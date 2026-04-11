@@ -3,15 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apagão Noturno</title>
+    <title>Protocolo Apagão - Ative o Gatilho</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; color: #ffffff; }
+        .bg-black-aggressive { background: linear-gradient(180deg, #121212 0%, #000000 100%); }
+        .text-gradient { background: linear-gradient(90deg, #ffcc00, #ff3300); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .btn-pulse { animation: pulse 1.5s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 204, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 204, 0, 0); }
+        }
+        .scarcity-bar { background: linear-gradient(90deg, #ff0000, #990000); }
+    </style>
 </head>
-<body>
-    <h1>Bem-vindo ao Apagão Noturno!</h1>
-    <button href="https://pay.kiwify.com.br/6stdDAC">Comprar</button>
-    <!-- Other content -->
-    <button href="https://pay.kiwify.com.br/6stdDAC">Pagar Agora</button>
-    <!-- Other content -->
-    <button href="https://pay.kiwify.com.br/6stdDAC">Finalizar Compra</button>
-    <!-- Other content -->
+<body class="overflow-x-hidden">
+
+    <div class="scarcity-bar text-white text-center py-2 text-sm font-bold uppercase tracking-widest animate__animated animate__fadeInDown">
+        Atenção: Esta oferta expira em <span id="timer">09:57</span>
+    </div>
+
+    <header class="container mx-auto px-4 py-12 text-center">
+        <h1 class="text-3xl md:text-6xl font-extrabold leading-tight animate__animated animate__zoomIn">
+            O <span class="text-yellow-500">"BOTÃO DE DESLIGAR"</span> HUMANO:<br>
+            <span class="text-gradient uppercase">Técnica Proibida de 7 Minutos</span>
+        </h1>
+        <p class="mt-6 text-gray-400 text-lg md:text-xl max-w-2xl mx-auto animate__animated animate__fadeIn animate__delay-1s">
+            Força o seu cérebro a apagar em instantes, mesmo que você esteja com a cabeça explodindo de problemas.
+        </p>
+    </header>
+
+    <section class="container mx-auto px-4 mb-16">
+        <div class="max-w-4xl mx-auto bg-gray-900 border-4 border-yellow-500 rounded-2xl overflow-hidden shadow-2xl animate__animated animate__fadeInUp animate__delay-1s">
+            <div class="aspect-video flex items-center justify-center bg-black relative">
+                <div class="text-center p-8">
+                    <div class="text-yellow-500 mb-4">
+                        <svg class="w-20 h-20 mx-auto" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                    </div>
+                    <p class="text-xl font-bold italic text-white uppercase tracking-tighter">Toque para ativar o som e descobrir o segredo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-yellow-500 py-12 text-black">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <p class="text-2xl font-black italic">"Eu não acreditava... mas o João de Uberlândia me provou o contrário. Em 5 minutos ele já estava roncando pesado após 10 anos de sofrimento!"</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container mx-auto px-4 py-20 border-b border-gray-800">
+        <div class="max-w-3xl mx-auto space-y-6 text-lg md:text-xl text-gray-300">
+            <h2 class="text-3xl font-bold text-white mb-8">Olha para mim: seu cérebro está <span class="underline decoration-red-600">TRAVADO</span>.</h2>
+            <p>Sabe por que você não dorme? Porque seu corpo acha que você está em guerra. Toda vez que você deita e tenta "forçar" o sono, você liga um alerta de perigo.</p>
+            <p class="bg-red-900/20 p-4 border-l-4 border-red-600">A indústria da farmácia ama isso. Eles querem que você compre comprimidos que te deixam "burro" no dia seguinte enquanto destroem seu fígado.</p>
+            <p>Existe um <strong class="text-white uppercase italic">curto-circuito biológico</strong> no seu corpo. Se você apertar o botão certo, o cérebro NÃO TEM ESCOLHA: ele é obrigado a desligar por puro instinto.</p>
+        </div>
+    </section>
+
+    <section class="bg-black-aggressive py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-4xl font-black mb-12">O QUE VOCÊ VAI RECEBER HOJE:</h3>
+            
+            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-16">
+                <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 text-left">
+                    <span class="text-green-500 font-bold">✓</span> Guia Prático Gatilho do Apagão
+                </div>
+                <div class="bg-gray-800 p-6 rounded-xl border border-gray-700 text-left">
+                    <span class="text-green-500 font-bold">✓</span> Manual do Despertar de Elite
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <p class="text-gray-500 line-through text-2xl">De R$ 147,00</p>
+                <p class="text-white text-xl">Por apenas</p>
+                <p class="text-6xl md:text-8xl font-black text-yellow-500">12x R$ 3,70</p>
+                <p class="text-gray-400 mt-2">ou R$ 37,00 à vista</p>
+            </div>
+
+            <a href="#" class="btn-pulse inline-block bg-yellow-500 hover:bg-yellow-400 text-black text-2xl md:text-3xl font-black py-6 px-10 rounded-full transition-all uppercase tracking-tighter">
+                Quero Ativar Meu Gatilho Agora
+            </a>
+            
+            <p class="mt-6 text-sm text-gray-500 uppercase tracking-widest">🔒 Compra 100% Segura e Criptografada</p>
+        </div>
+    </section>
+
+    <section class="container mx-auto px-4 py-16 text-center">
+        <div class="max-w-2xl mx-auto border-2 border-dashed border-gray-700 p-8 rounded-3xl">
+            <img src="https://cdn-icons-png.flaticon.com/512/7595/7595571.png" alt="Garantia" class="w-24 mx-auto mb-6 grayscale invert">
+            <h4 class="text-2xl font-bold mb-4 uppercase">Trato de Homem: Risco Zero</h4>
+            <p class="text-gray-400">Teste hoje à noite. Se você não apagar em minutos e acordar se sentindo um rei, eu te devolvo cada centavo. Sem perguntas. O risco é todo meu.</p>
+        </div>
+    </section>
+
+    <footer class="py-12 bg-black border-t border-gray-900 text-center text-gray-600 text-xs">
+        <p>© 2026 Protocolo Apagão - Todos os direitos reservados.</p>
+        <p class="mt-2">Aviso: Os resultados podem variar de pessoa para pessoa. Este produto não substitui aconselhamento médico.</p>
+    </footer>
+
+    <script>
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = minutes + ":" + seconds;
+                if (--timer < 0) { timer = duration; }
+            }, 1000);
+        }
+        window.onload = function () {
+            var tenMinutes = 60 * 10,
+            display = document.querySelector('#timer');
+            startTimer(tenMinutes, display);
+        };
+    </script>
 </body>
 </html>
