@@ -11,6 +11,27 @@
         .bg-gold { background-color: #D4AF37; }
         .text-gold { color: #D4AF37; }
         .border-gold { border-color: #D4AF37; }
+        
+        /* Estilização Manual dos Depoimentos */
+        .testimonial-card {
+            background-color: #0a0a0a;
+            border: 1px solid #1a1a1a;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .avatar {
+            width: 45px;
+            height: 45px;
+            background-color: #D4AF37;
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            margin-right: 12px;
+        }
     </style>
 </head>
 <body class="selection:bg-gold selection:text-black">
@@ -68,24 +89,48 @@
             <p style="font-size: 22px; font-weight: 700; color: #fff; text-align: center; margin: 30px 0;">
                 Naquela primeira noite, eu fiz o que ele mandou. <span style="color: #ff0000;">Foi a última coisa que eu vi.</span>
             </p>
+        </div>
+    </section>
 
-            <p style="margin-bottom: 20px;">
-                Acordei no dia seguinte com o sol na cara, descansado como se tivesse 15 anos de idade. Minha esposa, a Ana, nem acreditou quando me viu tomando café feliz da vida, sem aquelas olheiras gigantes.
+    <section class="py-16 px-6 max-w-3xl mx-auto">
+        <h2 style="text-align:center; font-size: 24px; font-weight: 900; text-transform: uppercase; margin-bottom: 30px;" class="text-gold">
+            Quem Usou, Apagou:
+        </h2>
+        
+        <div class="testimonial-card">
+            <div class="flex items-center mb-4">
+                <div class="avatar">C</div>
+                <div>
+                    <strong class="text-white block">Carlos M.</strong>
+                    <small class="text-green-500 font-bold uppercase text-[10px]">✅ Compra Verificada</small>
+                </div>
+            </div>
+            <p class="text-gray-300 italic text-sm leading-relaxed">
+                "Anos tomando remédio. Na primeira noite do protocolo, eu simplesmente apaguei. Acordei 8h depois sem nem lembrar que deitei. Sensacional!"
             </p>
+        </div>
 
-            <p style="margin-bottom: 20px;">
-                Eu cansei de ver as pessoas sofrendo e sendo enganadas por remédios caros que só estragam a saúde. Por isso, eu organizei esse método no Protocolo do Apagão.
+        <div class="testimonial-card">
+            <div class="flex items-center mb-4">
+                <div class="avatar">M</div>
+                <div>
+                    <strong class="text-white block">Mariana S.</strong>
+                    <small class="text-green-500 font-bold uppercase text-[10px]">✅ Compra Verificada</small>
+                </div>
+            </div>
+            <p class="text-gray-300 italic text-sm leading-relaxed">
+                "Eu tinha medo de ir para a cama. Hoje eu uso os 7 minutos de comando e meu cérebro obedece na hora. É bizarro o quanto funciona."
             </p>
         </div>
     </section>
 
-    <section class="bg-zinc-950 py-16 px-6 border-y border-zinc-900">
+    <section class="bg-zinc-950 py-16 px-6 border-y border-zinc-900 text-center">
         <div class="max-w-3xl mx-auto">
-            <h2 class="text-2xl md:text-4xl font-bold mb-8 text-center">
+            <h2 class="text-2xl md:text-4xl font-bold mb-8">
                 VOCÊ NÃO SOFRE DE INSÔNIA. <br>
-                <span class="text-red-600">VOCÊ É VÍTIMA DE UM SEQUESTRO BIOLÓGICO.</span>
+                <span class="text-red-600 uppercase">Você é vítima de um sequestro biológico.</span>
             </h2>
-            <p class="text-gray-400 text-center leading-relaxed mb-6">
+            <p class="text-gray-400 leading-relaxed mb-6">
                 Toda tentativa de ativar o sono ativará o cortisol, mantendo você em estado de "luta ou fuga". Você se torna um prisioneiro dos seus próprios pensamentos.
             </p>
         </div>
@@ -117,19 +162,19 @@
     <section id="oferta" class="py-12 px-6">
         <div class="max-w-lg mx-auto bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800">
             <ul class="space-y-4">
-                <li class="flex items-start gap-3">
+                <li class="flex items-start gap-3 text-left">
                     <span class="text-gold">⚠️</span>
                     <p class="text-sm"><strong class="text-white">ACESSO IMEDIATO:</strong> Receba o protocolo no seu e-mail em menos de 30 segundos.</p>
                 </li>
-                <li class="flex items-start gap-3">
+                <li class="flex items-start gap-3 text-left">
                     <span class="text-gold">💉</span>
                     <p class="text-sm"><strong class="text-white">MAIS BARATO QUE REMÉDIO:</strong> Menos que o preço de uma caixa de genérico para salvar suas noites.</p>
                 </li>
-                <li class="flex items-start gap-3">
+                <li class="flex items-start gap-3 text-left">
                     <span class="text-gold">🔐</span>
                     <p class="text-sm"><strong class="text-white">PAGAMENTO BLINDADO:</strong> Dados 100% seguros em plataforma criptografada.</p>
                 </li>
-                <li class="flex items-start gap-3">
+                <li class="flex items-start gap-3 text-left">
                     <span class="text-gold">🛡️</span>
                     <p class="text-sm"><strong class="text-white">GARANTIA TOTAL:</strong> Ou você apaga hoje, ou eu te devolvo os R$ 27,90 na hora.</p>
                 </li>
@@ -146,11 +191,11 @@
             <a href="SUA_URL_DE_CHECKOUT_AQUI" class="block w-full bg-red-600 hover:bg-red-700 text-white font-black py-6 px-4 rounded-xl text-xl md:text-2xl transition-all shadow-lg uppercase">
                 QUERO MEU APAGÃO AGORA
             </a>
-            <p class="text-gray-400 mt-6 text-xs uppercase tracking-widest">Compra Segura • Acesso Vitalício</p>
+            <p class="text-gray-400 mt-6 text-[10px] uppercase tracking-widest">Compra Segura • Acesso Vitalício • Garantia de 30 Dias</p>
         </div>
     </section>
 
-    <footer class="py-10 text-center text-gray-600 text-xs border-t border-zinc-900 px-6">
+    <footer class="py-10 text-center text-gray-600 text-[10px] border-t border-zinc-900 px-6">
         <p class="mb-4">© 2026 - Protocolo do Apagão. Todos os direitos reservados.</p>
         <p>Este site não faz parte do Facebook ou do Google.</p>
     </footer>
