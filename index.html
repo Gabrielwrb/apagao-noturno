@@ -39,25 +39,58 @@
         .pulse-text {
             animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
+        .vagas-bar {
+            height: 8px;
+            background: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .vagas-fill {
+            height: 100%;
+            background: #dc2626;
+            width: 92%; /* Representa 17 vagas restantes de 200 */
+            transition: width 2s ease-in-out;
+        }
     </style>
 </head>
 <body class="selection:bg-gold selection:text-black">
 
-    <div class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase tracking-widest fixed w-full z-50">
-        ⚠️ Black Friday: Últimas 17 vagas com 97% de desconto
+    <div class="bg-red-600 text-white text-center py-2 font-bold text-xs md:text-sm uppercase tracking-widest fixed w-full z-50">
+        ⚠️ ATENÇÃO: Desconto de Black Friday expira em instantes.
     </div>
 
     <section class="px-6 pt-24 pb-16 max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 mb-4 bg-zinc-900/80 px-4 py-1 rounded-full border border-zinc-800">
+            <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
+            <span class="text-xs text-gray-300 font-medium"><span id="viewers">142</span> pessoas assistindo agora</span>
+        </div>
+
         <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase text-white">
             O "Protocolo do Apagão": força um <span class="text-red-600">desligamento cerebral</span> em 420 segundos
         </h1>
         <p class="text-gray-400 text-lg md:text-xl mb-8">
             Sem remédios ou sinta o cheiro do seu dinheiro de volta. Ponto.
         </p>
-        <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="inline-block w-full md:w-auto bg-green-600 hover:bg-green-500 text-white font-black py-5 px-10 rounded-xl text-xl transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(22,163,74,0.5)]">
-            SIM! QUERO ATIVAR O APAGÃO AGORA
-        </a>
-        <p class="mt-4 text-sm text-gray-500 uppercase font-bold tracking-tighter">(ÚLTIMAS 17 VAGAS)</p>
+        
+        <div class="max-w-md mx-auto mb-8">
+            <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="inline-block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-10 rounded-xl text-xl transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(22,163,74,0.5)]">
+                SIM! QUERO ATIVAR O APAGÃO AGORA
+            </a>
+            
+            <div class="mt-6 text-left px-4 md:px-0">
+                <div class="flex justify-between text-[10px] font-bold uppercase tracking-tighter text-gray-400">
+                    <span>Disponibilidade de Vagas</span>
+                    <span class="text-red-500">92% PREENCHIDAS</span>
+                </div>
+                <div class="vagas-bar">
+                    <div class="vagas-fill"></div>
+                </div>
+                <p class="text-center text-[10px] text-gray-500 font-bold uppercase mt-1 tracking-widest">
+                    Apenas 17 vagas restantes para o valor promocional
+                </p>
+            </div>
+        </div>
     </section>
 
     <section style="background-color: #000; color: #fff; padding: 40px 20px; line-height: 1.8;">
@@ -77,7 +110,7 @@
 
             <div style="border-left: 4px solid #ff0000; background-color: #111; padding: 25px; margin: 35px 0; border-radius: 0 15px 15px 0;">
                 <p style="margin-bottom: 0; color: #eee;">
-                    Gastei mais de <strong>R$ 4.000,00</strong> com médicos particulares. Sabe o que eles fizeram? Me deram remédios pretos que me deixavam 'grogue' o dia inteiro, mas que não faziam eu dormir de verdade à noite. Eu me sentia um viciado, um número na mão deles.
+                    Gastei mais de <strong>R$ 4.000,00</strong> com médicos particulares. Sabe o que eles fizeram? Me deram remédios pretos que me deixavam 'grogue' o dia inteiro, mas que não faziam eu dormir de verdade à noite.
                 </p>
             </div>
 
@@ -86,140 +119,94 @@
             </p>
 
             <p style="background-color: #D4AF37; color: #000; padding: 20px; font-weight: 800; border-radius: 10px; font-size: 20px; text-align: center; margin: 30px 0;">
-                "Ricardo, seu erro é tentar dormir. O corpo não dorme porque você quer, ele dorme por um comando. Existe um botão de desligar no seu cérebro que ninguém te ensina a apertar."
+                "Ricardo, seu erro é tentar dormir. O corpo não dorme porque você quer, ele dorme por um comando. Existe um botão de desligar no seu cérebro."
             </p>
 
             <p style="margin-bottom: 20px;">
-                Ele me ensinou um passo a passo de 7 minutos. Não é reza, não é cházinho e nem meditação chata. É um comando físico, como se você desse um 'reset' no seu celular quando ele trava.
+                Ele me ensinou um passo a passo de 7 minutos. Não é reza, não é cházinho e nem meditação chata. É um comando físico, como se você desse um 'reset' no seu celular.
             </p>
 
             <p style="font-size: 22px; font-weight: 700; color: #fff; text-align: center; margin: 30px 0;">
                 Naquela primeira noite, eu fiz o que ele mandou. <span style="color: #ff0000;">Foi a última coisa que eu vi.</span>
             </p>
-
-            <p style="margin-bottom: 20px;">
-                Acordei no dia seguinte com o sol na cara, descansado como se tivesse 15 anos de idade. Minha esposa, a Ana, nem acreditou quando me viu tomando café feliz da vida, sem aquelas olheiras gigantes.
-            </p>
-
-            <p style="margin-bottom: 20px;">
-                Eu cansei de ver as pessoas sofrendo e sendo enganadas por remédios caros que só estragam a saúde. Por isso, eu organizei esse método no Protocolo do Apagão.
-            </p>
         </div>
     </section>
 
     <section class="py-16 px-6 max-w-3xl mx-auto text-center">
-        <h2 style="font-size: 24px; font-weight: 900; text-transform: uppercase; margin-bottom: 30px;" class="text-gold">
+        <h2 class="text-gold text-2xl font-black uppercase mb-8">
             Quem Usou, Apagou:
         </h2>
         
         <div class="testimonial-card text-left">
             <div class="flex items-center mb-4">
-                <div class="avatar"><img src="https://i.pravatar.cc/150?u=carlos1" alt="Carlos"></div>
+                <div class="avatar">
+                    <img src="https://randomuser.me/api/portraits/men/11.jpg">
+                </div>
                 <div>
                     <strong class="text-white block">Carlos M.</strong>
                     <small class="text-green-500 font-bold uppercase text-[10px]">✅ Compra Verificada</small>
                 </div>
             </div>
-            <p class="text-gray-300 italic text-sm leading-relaxed">
-                "Anos tomando remédio. Na primeira noite do protocolo, eu simplesmente apaguei. Acordei 8h depois sem nem lembrar que deitei. Sensacional!"
+            <p class="text-gray-300 italic text-sm">
+                "Anos tomando remédio. Na primeira noite do protocolo, eu simplesmente apaguei."
             </p>
         </div>
 
         <div class="testimonial-card text-left">
             <div class="flex items-center mb-4">
-                <div class="avatar"><img src="https://i.pravatar.cc/150?u=mariana2" alt="Mariana"></div>
+                <div class="avatar">
+                    <img src="https://randomuser.me/api/portraits/women/12.jpg">
+                </div>
                 <div>
                     <strong class="text-white block">Mariana S.</strong>
                     <small class="text-green-500 font-bold uppercase text-[10px]">✅ Compra Verificada</small>
                 </div>
             </div>
-            <p class="text-gray-300 italic text-sm leading-relaxed">
-                "Eu tinha medo de ir para a cama. Hoje eu uso os 7 minutos de comando e meu cérebro obedece na hora. É bizarro o quanto funciona."
+            <p class="text-gray-300 italic text-sm">
+                "Meu cérebro desliga em minutos. Impressionante."
             </p>
         </div>
 
         <div class="testimonial-card text-left">
             <div class="flex items-center mb-4">
-                <div class="avatar"><img src="https://i.pravatar.cc/150?u=roberto3" alt="Roberto"></div>
+                <div class="avatar">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg">
+                </div>
                 <div>
                     <strong class="text-white block">Roberto Alves</strong>
                     <small class="text-green-500 font-bold uppercase text-[10px]">✅ Compra Verificada</small>
                 </div>
             </div>
-            <p class="text-gray-300 italic text-sm leading-relaxed">
-                "Duvidei no começo porque parecia simples demais. Mas o resultado é imediato. Parece que desligam um interruptor na nuca. Melhor investimento que fiz."
+            <p class="text-gray-300 italic text-sm">
+                "Funciona de verdade. Dormi como não dormia há anos."
             </p>
         </div>
 
         <div class="testimonial-card text-left">
             <div class="flex items-center mb-4">
-                <div class="avatar"><img src="https://i.pravatar.cc/150?u=sandra4" alt="Sandra"></div>
+                <div class="avatar">
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg">
+                </div>
                 <div>
                     <strong class="text-white block">Sandra Lima</strong>
                     <small class="text-green-500 font-bold uppercase text-[10px]">✅ Compra Verificada</small>
                 </div>
             </div>
-            <p class="text-gray-300 italic text-sm leading-relaxed">
-                "Finalmente parei de acordar às 3h da manhã com a cabeça a mil. O Protocolo do Apagão devolveu minha disposição. Recomendo para todos!"
+            <p class="text-gray-300 italic text-sm">
+                "Parei de acordar de madrugada. Mudou minha vida."
             </p>
         </div>
     </section>
 
     <section class="bg-zinc-950 py-16 px-6 border-y border-zinc-900 text-center">
         <div class="max-w-3xl mx-auto">
-            <h2 class="text-2xl md:text-4xl font-bold mb-8">
+            <h2 class="text-2xl md:text-4xl font-bold mb-8 uppercase">
                 VOCÊ NÃO SOFRE DE INSÔNIA. <br>
-                <span class="text-red-600 uppercase">Você é vítima de um sequestro biológico.</span>
+                <span class="text-red-600">ISSO É UM SEQUESTRO BIOLÓGICO.</span>
             </h2>
-            <p class="text-gray-400 leading-relaxed mb-6">
-                Toda tentativa de ativar o sono ativará o cortisol, mantendo você em estado de "luta ou fuga". Você se torna um prisioneiro dos seus próprios pensamentos.
+            <p class="text-gray-400 leading-relaxed mb-6 italic">
+                A cada minuto que passa, seu cérebro se torna mais resistente ao sono natural. Se você não agir agora, o dano neuronal pode ser irreversível.
             </p>
-        </div>
-    </section>
-
-    <section class="py-16 px-6 max-w-4xl mx-auto">
-        <div class="bg-zinc-900 p-8 rounded-3xl border border-zinc-800 shadow-2xl">
-            <h3 class="text-gold text-2xl font-black uppercase mb-8 tracking-tighter text-center">A Engenharia do Desligamento Forçado</h3>
-            <div class="grid md:grid-cols-3 gap-8 text-center">
-                <div class="p-4">
-                    <span class="text-4xl mb-4 block">🔥</span>
-                    <strong class="block text-white text-lg mb-2 uppercase">Expulsão de Cortisol</strong>
-                    <p class="text-gray-400 text-sm font-light">Aniquila o hormônio do estresse que mantém seus olhos abertos contra a sua vontade.</p>
-                </div>
-                <div class="p-4 border-y md:border-y-0 md:border-x border-zinc-800">
-                    <span class="text-4xl mb-4 block">☢️</span>
-                    <strong class="block text-white text-lg mb-2 uppercase">Reset Neuronal</strong>
-                    <p class="text-gray-400 text-sm font-light">Interrompe o fluxo de pensamentos acelerados através de um comando biofísico simples.</p>
-                </div>
-                <div class="p-4">
-                    <span class="text-4xl mb-4 block">💤</span>
-                    <strong class="block text-white text-lg mb-2 uppercase">Apagão Sistêmico</strong>
-                    <p class="text-gray-400 text-sm font-light">Seu cérebro entra em modo de reparo profundo em 420 segundos. Sem exceções.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="bullets" class="py-12 px-6">
-        <div class="max-w-lg mx-auto bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800">
-            <ul class="space-y-4">
-                <li class="flex items-start gap-3 text-left">
-                    <span class="text-gold">⚠️</span>
-                    <p class="text-sm text-white"><strong class="uppercase">ACESSO IMEDIATO:</strong> Receba o protocolo no seu e-mail em menos de 30 segundos.</p>
-                </li>
-                <li class="flex items-start gap-3 text-left">
-                    <span class="text-gold">💉</span>
-                    <p class="text-sm text-white"><strong class="uppercase">MAIS BARATO QUE REMÉDIO:</strong> Menos que o preço de uma caixa de genérico para salvar suas noites.</p>
-                </li>
-                <li class="flex items-start gap-3 text-left">
-                    <span class="text-gold">🔐</span>
-                    <p class="text-sm text-white"><strong class="uppercase">PAGAMENTO BLINDADO:</strong> Dados 100% seguros em plataforma criptografada.</p>
-                </li>
-                <li class="flex items-start gap-3 text-left">
-                    <span class="text-gold">🛡️</span>
-                    <p class="text-sm text-white"><strong class="uppercase">GARANTIA TOTAL:</strong> Ou você apaga hoje, ou eu te devolvo os R$ 27,90 na hora.</p>
-                </li>
-            </ul>
         </div>
     </section>
 
@@ -228,8 +215,8 @@
             <p class="text-gray-500 uppercase font-bold mb-2">Preço Normal: <span class="line-through">R$ 997</span></p>
             <p class="text-white text-xl font-bold mb-4 uppercase tracking-widest">Oferta Black Friday Somente Hoje</p>
             
-            <div class="mb-6 py-3 px-4 rounded-lg bg-black border border-zinc-800 inline-block">
-                <p class="text-red-500 text-xs uppercase font-bold pulse-text mb-1">A oferta expira em:</p>
+            <div class="mb-6 py-3 px-6 rounded-lg bg-black border border-red-900/50 inline-block">
+                <p class="text-red-500 text-[10px] uppercase font-bold pulse-text mb-1">Seu desconto expira em:</p>
                 <div id="timer" class="text-4xl md:text-5xl font-black text-white tabular-nums tracking-tight">10:00</div>
             </div>
 
@@ -239,8 +226,8 @@
                 QUERO MEU APAGÃO AGORA
             </a>
 
-            <p class="text-gray-400 mt-6 text-[10px] uppercase tracking-widest">
-                Compra Segura • Acesso Vitalício • Garantia de 30 Dias
+            <p class="text-red-500 mt-6 text-[10px] uppercase font-black tracking-widest">
+                 ⚠️ ATENÇÃO: Se sair da página, este valor voltará para R$ 997,00
             </p>
         </div>
     </section>
@@ -251,6 +238,7 @@
     </footer>
 
     <script>
+        // Temporizador 10 min
         function startTimer(duration, display) {
             let timer = duration, minutes, seconds;
             setInterval(function () {
@@ -262,8 +250,20 @@
                 if (--timer < 0) { timer = 0; }
             }, 1000);
         }
+
+        // Simulação de espectadores online
+        function startViewers() {
+            const display = document.querySelector('#viewers');
+            setInterval(() => {
+                let current = parseInt(display.textContent);
+                let change = Math.floor(Math.random() * 5) - 2;
+                display.textContent = current + change;
+            }, 3000);
+        }
+
         window.onload = function () {
             startTimer(60 * 10, document.querySelector('#timer'));
+            startViewers();
         };
     </script>
 
