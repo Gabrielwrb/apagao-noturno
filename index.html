@@ -22,14 +22,22 @@
         .avatar {
             width: 45px;
             height: 45px;
-            background-color: #D4AF37;
-            color: #000;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
             margin-right: 12px;
+            overflow: hidden;
+            border: 2px solid #D4AF37;
+        }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .pulse-text {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
     </style>
 </head>
@@ -106,7 +114,7 @@
         
         <div class="testimonial-card text-left">
             <div class="flex items-center mb-4">
-                <div class="avatar">C</div>
+                <div class="avatar"><img src="https://i.pravatar.cc/150?u=carlos1" alt="Carlos"></div>
                 <div>
                     <strong class="text-white block">Carlos M.</strong>
                     <small class="text-green-500 font-bold uppercase text-[10px]">✅ Compra Verificada</small>
@@ -119,7 +127,7 @@
 
         <div class="testimonial-card text-left">
             <div class="flex items-center mb-4">
-                <div class="avatar">M</div>
+                <div class="avatar"><img src="https://i.pravatar.cc/150?u=mariana2" alt="Mariana"></div>
                 <div>
                     <strong class="text-white block">Mariana S.</strong>
                     <small class="text-green-500 font-bold uppercase text-[10px]">✅ Compra Verificada</small>
@@ -127,6 +135,32 @@
             </div>
             <p class="text-gray-300 italic text-sm leading-relaxed">
                 "Eu tinha medo de ir para a cama. Hoje eu uso os 7 minutos de comando e meu cérebro obedece na hora. É bizarro o quanto funciona."
+            </p>
+        </div>
+
+        <div class="testimonial-card text-left">
+            <div class="flex items-center mb-4">
+                <div class="avatar"><img src="https://i.pravatar.cc/150?u=roberto3" alt="Roberto"></div>
+                <div>
+                    <strong class="text-white block">Roberto Alves</strong>
+                    <small class="text-green-500 font-bold uppercase text-[10px]">✅ Compra Verificada</small>
+                </div>
+            </div>
+            <p class="text-gray-300 italic text-sm leading-relaxed">
+                "Duvidei no começo porque parecia simples demais. Mas o resultado é imediato. Parece que desligam um interruptor na nuca. Melhor investimento que fiz."
+            </p>
+        </div>
+
+        <div class="testimonial-card text-left">
+            <div class="flex items-center mb-4">
+                <div class="avatar"><img src="https://i.pravatar.cc/150?u=sandra4" alt="Sandra"></div>
+                <div>
+                    <strong class="text-white block">Sandra Lima</strong>
+                    <small class="text-green-500 font-bold uppercase text-[10px]">✅ Compra Verificada</small>
+                </div>
+            </div>
+            <p class="text-gray-300 italic text-sm leading-relaxed">
+                "Finalmente parei de acordar às 3h da manhã com a cabeça a mil. O Protocolo do Apagão devolveu minha disposição. Recomendo para todos!"
             </p>
         </div>
     </section>
@@ -193,32 +227,46 @@
         <div class="max-w-2xl mx-auto border-2 border-dashed border-red-600 p-10 rounded-3xl bg-zinc-950 shadow-[0_0_50px_rgba(220,38,38,0.2)]">
             <p class="text-gray-500 uppercase font-bold mb-2">Preço Normal: <span class="line-through">R$ 997</span></p>
             <p class="text-white text-xl font-bold mb-4 uppercase tracking-widest">Oferta Black Friday Somente Hoje</p>
+            
+            <div class="mb-6 py-3 px-4 rounded-lg bg-black border border-zinc-800 inline-block">
+                <p class="text-red-500 text-xs uppercase font-bold pulse-text mb-1">A oferta expira em:</p>
+                <div id="timer" class="text-4xl md:text-5xl font-black text-white tabular-nums tracking-tight">10:00</div>
+            </div>
+
             <div class="text-7xl md:text-8xl font-black text-green-500 mb-6">R$ 27,90</div>
             
             <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-red-600 hover:bg-red-700 text-white font-black py-6 px-4 rounded-xl text-xl md:text-2xl transition-all shadow-lg uppercase">
-    QUERO MEU APAGÃO AGORA
-</a>
+                QUERO MEU APAGÃO AGORA
+            </a>
 
-<p class="text-gray-400 mt-6 text-[10px] uppercase tracking-widest">
-    Compra Segura • Acesso Vitalício • Garantia de 30 Dias
-</p>
+            <p class="text-gray-400 mt-6 text-[10px] uppercase tracking-widest">
+                Compra Segura • Acesso Vitalício • Garantia de 30 Dias
+            </p>
+        </div>
+    </section>
 
-</div>
-</section>
+    <footer class="py-10 text-center text-gray-600 text-[10px] border-t border-zinc-900 px-6">
+        <p class="mb-4">© 2026 - Protocolo do Apagão. Todos os direitos reservados.</p>
+        <p>Este site não faz parte do Facebook ou do Google.</p>
+    </footer>
 
-<footer class="py-10 text-center text-gray-600 text-[10px] border-t border-zinc-900 px-6">
-    <p class="mb-4">© 2026 - Protocolo do Apagão. Todos os direitos reservados.</p>
-    <p>Este site não faz parte do Facebook ou do Google.</p>
-</footer>
+    <script>
+        function startTimer(duration, display) {
+            let timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.textContent = minutes + ":" + seconds;
+                if (--timer < 0) { timer = 0; }
+            }, 1000);
+        }
+        window.onload = function () {
+            startTimer(60 * 10, document.querySelector('#timer'));
+        };
+    </script>
 
-<!-- UTMify Script -->
-<script
-    src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-    data-utmify-prevent-xcod-sck
-    data-utmify-prevent-subids
-    async
-    defer>
-</script>
-
+    <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
 </body>
 </html>
