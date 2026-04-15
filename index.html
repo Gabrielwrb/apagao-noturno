@@ -7,71 +7,80 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; }
         
-        /* Barra VSL */
+        /* Barra VSL de 10 min */
         @keyframes progress { from { width: 0%; } to { width: 100%; } }
         .vsl-progress-fill { height: 100%; background: #dc2626; animation: progress 600s linear forwards; }
 
-        /* Slider de WhatsApp */
-        .wp-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding: 20px 0; scrollbar-width: none; }
-        .wp-slider::-webkit-scrollbar { display: none; }
-        .wp-card { flex: 0 0 85%; scroll-snap-align: center; background: #0b141a; border-radius: 20px; padding: 15px; border: 1px solid #202c33; text-align: left; }
-        .wp-msg { background: #202c33; color: #e9edef; padding: 10px 14px; border-radius: 0 12px 12px 12px; font-size: 14px; position: relative; }
+        /* Estilo WhatsApp */
+        .wp-container { background: #0b141a; border-radius: 15px; padding: 15px; max-width: 400px; margin: 10px auto; border: 1px solid #202c33; text-align: left; }
+        .wp-msg { background: #202c33; color: #e9edef; padding: 8px 12px; border-radius: 0 10px 10px 10px; margin-bottom: 10px; font-size: 14px; position: relative; width: fit-content; max-width: 90%; }
         .wp-msg::before { content: ""; position: absolute; left: -8px; top: 0; border: 8px solid transparent; border-top-color: #202c33; border-right-color: #202c33; }
+        .wp-name { font-weight: bold; color: #d1d7db; font-size: 12px; margin-bottom: 2px; display: block; }
+        .wp-time { font-size: 10px; color: #8696a0; float: right; margin-left: 10px; margin-top: 5px; }
 
+        /* Ocultar conteúdo inicialmente */
         #content-delay { display: none; }
-        .fade-in { animation: fadeIn 0.8s ease-in forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Transição suave de cor do banner */
+        #top-banner { transition: background-color 1s ease; }
     </style>
 </head>
 <body class="selection:bg-red-600 selection:text-white">
 
-    <div id="top-banner" class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase tracking-widest fixed w-full z-50 transition-colors duration-1000">
+    <div id="top-banner" class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase tracking-widest fixed w-full z-50">
         <span id="banner-text">⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS COM MAIS DE 70% OFF</span>
     </div>
 
-    <section class="px-6 pt-24 pb-4 max-w-4xl mx-auto text-center">
+    <section class="px-6 pt-24 pb-8 max-w-4xl mx-auto text-center">
         <div class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
             <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
-            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">134</span> visitando agora</span>
+            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">134</span> visitando a página agora</span>
         </div>
 
-        <h1 class="text-3xl md:text-5xl font-black mb-6 uppercase">Desligue sua mente e durma sem rolar na cama</h1>
+        <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase">
+            Desligue sua mente e durma sem ficar rolando na cama por horas
+        </h1>
+        <p class="text-gray-400 text-lg mb-8">Feito para quem deita cansado, mas não desliga.</p>
 
         <div class="relative w-full aspect-video bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
-            <div class="absolute inset-0 flex items-center justify-center text-zinc-700 font-bold uppercase tracking-tighter">[ VSL - ILUSTRAÇÃO ]</div>
+            <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-zinc-700 font-bold uppercase tracking-widest">[ VSL - ILUSTRAÇÃO ]</span>
+            </div>
         </div>
         
-        <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-8">
+        <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-12">
             <div class="vsl-progress-fill"></div>
         </div>
     </section>
 
-    <div id="content-delay" class="fade-in">
+    <div id="content-delay">
         
-        <section class="px-6 py-4 max-w-4xl mx-auto text-center">
-            <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-2">Arraste para o lado ➔</p>
-            <div class="wp-slider">
-                <div class="wp-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full border border-green-500">
-                        <span class="font-bold text-sm text-zinc-300">Rodrigo (Grupo Alunos)</span>
-                    </div>
-                    <div class="wp-msg">
-                        Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem acordei novo. 🚀
-                        <span class="block text-[10px] text-zinc-500 text-right mt-1">14:20</span>
-                    </div>
+        <section class="px-6 py-8 max-w-4xl mx-auto text-center">
+            <h3 class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-6">Resultados de quem aplicou hoje:</h3>
+            
+            <div class="wp-container">
+                <div class="wp-msg">
+                    <span class="wp-name">Rodrigo (Grupo Alunos)</span>
+                    Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo.
+                    <span class="wp-time">14:20</span>
                 </div>
-                <div class="wp-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-8 h-8 rounded-full border border-green-500">
-                        <span class="font-bold text-sm text-zinc-300">Dra. Claudia</span>
-                    </div>
-                    <div class="wp-msg">
-                        Técnica excelente. O cérebro entende que precisa desligar na marra. Funcionou de primeira!
-                        <span class="block text-[10px] text-zinc-500 text-right mt-1">15:45</span>
-                    </div>
+            </div>
+
+            <div class="wp-container">
+                <div class="wp-msg">
+                    <span class="wp-name">Dra. Claudia</span>
+                    A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra.
+                    <span class="wp-time">15:45</span>
+                </div>
+            </div>
+
+            <div class="wp-container">
+                <div class="wp-msg">
+                    <span class="wp-name">Lucas Oliveira</span>
+                    Finalmente silêncio na cabeça kkkk. Aquela ansiedade de ver o relógio passou. Valeu muito.
+                    <span class="wp-time">16:12</span>
                 </div>
             </div>
         </section>
@@ -81,8 +90,9 @@
                 <div class="max-w-md mx-auto border-2 border-dashed border-zinc-700 p-8 rounded-2xl bg-black">
                     <p class="text-gray-500 uppercase font-bold text-xs mb-1">Preço Comum: <span class="line-through">R$ 197</span></p>
                     <div class="text-5xl font-black text-green-500 mb-6">R$ 27,90</div>
+                    
                     <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl transition-all shadow-lg uppercase">
-                        QUERO MEU ACESSO AGORA
+                        QUERO MEU ACESSO IMEDIATO
                     </a>
                 </div>
             </div>
@@ -90,42 +100,58 @@
     </div>
 
     <script>
-        // 1. Desbloqueio (15 segundos)
-        setTimeout(() => { document.getElementById('content-delay').style.display = 'block'; }, 15000);
+        // 1. Desbloqueio Geral (15 segundos)
+        setTimeout(() => { 
+            document.getElementById('content-delay').style.display = 'block'; 
+        }, 15000);
 
-        // 2. Lógica de Escassez Decrescente Automática
+        // 2. Lógica de Escassez Decrescente Automática (19 -> 3 vagas)
         let vagas = 19;
-        const campoVagas = document.getElementById('vagas-count');
+        const vagasElement = document.getElementById('vagas-count');
         const banner = document.getElementById('top-banner');
 
         function atualizarVagas() {
             if (vagas > 3) {
-                // Diminui entre 1 ou 2 vagas por vez
+                // Diminui entre 1 ou 2 vagas
                 let queda = Math.floor(Math.random() * 2) + 1;
                 vagas -= queda;
-                
-                if (vagas < 3) vagas = 3; // Trava no 3
-                
-                campoVagas.innerText = vagas;
+                if (vagas < 3) vagas = 3;
 
-                // Muda a cor do banner conforme as vagas acabam
-                if (vagas <= 10) banner.classList.replace('bg-red-600', 'bg-orange-600');
-                if (vagas <= 5) banner.style.backgroundColor = "#ff0000";
+                vagasElement.innerText = vagas;
 
-                // Define o próximo tempo de queda (entre 15 e 40 segundos)
-                let proximoTempo = Math.floor(Math.random() * (40000 - 15000 + 1)) + 15000;
+                // Troca cores conforme a urgência
+                if (vagas <= 12) banner.style.backgroundColor = "#ea580c"; // Orange 600
+                if (vagas <= 6) banner.style.backgroundColor = "#b91c1c";  // Red 700
+
+                // Define próximo intervalo (entre 15s e 45s)
+                let proximoTempo = Math.floor(Math.random() * (45000 - 15000 + 1)) + 15000;
                 setTimeout(atualizarVagas, proximoTempo);
             }
         }
-        // Inicia o ciclo de quedas após 20 segundos da página aberta
-        setTimeout(atualizarVagas, 20000);
+        // Inicia o contador após 10 segundos na página
+        setTimeout(atualizarVagas, 10000);
 
         // 3. Visitantes Fake
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
-            display.textContent = current + (Math.floor(Math.random() * 5) - 2);
+            let oscilacao = Math.floor(Math.random() * 9) - 4;
+            display.textContent = Math.max(120, current + oscilacao);
         }, 3000);
+
+        // 4. Efeito de Notificação no Scroll
+        let scrollTrigger = false;
+        window.addEventListener('scroll', () => {
+            if (!scrollTrigger && window.scrollY > 500) {
+                scrollTrigger = true;
+                const bannerText = document.getElementById('banner-text');
+                const textoOriginal = bannerText.innerHTML;
+                bannerText.innerHTML = "🔥 6 PESSOAS COMPRARAM AGORA! RESTAM POUCAS VAGAS";
+                setTimeout(() => {
+                    bannerText.innerHTML = "⚠️ ÚLTIMAS <span id='vagas-count'>" + vagas + "</span> VAGAS COM MAIS DE 70% OFF";
+                }, 4000);
+            }
+        });
     </script>
 </body>
 </html>
