@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protocolo do Apagão | Oferta Black</title>
+    <title>Protocolo do Apagão | Oficial</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -27,242 +27,147 @@
             overflow: hidden;
             border: 2px solid #D4AF37;
         }
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Animação da Barra de Visualização */
+        @keyframes progress {
+            from { width: 0%; }
+            to { width: 100%; }
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .pulse-text {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        .vagas-bar {
-            height: 8px;
-            background: #222;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 10px 0;
-        }
-        .vagas-fill {
+        .vsl-progress-fill {
             height: 100%;
             background: #dc2626;
-            width: 92%;
-            transition: width 2s ease-in-out;
+            animation: progress 600s linear forwards; /* 10 minutos */
         }
+
+        /* Estilo para esconder conteúdo */
+        #content-delay { display: none; }
+
+        .pulse-text { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
     </style>
 </head>
 <body class="selection:bg-gold selection:text-black">
 
-    <div class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase tracking-widest fixed w-full z-50">
-        ⚠️ Black Friday: Últimas 17 vagas com 97% de desconto
+    <div id="top-banner" class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase tracking-widest fixed w-full z-50 transition-all duration-500">
+        <span id="banner-text">⚠️ Últimas 9 vagas com mais de 70% OFF</span>
     </div>
 
-    <section class="px-6 pt-24 pb-16 max-w-4xl mx-auto text-center">
+    <section class="px-6 pt-24 pb-8 max-w-4xl mx-auto text-center">
         <div class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
             <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
-            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">142</span> pessoas tentando silenciar a mente agora</span>
+            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">134</span> visitando a página agora</span>
         </div>
 
         <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase text-white">
-            O mundo apagado e sua mente no <span class="text-red-600">turbilhão?</span>
+            Desligue sua mente e durma sem ficar rolando na cama por horas, mesmo que você já tenha tentado de tudo
         </h1>
         <p class="text-gray-400 text-lg md:text-xl mb-8">
-            Faltam poucas horas para o despertador tocar. Se não dormir agora, amanhã será um desastre.
+            Feito para quem deita cansado, mas não desliga e passa horas rolando na cama
         </p>
-        <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="inline-block w-full md:w-auto bg-green-600 hover:bg-green-500 text-white font-black py-5 px-10 rounded-xl text-xl transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(22,163,74,0.5)] uppercase tracking-tighter">
-            SIM! QUERO COMEÇAR HOJE E SILENCIAR MINHA MENTE
-        </a>
-        <p class="text-[10px] text-gray-500 mt-3 uppercase tracking-widest text-center">Acesso imediato enviado para o seu e-mail</p>
+
+        <div class="relative w-full aspect-video bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
+            <div class="absolute inset-0 flex items-center justify-center">
+                <span class="text-zinc-700 font-bold uppercase tracking-widest">[ VSL - ILUSTRAÇÃO ]</span>
+            </div>
+        </div>
         
-        <div class="max-w-xs mx-auto mt-6">
-            <div class="flex justify-between text-[10px] font-bold uppercase text-gray-400">
-                <span>Vagas Disponíveis</span>
-                <span class="text-red-500 font-black">17 RESTANTES</span>
-            </div>
-            <div class="vagas-bar">
-                <div class="vagas-fill"></div>
-            </div>
+        <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-12">
+            <div class="vsl-progress-fill"></div>
         </div>
     </section>
 
-    <section style="background-color: #000; color: #fff; padding: 40px 20px; line-height: 1.8;">
-        <div style="max-width: 750px; margin: 0 auto; text-align: left;">
-            <h2 style="color: #D4AF37; text-align: center; font-size: 32px; font-weight: 900; text-transform: uppercase; margin-bottom: 40px; line-height: 1.2;">
-                VOCÊ ESTÁ PRESTES A COLAPSAR <br>
-                <span style="color: #ff0000; font-size: 20px;">E o erro é achar que "relaxar" vai resolver</span>
-            </h2>
+    <div id="content-delay">
+        <section class="py-16 px-6 max-w-4xl mx-auto">
+            <div class="bg-zinc-900 p-8 rounded-3xl border border-zinc-800 shadow-2xl text-center">
+                <h3 class="text-gold text-2xl font-black uppercase mb-8 tracking-tighter">O QUE VOCÊ VAI RECEBER:</h3>
+                <div class="grid md:grid-cols-3 gap-8 text-center mb-12">
+                    <div class="p-4">
+                        <span class="text-4xl mb-4 block">🔇</span>
+                        <strong class="block text-white text-lg mb-2 uppercase">Mudo na Mente</strong>
+                        <p class="text-gray-400 text-sm">Silencie os pensamentos acelerados imediatamente.</p>
+                    </div>
+                    <div class="p-4 border-y md:border-y-0 md:border-x border-zinc-800">
+                        <span class="text-4xl mb-4 block">📉</span>
+                        <strong class="block text-white text-lg mb-2 uppercase">Alívio no Peito</strong>
+                        <p class="text-gray-400 text-sm">Remova a ansiedade de ver o tempo passar.</p>
+                    </div>
+                    <div class="p-4">
+                        <span class="text-4xl mb-4 block">💤</span>
+                        <strong class="block text-white text-lg mb-2 uppercase">Apagão Geral</strong>
+                        <p class="text-gray-400 text-sm">O comando militar para apagar em 7 minutos.</p>
+                    </div>
+                </div>
 
-            <p style="font-size: 18px; margin-bottom: 20px;">
-                "Quem vive sob pressão não desliga a mente só por querer. Você deita, mas a cabeça continua a mil por hora, pensando em tudo que tem pra fazer.
-            </p>
-
-            <p style="margin-bottom: 20px;">
-                O corpo está moído, mas o cérebro não para. Você olha o relógio e dá aquele aperto no peito: 'Se eu dormir agora, só vou ter 3 horas de sono'. Isso acaba com o seu dia seguinte.
-            </p>
-
-            <div style="border-left: 4px solid #ff0000; background-color: #111; padding: 25px; margin: 35px 0; border-radius: 0 15px 15px 0;">
-                <p style="margin-bottom: 0; color: #eee;">
-                    Você não precisa de chazinho ou meditação calma. Quem está no turbilhão precisa de um <strong>comando mecânico</strong>. Um jeito de apertar um botão e forçar o corpo a apagar em 7 minutos.
-                </p>
-            </div>
-
-            <p style="margin-bottom: 20px;">
-                É o que os militares fazem. Eles não esperam o sono vir. Eles usam o <strong>Gatilho do Apagão</strong> para desligar a mente na marra, não importa o estresse que você esteja passando.
-            </p>
-
-            <p style="background-color: #D4AF37; color: #000; padding: 20px; font-weight: 800; border-radius: 10px; font-size: 20px; text-align: center; margin: 30px 0;">
-                "O sono profundo não é sorte, é um comando de 7 minutos que faz sua mente parar de falar e seu corpo apagar."
-            </p>
-
-            <p style="background-color: #111; border: 1px dashed #333; padding: 15px; border-radius: 10px; font-size: 14px; text-align: center; margin-top: 30px; color: #bbb;">
-                ⚠️ <strong>AVISO:</strong> Funciona mesmo que você sofra de ansiedade extrema ou sinta que sua mente nunca "desliga".
-            </p>
-
-            <p style="font-size: 22px; font-weight: 700; color: #fff; text-align: center; margin: 30px 0;">
-                Não deixe sua produtividade ao acaso. <br>
-                <span style="color: #ff0000; text-transform: uppercase;">Aperte o botão e ative seu apagão agora.</span>
-            </p>
-        </div>
-    </section>
-
-    <section class="py-16 px-6 max-w-3xl mx-auto text-center">
-        <h2 class="text-gold text-2xl font-black uppercase mb-8">
-            Quem já está dormindo igual uma pedra:
-        </h2>
-        
-        <div class="testimonial-card text-left">
-            <div class="flex items-center mb-4">
-                <div class="avatar"><img src="https://randomuser.me/api/portraits/men/11.jpg"></div>
-                <div>
-                    <strong class="text-white block">Marcos Vinícius</strong>
-                    <small class="text-green-500 font-bold uppercase text-[10px]">✅ CONSEGUI DORMIR MESMO ANSIOSO</small>
+                <div class="max-w-md mx-auto border-2 border-dashed border-zinc-700 p-8 rounded-2xl bg-black">
+                    <p class="text-gray-500 uppercase font-bold text-xs mb-1">Preço Comum: <span class="line-through">R$ 197</span></p>
+                    <p class="text-white text-sm font-bold mb-4 uppercase tracking-widest">Oferta Exclusiva Hoje</p>
+                    
+                    <div class="text-5xl font-black text-green-500 mb-6">R$ 27,90</div>
+                    
+                    <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl transition-all shadow-lg uppercase tracking-tighter">
+                        QUERO MEU ACESSO IMEDIATO
+                    </a>
                 </div>
             </div>
-            <p class="text-gray-300 italic text-sm">"Minha cabeça não parava um segundo pensando em conta e serviço. Fiz esse negócio de 7 minutos e parece que puxaram a tomada. Dormi a noite inteira e acordei novo."</p>
-        </div>
+        </section>
 
-        <div class="testimonial-card text-left">
-            <div class="flex items-center mb-4">
-                <div class="avatar"><img src="https://randomuser.me/api/portraits/women/12.jpg"></div>
-                <div>
-                    <strong class="text-white block">Aline Souza</strong>
-                    <small class="text-green-500 font-bold uppercase text-[10px]">✅ SEM APERTO NO PEITO</small>
+        <section class="py-16 px-6 max-w-3xl mx-auto text-center">
+            <h2 class="text-gold text-2xl font-black uppercase mb-8">Quem já está dormindo como uma pedra:</h2>
+            <div class="testimonial-card text-left">
+                <div class="flex items-center mb-4">
+                    <div class="avatar"><img src="https://randomuser.me/api/portraits/men/11.jpg"></div>
+                    <div>
+                        <strong class="text-white block">Marcos Vinícius</strong>
+                        <small class="text-green-500 font-bold uppercase text-[10px]">✅ CONSEGUI DORMIR MESMO ANSIOSO</small>
+                    </div>
                 </div>
+                <p class="text-gray-300 italic text-sm">"Minha cabeça não parava um segundo. Fiz o protocolo e parece que puxaram a tomada."</p>
             </div>
-            <p class="text-gray-300 italic text-sm">"Eu ficava doida olhando o relógio e vendo a hora passar. Dava até um aperto no peito. Esse gatilho salvou minha vida, agora eu deito e apago rapidinho. Recomendo muito!"</p>
-        </div>
-
-        <div class="testimonial-card text-left">
-            <div class="flex items-center mb-4">
-                <div class="avatar"><img src="https://randomuser.me/api/portraits/men/45.jpg"></div>
-                <div>
-                    <strong class="text-white block">Seu Geraldo</strong>
-                    <small class="text-green-500 font-bold uppercase text-[10px]">✅ MELHOR QUE REMÉDIO</small>
-                </div>
-            </div>
-            <p class="text-gray-300 italic text-sm">"Gastava um dinheirão na farmácia pra ficar dopado no outro dia. Com esse segredo aí eu durmo natural e acordo com disposição. A mente fica quietinha."</p>
-        </div>
-    </section>
-
-    <section class="bg-zinc-950 py-16 px-6 border-y border-zinc-900 text-center">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-2xl md:text-4xl font-bold mb-8 uppercase text-white">
-                O SEU AMANHÃ DEPENDE DO <br>
-                <span class="text-red-600">SEU APAGÃO DE HOJE.</span>
-            </h2>
-            <p class="text-gray-400 leading-relaxed mb-6">
-                Não adianta lutar contra o sono. Se a mente está a mil, você precisa desligar o corpo no modo manual.
-            </p>
-        </div>
-    </section>
-
-    <section class="py-16 px-6 max-w-4xl mx-auto">
-        <div class="bg-zinc-900 p-8 rounded-3xl border border-zinc-800 shadow-2xl">
-            <h3 class="text-gold text-2xl font-black uppercase mb-8 tracking-tighter text-center">Por que o Gatilho funciona?</h3>
-            <div class="grid md:grid-cols-3 gap-8 text-center">
-                <div class="p-4">
-                    <span class="text-4xl mb-4 block">🔇</span>
-                    <strong class="block text-white text-lg mb-2 uppercase">Mudo na Mente</strong>
-                    <p class="text-gray-400 text-sm font-light">Para aquela vozinha que fica repetindo os problemas na sua orelha.</p>
-                </div>
-                <div class="p-4 border-y md:border-y-0 md:border-x border-zinc-800">
-                    <span class="text-4xl mb-4 block">📉</span>
-                    <strong class="block text-white text-lg mb-2 uppercase">Alívio no Peito</strong>
-                    <p class="text-gray-400 text-sm font-light">Tira aquela pressão e ansiedade de ver o tempo passando.</p>
-                </div>
-                <div class="p-4">
-                    <span class="text-4xl mb-4 block">💤</span>
-                    <strong class="block text-white text-lg mb-2 uppercase">Apagão Geral</strong>
-                    <p class="text-gray-400 text-sm font-light">Força o corpo a entrar em sono profundo em exatos 7 minutos.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-12 px-6">
-        <div class="max-w-lg mx-auto bg-zinc-900/50 p-6 rounded-2xl border border-dashed border-zinc-700 text-center">
-            <h4 class="text-white font-black uppercase mb-3">🛡️ RISCO ZERO: GARANTIA DE 30 DIAS</h4>
-            <p class="text-gray-400 text-xs leading-relaxed">
-                Teste o protocolo. Se você aplicar e sua mente não silenciar, devolvemos 100% do seu dinheiro. Sem perguntas. É o seu sono de volta ou seu dinheiro na conta.
-            </p>
-        </div>
-    </section>
-
-    <section class="pb-20 px-6 text-center" id="oferta">
-        <div class="max-w-2xl mx-auto border-2 border-dashed border-red-600 p-10 rounded-3xl bg-zinc-950 shadow-[0_0_50px_rgba(220,38,38,0.2)]">
-            <p class="text-gray-500 uppercase font-bold mb-2">Preço Comum: <span class="line-through">R$ 997</span></p>
-            <p class="text-white text-xl font-bold mb-4 uppercase tracking-widest">Oferta Black Friday Hoje</p>
-            
-            <div class="mb-6 py-3 px-4 rounded-lg bg-black border border-zinc-800 inline-block">
-                <p class="text-red-500 text-[10px] uppercase font-bold pulse-text mb-1">Acesso expira em:</p>
-                <div id="timer" class="text-4xl md:text-5xl font-black text-white tabular-nums tracking-tight">10:00</div>
-            </div>
-
-            <div class="text-7xl md:text-8xl font-black text-green-500 mb-6">R$ 27,90</div>
-            
-            <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-red-600 hover:bg-red-700 text-white font-black py-6 px-4 rounded-xl text-xl md:text-2xl transition-all shadow-lg uppercase tracking-tighter">
-                QUERO MEU ACESSO IMEDIATO AGORA
-            </a>
-
-            <p class="text-gray-400 mt-6 text-[10px] uppercase tracking-widest text-center">
-                PAGAMENTO ÚNICO • SEM MENSALIDADE • ENTREGA NO E-MAIL EM 1 MINUTO
-            </p>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <footer class="py-10 text-center text-gray-600 text-[10px] border-t border-zinc-900 px-6">
-        <p class="mb-4">© 2026 - Protocolo do Apagão. Todos os direitos reservados.</p>
-        <p>Este site não tem vínculo com Facebook ou Google.</p>
+        <p>© 2026 - Protocolo do Apagão. Todos os direitos reservados.</p>
     </footer>
 
     <script>
-        function startTimer(duration, display) {
-            let timer = duration, minutes, seconds;
-            setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-                display.textContent = minutes + ":" + seconds;
-                if (--timer < 0) { timer = 0; }
-            }, 1000);
-        }
+        // 1. Script de Desbloqueio (15 segundos)
+        setTimeout(function() {
+            document.getElementById('content-delay').style.display = 'block';
+        }, 15000);
+
+        // 2. Visitantes fake variando
         function startVisitantes() {
             const display = document.querySelector('#visitantes');
             setInterval(() => {
                 let current = parseInt(display.textContent);
-                let oscilacao = Math.floor(Math.random() * 7) - 3;
-                display.textContent = current + oscilacao;
+                let oscilacao = Math.floor(Math.random() * 11) - 5; // Varia entre -5 e +5
+                display.textContent = Math.max(110, current + oscilacao);
             }, 3000);
         }
+
+        // 3. Notificação de compra e vagas ao rolar
+        let compraAtivada = false;
+        window.addEventListener('scroll', function() {
+            if (!compraAtivada && window.scrollY > 400) {
+                compraAtivada = true;
+                const banner = document.getElementById('top-banner');
+                const bannerText = document.getElementById('banner-text');
+                
+                // Muda para notificação de compra e atualiza vagas
+                banner.classList.replace('bg-red-600', 'bg-orange-600');
+                bannerText.innerHTML = "⚡ 6 pessoas acabaram de comprar! RESTAM APENAS 3 VAGAS";
+                
+                // Efeito visual de alerta
+                banner.style.transform = "scale(1.05)";
+                setTimeout(() => banner.style.transform = "scale(1)", 200);
+            }
+        });
+
         window.onload = function () {
-            startTimer(60 * 10, document.querySelector('#timer'));
             startVisitantes();
         };
     </script>
-    <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
 </body>
 </html>
