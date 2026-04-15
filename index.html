@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -9,17 +9,18 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; }
         
-        /* Barra VSL */
+        /* Barra VSL de 10 min */
         @keyframes progress { from { width: 0%; } to { width: 100%; } }
         .vsl-progress-fill { height: 100%; background: #dc2626; animation: progress 600s linear forwards; }
 
         /* Estilo WhatsApp */
-        .wp-container { background: #0b141a; border-radius: 15px; padding: 15px; max-width: 400px; margin: 10px auto; border: 1px solid #202c33; }
+        .wp-container { background: #0b141a; border-radius: 15px; padding: 15px; max-width: 400px; margin: 10px auto; border: 1px solid #202c33; text-align: left; }
         .wp-msg { background: #202c33; color: #e9edef; padding: 8px 12px; border-radius: 0 10px 10px 10px; margin-bottom: 10px; font-size: 14px; position: relative; width: fit-content; max-width: 90%; }
         .wp-msg::before { content: ""; position: absolute; left: -8px; top: 0; border: 8px solid transparent; border-top-color: #202c33; border-right-color: #202c33; }
         .wp-name { font-weight: bold; color: #d1d7db; font-size: 12px; margin-bottom: 2px; display: block; }
         .wp-time { font-size: 10px; color: #8696a0; float: right; margin-left: 10px; margin-top: 5px; }
 
+        /* Ocultar conteúdo inicialmente */
         #content-delay { display: none; }
     </style>
 </head>
@@ -38,6 +39,7 @@
         <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase">
             Desligue sua mente e durma sem ficar rolando na cama por horas
         </h1>
+        <p class="text-gray-400 text-lg mb-8">Feito para quem deita cansado, mas não desliga.</p>
 
         <div class="relative w-full aspect-video bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
             <div class="absolute inset-0 flex items-center justify-center">
@@ -48,14 +50,17 @@
         <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-12">
             <div class="vsl-progress-fill"></div>
         </div>
+    </section>
 
-        <div class="mt-12 space-y-8">
-            <h3 class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-4">Alunos que aplicaram o Gatilho hoje:</h3>
+    <div id="content-delay">
+        
+        <section class="px-6 py-8 max-w-4xl mx-auto text-center">
+            <h3 class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-6">Resultados de quem aplicou hoje:</h3>
             
             <div class="wp-container">
                 <div class="wp-msg">
                     <span class="wp-name">Rodrigo (Grupo Alunos)</span>
-                    Mano, testei o gatilho de 7 min ontem. Eu geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, só acordei hoje 7 da manhã.
+                    Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo.
                     <span class="wp-time">14:20</span>
                 </div>
             </div>
@@ -63,7 +68,7 @@
             <div class="wp-container">
                 <div class="wp-msg">
                     <span class="wp-name">Dra. Claudia</span>
-                    A técnica de respiração mecânica que vcs ensinam no protocolo é bizarra. O cérebro simplesmente entende que precisa desligar. Nota 10.
+                    A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra.
                     <span class="wp-time">15:45</span>
                 </div>
             </div>
@@ -71,15 +76,13 @@
             <div class="wp-container">
                 <div class="wp-msg">
                     <span class="wp-name">Lucas Oliveira</span>
-                    Finalmente silêncio na cabeça kkkk. Aquela ansiedade de ver o relógio passou. Valeu cada centavo.
+                    Finalmente silêncio na cabeça kkkk. Aquela ansiedade de ver o relógio passou. Valeu muito.
                     <span class="wp-time">16:12</span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <div id="content-delay">
-        <section class="py-16 px-6 max-w-4xl mx-auto text-center">
+        <section class="py-12 px-6 max-w-4xl mx-auto text-center">
             <div class="bg-zinc-900 p-8 rounded-3xl border border-zinc-800 shadow-2xl">
                 <div class="max-w-md mx-auto border-2 border-dashed border-zinc-700 p-8 rounded-2xl bg-black">
                     <p class="text-gray-500 uppercase font-bold text-xs mb-1">Preço Comum: <span class="line-through">R$ 197</span></p>
@@ -94,25 +97,25 @@
     </div>
 
     <script>
-        // 1. Script de Desbloqueio (15 segundos)
-        setTimeout(() => { document.getElementById('content-delay').style.display = 'block'; }, 15000);
+        // 1. Desbloqueio Geral (15 segundos)
+        setTimeout(() => { 
+            document.getElementById('content-delay').style.display = 'block'; 
+        }, 15000);
 
-        // 2. Lógica de Atualização de Vagas por Tempo
+        // 2. Controle de Vagas por Tempo
         const vagasElement = document.getElementById('vagas-count');
         
-        // Depois de 1 minuto (60000ms) -> 11 vagas
-        setTimeout(() => {
+        setTimeout(() => { // 1 Minuto
             vagasElement.innerText = "11";
             document.getElementById('top-banner').classList.add('bg-orange-600');
         }, 60000);
 
-        // Depois de 8 minutos (480000ms) -> 9 vagas
-        setTimeout(() => {
+        setTimeout(() => { // 8 Minutos
             vagasElement.innerText = "9";
             document.getElementById('top-banner').classList.replace('bg-orange-600', 'bg-red-700');
         }, 480000);
 
-        // 3. Visitantes fake
+        // 3. Visitantes Fake
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
@@ -120,12 +123,13 @@
             display.textContent = Math.max(120, current + oscilacao);
         }, 3000);
 
-        // 4. Notificação ao rolar
+        // 4. Efeito de Notificação no Scroll
         let scrollTrigger = false;
         window.addEventListener('scroll', () => {
             if (!scrollTrigger && window.scrollY > 500) {
                 scrollTrigger = true;
                 const bannerText = document.getElementById('banner-text');
+                const originalText = bannerText.innerHTML;
                 bannerText.innerHTML = "🔥 6 PESSOAS COMPRARAM AGORA! RESTAM POUCAS VAGAS";
                 setTimeout(() => {
                     bannerText.innerHTML = "⚠️ ÚLTIMAS " + vagasElement.innerText + " VAGAS COM MAIS DE 70% OFF";
