@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -7,21 +7,59 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; overflow-x: hidden; }
         
         /* Barra VSL de 10 min */
         @keyframes progress { from { width: 0%; } to { width: 100%; } }
         .vsl-progress-fill { height: 100%; background: #dc2626; animation: progress 600s linear forwards; }
 
-        /* Estilo WhatsApp */
-        .wp-container { background: #0b141a; border-radius: 15px; padding: 15px; max-width: 400px; margin: 10px auto; border: 1px solid #202c33; text-align: left; }
-        .wp-msg { background: #202c33; color: #e9edef; padding: 8px 12px; border-radius: 0 10px 10px 10px; margin-bottom: 10px; font-size: 14px; position: relative; width: fit-content; max-width: 90%; }
-        .wp-msg::before { content: ""; position: absolute; left: -8px; top: 0; border: 8px solid transparent; border-top-color: #202c33; border-right-color: #202c33; }
-        .wp-name { font-weight: bold; color: #d1d7db; font-size: 12px; margin-bottom: 2px; display: block; }
-        .wp-time { font-size: 10px; color: #8696a0; float: right; margin-left: 10px; margin-top: 5px; }
+        /* Slider de WhatsApp Moderno */
+        .wp-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 15px;
+            padding: 20px 0;
+            scrollbar-width: none; /* Esconde scroll no Firefox */
+        }
+        .wp-slider::-webkit-scrollbar { display: none; } /* Esconde scroll no Chrome/Safari */
+
+        .wp-card {
+            flex: 0 0 85%;
+            scroll-snap-align: center;
+            background: #0b141a;
+            border-radius: 20px;
+            padding: 15px;
+            border: 1px solid #202c33;
+            text-align: left;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+
+        .wp-msg {
+            background: #202c33;
+            color: #e9edef;
+            padding: 10px 14px;
+            border-radius: 0 12px 12px 12px;
+            font-size: 14px;
+            position: relative;
+            line-height: 1.4;
+        }
+
+        .wp-msg::before {
+            content: "";
+            position: absolute;
+            left: -8px;
+            top: 0;
+            border: 8px solid transparent;
+            border-top-color: #202c33;
+            border-right-color: #202c33;
+        }
 
         /* Ocultar conteúdo inicialmente */
         #content-delay { display: none; }
+        
+        .fade-in { animation: fadeIn 0.8s ease-in forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="selection:bg-red-600 selection:text-white">
@@ -30,54 +68,59 @@
         <span id="banner-text">⚠️ ÚLTIMAS <span id="vagas-count">12</span> VAGAS COM MAIS DE 70% OFF</span>
     </div>
 
-    <section class="px-6 pt-24 pb-8 max-w-4xl mx-auto text-center">
+    <section class="px-6 pt-24 pb-4 max-w-4xl mx-auto text-center">
         <div class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
             <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
-            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">134</span> visitando a página agora</span>
+            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">134</span> visitando agora</span>
         </div>
 
-        <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase">
-            Desligue sua mente e durma sem ficar rolando na cama por horas
-        </h1>
-        <p class="text-gray-400 text-lg mb-8">Feito para quem deita cansado, mas não desliga.</p>
+        <h1 class="text-3xl md:text-5xl font-black mb-6 uppercase">Desligue sua mente e durma sem rolar na cama</h1>
 
         <div class="relative w-full aspect-video bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
-            <div class="absolute inset-0 flex items-center justify-center">
-                <span class="text-zinc-700 font-bold uppercase tracking-widest">[ VSL - ILUSTRAÇÃO ]</span>
-            </div>
+            <div class="absolute inset-0 flex items-center justify-center text-zinc-700 font-bold uppercase tracking-tighter">[ VSL - ILUSTRAÇÃO ]</div>
         </div>
         
-        <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-12">
+        <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-8">
             <div class="vsl-progress-fill"></div>
         </div>
     </section>
 
-    <div id="content-delay">
+    <div id="content-delay" class="fade-in">
         
-        <section class="px-6 py-8 max-w-4xl mx-auto text-center">
-            <h3 class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-6">Resultados de quem aplicou hoje:</h3>
-            
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="wp-name">Rodrigo (Grupo Alunos)</span>
-                    Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo.
-                    <span class="wp-time">14:20</span>
+        <section class="px-6 py-4 max-w-4xl mx-auto text-center">
+            <p class="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mb-2">Arraste para o lado ➔</p>
+            <div class="wp-slider">
+                <div class="wp-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="w-8 h-8 rounded-full border border-green-500">
+                        <span class="font-bold text-sm text-zinc-300">Rodrigo (Grupo Alunos)</span>
+                    </div>
+                    <div class="wp-msg">
+                        Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo. 🚀
+                        <span class="block text-[10px] text-zinc-500 text-right mt-1">14:20</span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="wp-name">Dra. Claudia</span>
-                    A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra.
-                    <span class="wp-time">15:45</span>
+                <div class="wp-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-8 h-8 rounded-full border border-green-500">
+                        <span class="font-bold text-sm text-zinc-300">Dra. Claudia</span>
+                    </div>
+                    <div class="wp-msg">
+                        A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra. Funcionou de primeira!
+                        <span class="block text-[10px] text-zinc-500 text-right mt-1">15:45</span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="wp-name">Lucas Oliveira</span>
-                    Finalmente silêncio na cabeça kkkk. Aquela ansiedade de ver o relógio passou. Valeu muito.
-                    <span class="wp-time">16:12</span>
+                <div class="wp-card">
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="https://randomuser.me/api/portraits/men/85.jpg" class="w-8 h-8 rounded-full border border-green-500">
+                        <span class="font-bold text-sm text-zinc-300">Lucas Oliveira</span>
+                    </div>
+                    <div class="wp-msg">
+                        Finalmente silêncio na cabeça kkkk. Aquela ansiedade de ver o relógio passou. Valeu muito o investimento.
+                        <span class="block text-[10px] text-zinc-500 text-right mt-1">16:12</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -89,7 +132,7 @@
                     <div class="text-5xl font-black text-green-500 mb-6">R$ 27,90</div>
                     
                     <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl transition-all shadow-lg uppercase">
-                        QUERO MEU ACESSO IMEDIATO
+                        QUERO MEU ACESSO AGORA
                     </a>
                 </div>
             </div>
@@ -97,45 +140,30 @@
     </div>
 
     <script>
-        // 1. Desbloqueio Geral (15 segundos)
-        setTimeout(() => { 
-            document.getElementById('content-delay').style.display = 'block'; 
-        }, 15000);
+        // 1. Desbloqueio (15 segundos)
+        setTimeout(() => { document.getElementById('content-delay').style.display = 'block'; }, 15000);
 
-        // 2. Controle de Vagas por Tempo
+        // 2. Novo Script de Vagas nos Tempos Exatos
         const vagasElement = document.getElementById('vagas-count');
         
-        setTimeout(() => { // 1 Minuto
+        // Em 30 segundos -> 11 vagas
+        setTimeout(() => {
             vagasElement.innerText = "11";
-            document.getElementById('top-banner').classList.add('bg-orange-600');
-        }, 60000);
+            document.getElementById('top-banner').classList.replace('bg-red-600', 'bg-orange-600');
+        }, 30000);
 
-        setTimeout(() => { // 8 Minutos
+        // Em 4 minutos (240.000ms) -> 9 vagas
+        setTimeout(() => {
             vagasElement.innerText = "9";
             document.getElementById('top-banner').classList.replace('bg-orange-600', 'bg-red-700');
-        }, 480000);
+        }, 240000);
 
-        // 3. Visitantes Fake
+        // 3. Visitantes fake
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
-            let oscilacao = Math.floor(Math.random() * 9) - 4;
-            display.textContent = Math.max(120, current + oscilacao);
+            display.textContent = current + (Math.floor(Math.random() * 5) - 2);
         }, 3000);
-
-        // 4. Efeito de Notificação no Scroll
-        let scrollTrigger = false;
-        window.addEventListener('scroll', () => {
-            if (!scrollTrigger && window.scrollY > 500) {
-                scrollTrigger = true;
-                const bannerText = document.getElementById('banner-text');
-                const originalText = bannerText.innerHTML;
-                bannerText.innerHTML = "🔥 6 PESSOAS COMPRARAM AGORA! RESTAM POUCAS VAGAS";
-                setTimeout(() => {
-                    bannerText.innerHTML = "⚠️ ÚLTIMAS " + vagasElement.innerText + " VAGAS COM MAIS DE 70% OFF";
-                }, 4000);
-            }
-        });
     </script>
 </body>
 </html>
