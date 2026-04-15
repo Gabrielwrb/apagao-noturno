@@ -9,63 +9,26 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; overflow-x: hidden; }
         
-        /* Barra VSL de 10 min */
+        /* Barra VSL */
         @keyframes progress { from { width: 0%; } to { width: 100%; } }
         .vsl-progress-fill { height: 100%; background: #dc2626; animation: progress 600s linear forwards; }
 
-        /* Slider de WhatsApp Moderno */
-        .wp-slider {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            gap: 15px;
-            padding: 20px 0;
-            scrollbar-width: none; /* Esconde scroll no Firefox */
-        }
-        .wp-slider::-webkit-scrollbar { display: none; } /* Esconde scroll no Chrome/Safari */
+        /* Slider de WhatsApp */
+        .wp-slider { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding: 20px 0; scrollbar-width: none; }
+        .wp-slider::-webkit-scrollbar { display: none; }
+        .wp-card { flex: 0 0 85%; scroll-snap-align: center; background: #0b141a; border-radius: 20px; padding: 15px; border: 1px solid #202c33; text-align: left; }
+        .wp-msg { background: #202c33; color: #e9edef; padding: 10px 14px; border-radius: 0 12px 12px 12px; font-size: 14px; position: relative; }
+        .wp-msg::before { content: ""; position: absolute; left: -8px; top: 0; border: 8px solid transparent; border-top-color: #202c33; border-right-color: #202c33; }
 
-        .wp-card {
-            flex: 0 0 85%;
-            scroll-snap-align: center;
-            background: #0b141a;
-            border-radius: 20px;
-            padding: 15px;
-            border: 1px solid #202c33;
-            text-align: left;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
-
-        .wp-msg {
-            background: #202c33;
-            color: #e9edef;
-            padding: 10px 14px;
-            border-radius: 0 12px 12px 12px;
-            font-size: 14px;
-            position: relative;
-            line-height: 1.4;
-        }
-
-        .wp-msg::before {
-            content: "";
-            position: absolute;
-            left: -8px;
-            top: 0;
-            border: 8px solid transparent;
-            border-top-color: #202c33;
-            border-right-color: #202c33;
-        }
-
-        /* Ocultar conteúdo inicialmente */
         #content-delay { display: none; }
-        
         .fade-in { animation: fadeIn 0.8s ease-in forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="selection:bg-red-600 selection:text-white">
 
-    <div id="top-banner" class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase tracking-widest fixed w-full z-50">
-        <span id="banner-text">⚠️ ÚLTIMAS <span id="vagas-count">12</span> VAGAS COM MAIS DE 70% OFF</span>
+    <div id="top-banner" class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase tracking-widest fixed w-full z-50 transition-colors duration-1000">
+        <span id="banner-text">⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS COM MAIS DE 70% OFF</span>
     </div>
 
     <section class="px-6 pt-24 pb-4 max-w-4xl mx-auto text-center">
@@ -96,30 +59,18 @@
                         <span class="font-bold text-sm text-zinc-300">Rodrigo (Grupo Alunos)</span>
                     </div>
                     <div class="wp-msg">
-                        Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo. 🚀
+                        Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem acordei novo. 🚀
                         <span class="block text-[10px] text-zinc-500 text-right mt-1">14:20</span>
                     </div>
                 </div>
-
                 <div class="wp-card">
                     <div class="flex items-center gap-3 mb-3">
                         <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-8 h-8 rounded-full border border-green-500">
                         <span class="font-bold text-sm text-zinc-300">Dra. Claudia</span>
                     </div>
                     <div class="wp-msg">
-                        A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra. Funcionou de primeira!
+                        Técnica excelente. O cérebro entende que precisa desligar na marra. Funcionou de primeira!
                         <span class="block text-[10px] text-zinc-500 text-right mt-1">15:45</span>
-                    </div>
-                </div>
-
-                <div class="wp-card">
-                    <div class="flex items-center gap-3 mb-3">
-                        <img src="https://randomuser.me/api/portraits/men/85.jpg" class="w-8 h-8 rounded-full border border-green-500">
-                        <span class="font-bold text-sm text-zinc-300">Lucas Oliveira</span>
-                    </div>
-                    <div class="wp-msg">
-                        Finalmente silêncio na cabeça kkkk. Aquela ansiedade de ver o relógio passou. Valeu muito o investimento.
-                        <span class="block text-[10px] text-zinc-500 text-right mt-1">16:12</span>
                     </div>
                 </div>
             </div>
@@ -130,7 +81,6 @@
                 <div class="max-w-md mx-auto border-2 border-dashed border-zinc-700 p-8 rounded-2xl bg-black">
                     <p class="text-gray-500 uppercase font-bold text-xs mb-1">Preço Comum: <span class="line-through">R$ 197</span></p>
                     <div class="text-5xl font-black text-green-500 mb-6">R$ 27,90</div>
-                    
                     <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl transition-all shadow-lg uppercase">
                         QUERO MEU ACESSO AGORA
                     </a>
@@ -143,22 +93,34 @@
         // 1. Desbloqueio (15 segundos)
         setTimeout(() => { document.getElementById('content-delay').style.display = 'block'; }, 15000);
 
-        // 2. Novo Script de Vagas nos Tempos Exatos
-        const vagasElement = document.getElementById('vagas-count');
-        
-        // Em 30 segundos -> 11 vagas
-        setTimeout(() => {
-            vagasElement.innerText = "11";
-            document.getElementById('top-banner').classList.replace('bg-red-600', 'bg-orange-600');
-        }, 30000);
+        // 2. Lógica de Escassez Decrescente Automática
+        let vagas = 19;
+        const campoVagas = document.getElementById('vagas-count');
+        const banner = document.getElementById('top-banner');
 
-        // Em 4 minutos (240.000ms) -> 9 vagas
-        setTimeout(() => {
-            vagasElement.innerText = "9";
-            document.getElementById('top-banner').classList.replace('bg-orange-600', 'bg-red-700');
-        }, 240000);
+        function atualizarVagas() {
+            if (vagas > 3) {
+                // Diminui entre 1 ou 2 vagas por vez
+                let queda = Math.floor(Math.random() * 2) + 1;
+                vagas -= queda;
+                
+                if (vagas < 3) vagas = 3; // Trava no 3
+                
+                campoVagas.innerText = vagas;
 
-        // 3. Visitantes fake
+                // Muda a cor do banner conforme as vagas acabam
+                if (vagas <= 10) banner.classList.replace('bg-red-600', 'bg-orange-600');
+                if (vagas <= 5) banner.style.backgroundColor = "#ff0000";
+
+                // Define o próximo tempo de queda (entre 15 e 40 segundos)
+                let proximoTempo = Math.floor(Math.random() * (40000 - 15000 + 1)) + 15000;
+                setTimeout(atualizarVagas, proximoTempo);
+            }
+        }
+        // Inicia o ciclo de quedas após 20 segundos da página aberta
+        setTimeout(atualizarVagas, 20000);
+
+        // 3. Visitantes Fake
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
