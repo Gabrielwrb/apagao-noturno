@@ -23,7 +23,6 @@
         /* Ocultar conteúdo inicialmente */
         #content-delay { display: none; }
         
-        /* Transição suave de cor do banner */
         #top-banner { transition: background-color 1s ease; }
     </style>
 </head>
@@ -46,7 +45,7 @@
 
         <div class="relative w-full aspect-video bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
             <div class="absolute inset-0 flex items-center justify-center">
-                <span class="text-zinc-700 font-bold uppercase tracking-widest">[ VSL - ILUSTRAÇÃO ]</span>
+                <span class="text-zinc-700 font-bold uppercase tracking-widest text-xs md:text-base">[ VSL - O GATILHO DO APAGÃO ]</span>
             </div>
         </div>
         
@@ -105,30 +104,26 @@
             document.getElementById('content-delay').style.display = 'block'; 
         }, 15000);
 
-        // 2. Lógica de Escassez Decrescente Automática (19 -> 3 vagas)
+        // 2. Lógica de Escassez Decrescente Automática (Sem trava no 3)
         let vagas = 19;
         const vagasElement = document.getElementById('vagas-count');
         const banner = document.getElementById('top-banner');
 
         function atualizarVagas() {
-            if (vagas > 3) {
-                // Diminui entre 1 ou 2 vagas
+            if (vagas > 1) { // Continua caindo enquanto for maior que 1
                 let queda = Math.floor(Math.random() * 2) + 1;
                 vagas -= queda;
-                if (vagas < 3) vagas = 3;
+                if (vagas < 1) vagas = 1;
 
                 vagasElement.innerText = vagas;
 
-                // Troca cores conforme a urgência
-                if (vagas <= 12) banner.style.backgroundColor = "#ea580c"; // Orange 600
-                if (vagas <= 6) banner.style.backgroundColor = "#b91c1c";  // Red 700
+                if (vagas <= 12) banner.style.backgroundColor = "#ea580c"; 
+                if (vagas <= 6) banner.style.backgroundColor = "#b91c1c";
 
-                // Define próximo intervalo (entre 15s e 45s)
                 let proximoTempo = Math.floor(Math.random() * (45000 - 15000 + 1)) + 15000;
                 setTimeout(atualizarVagas, proximoTempo);
             }
         }
-        // Inicia o contador após 10 segundos na página
         setTimeout(atualizarVagas, 10000);
 
         // 3. Visitantes Fake
@@ -138,20 +133,6 @@
             let oscilacao = Math.floor(Math.random() * 9) - 4;
             display.textContent = Math.max(120, current + oscilacao);
         }, 3000);
-
-        // 4. Efeito de Notificação no Scroll
-        let scrollTrigger = false;
-        window.addEventListener('scroll', () => {
-            if (!scrollTrigger && window.scrollY > 500) {
-                scrollTrigger = true;
-                const bannerText = document.getElementById('banner-text');
-                const textoOriginal = bannerText.innerHTML;
-                bannerText.innerHTML = "🔥 6 PESSOAS COMPRARAM AGORA! RESTAM POUCAS VAGAS";
-                setTimeout(() => {
-                    bannerText.innerHTML = "⚠️ ÚLTIMAS <span id='vagas-count'>" + vagas + "</span> VAGAS COM MAIS DE 70% OFF";
-                }, 4000);
-            }
-        });
     </script>
 </body>
 </html>
