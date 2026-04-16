@@ -12,31 +12,35 @@
         
         #top-banner { display: none; position: fixed; top: 0; width: 100%; z-index: 100; box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4); }
         
-        /* Controle de Exibição Inicial */
-        #main-content { display: none; }
-        .reveal-active { display: block !important; }
+        /* Controle de Revelação */
+        #main-content { display: none; opacity: 0; transition: opacity 1s ease-in; }
+        .reveal-active { display: block !important; opacity: 1 !important; }
 
         .vsl-progress-container { width: 100%; background: #27272a; height: 10px; border-radius: 999px; overflow: hidden; margin-top: 15px; }
         #progress-bar-fill { height: 100%; background: #dc2626; width: 0%; transition: width 0.5s linear; }
 
-        /* Estilo dos Cards */
-        .glass-card {
-            background: rgba(24, 24, 27, 0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        /* Classes de Animação de Junção */
+        /* Animação de Junção Profissional */
         .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(50px) scale(0.9);
-            transition: all 0.8s cubic-bezier(0.17, 0.55, 0.55, 1);
+            opacity: 0.1; /* Não some totalmente para não parecer vazio */
+            transform: translateY(40px) scale(0.95);
+            filter: blur(5px);
+            transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         .animate-on-scroll.visible {
             opacity: 1;
             transform: translateY(0) scale(1);
+            filter: blur(0px);
+        }
+
+        /* Seta Indicadora */
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
         }
 
         #play-overlay {
@@ -54,14 +58,14 @@
 </head>
 <body class="selection:bg-red-600 selection:text-white">
 
-    <div id="top-banner" class="bg-red-600 text-white text-center py-2.5 px-6 font-bold text-[10px] md:text-xs uppercase fixed w-full z-40 leading-tight">
-        ⚠️ ÚLTIMA CHANCE: O valor de R$ 27,90 expira ao final desta <span id="dia-semana"></span>. Garanta seu desconto antes que o sistema atualize.
+    <div id="top-banner" class="bg-red-600 text-white text-center py-2.5 px-6 font-bold text-[10px] md:text-xs uppercase fixed w-full z-40">
+        ⚠️ ÚLTIMA CHANCE: O valor de R$ 27,90 expira ao final desta <span id="dia-semana"></span>.
     </div>
 
     <section class="px-5 pt-16 pb-10 max-w-4xl mx-auto text-center">
         <div id="visitantes-badge" class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
             <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
-            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">145</span> pessoas assistindo agora</span>
+            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">145</span> assistindo agora</span>
         </div>
 
         <h1 class="headline-main font-black mb-6 uppercase italic text-white">
@@ -69,7 +73,7 @@
         </h1>
 
         <p class="text-zinc-400 text-sm md:text-lg mb-8 font-medium italic leading-relaxed px-2 max-w-3xl mx-auto">
-            Descubra como silenciar a <span class="text-zinc-100">Hipervigilância Cognitiva Residual</span> — o estado de alerta ancestral que trava o seu cérebro e impede o descanso, mesmo que você esteja exausto.
+            Descubra como silenciar a <span class="text-zinc-100">Hipervigilância Cognitiva Residual</span> — o estado de alerta ancestral que trava o seu cérebro.
         </p>
 
         <div class="relative w-full bg-zinc-900 rounded-3xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
@@ -89,6 +93,11 @@
         <div class="vsl-progress-container">
             <div id="progress-bar-fill"></div>
         </div>
+
+        <div id="scroll-hint" class="hidden mt-8 flex-col items-center gap-2 text-zinc-500">
+            <span class="text-[10px] uppercase font-bold tracking-widest">Mais informações abaixo</span>
+            <svg class="w-5 h-5 scroll-indicator" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
     </section>
 
     <div id="main-content" class="max-w-4xl mx-auto px-5 pb-20">
@@ -101,37 +110,37 @@
 
         <div class="text-center max-w-3xl mx-auto mb-20 px-4 animate-on-scroll">
             <p class="text-zinc-300 text-base md:text-lg leading-relaxed font-medium">
-                O problema não é falta de cansaço, é a sua <span class="text-white font-bold">biologia</span>. O estresse mantém você em "vigilância". O Protocolo Apagão utiliza a <span class="text-red-500 font-bold">Calibragem do Ciclo Parassimpático</span> para induzir o sono profundo de forma mecânica.
+                O problema não é falta de cansaço, é a sua <span class="text-white font-bold">biologia</span>. O Protocolo Apagão utiliza a <span class="text-red-500 font-bold">Calibragem do Ciclo Parassimpático</span> para avisar ao seu sistema nervoso que o ambiente é seguro.
             </p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-6 mb-20">
-            <div class="glass-card p-8 rounded-3xl animate-on-scroll">
+            <div class="bg-zinc-900/60 backdrop-blur-md p-8 rounded-3xl border border-zinc-800 animate-on-scroll">
                 <div class="flex items-start gap-4">
                     <span class="text-red-600 font-black text-4xl opacity-50">01</span>
                     <div>
-                        <h3 class="text-white font-black uppercase text-lg leading-tight mb-2">O Ritual do Desligamento Sináptico</h3>
-                        <p class="text-zinc-400 text-sm italic">O passo a passo para o apagão inicial.</p>
+                        <h3 class="text-white font-black uppercase text-lg leading-tight mb-2">Desligamento Sináptico</h3>
+                        <p class="text-zinc-400 text-sm italic">O passo a passo para o apagão inicial e silêncio mental.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="glass-card p-8 rounded-3xl animate-on-scroll">
+            <div class="bg-zinc-900/60 backdrop-blur-md p-8 rounded-3xl border border-zinc-800 animate-on-scroll">
                 <div class="flex items-start gap-4">
                     <span class="text-red-600 font-black text-4xl opacity-50">02</span>
                     <div>
                         <h3 class="text-white font-black uppercase text-lg leading-tight mb-2">Blindagem Hormonal</h3>
-                        <p class="text-zinc-400 text-sm italic">Como proteger o sono sob estresse ou menopausa.</p>
+                        <p class="text-zinc-400 text-sm italic">Proteja seu sono contra picos de cortisol e estresse.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="glass-card p-8 rounded-3xl animate-on-scroll">
+            <div class="bg-zinc-900/60 backdrop-blur-md p-8 rounded-3xl border border-zinc-800 animate-on-scroll">
                 <div class="flex items-start gap-4">
                     <span class="text-red-600 font-black text-4xl opacity-50">03</span>
                     <div>
-                        <h3 class="text-white font-black uppercase text-lg leading-tight mb-2">Protocolo de Ressuscitação</h3>
-                        <p class="text-zinc-400 text-sm italic">Como voltar a dormir após acordar às 3h.</p>
+                        <h3 class="text-white font-black uppercase text-lg leading-tight mb-2">Ressuscitação às 3h</h3>
+                        <p class="text-zinc-400 text-sm italic">Técnica exata para voltar a dormir se o sono quebrar.</p>
                     </div>
                 </div>
             </div>
@@ -140,8 +149,8 @@
                 <div class="flex items-start gap-4">
                     <span class="text-red-500 text-4xl">★</span>
                     <div>
-                        <h3 class="text-white font-black uppercase text-lg leading-tight mb-2">BÔNUS: Checklist Zumbi Nunca Mais</h3>
-                        <p class="text-zinc-100/60 text-sm italic">Roteiro para limpar a névoa mental matinal.</p>
+                        <h3 class="text-white font-black uppercase text-lg leading-tight mb-2">BÔNUS: Checklist Zumbi</h3>
+                        <p class="text-zinc-100/60 text-sm italic">O roteiro para limpar a névoa mental pela manhã.</p>
                     </div>
                 </div>
             </div>
@@ -150,10 +159,8 @@
         <div class="flex flex-col md:flex-row items-center gap-8 bg-zinc-900/30 p-10 rounded-3xl border border-zinc-800/50 animate-on-scroll">
             <img src="https://img.icons8.com/fluency/96/guarantee.png" class="w-24 h-24 opacity-70" alt="Garantia">
             <div>
-                <h3 class="text-2xl font-black uppercase mb-2 italic tracking-tighter">Sua Satisfação ou Reembolso Total</h3>
-                <p class="text-zinc-400 text-sm italic">
-                    Teste o protocolo hoje à noite. Se você não sentir seu cérebro desligar, eu devolvo 100% do seu investimento.
-                </p>
+                <h3 class="text-2xl font-black uppercase mb-2 italic tracking-tighter">Garantia Blindada de 7 Dias</h3>
+                <p class="text-zinc-400 text-sm italic">Teste o protocolo. Se não apagar em minutos, eu devolvo 100% do seu dinheiro.</p>
             </div>
         </div>
     </div>
@@ -166,11 +173,11 @@
         }
         atualizarDia();
 
-        // Configuração do Vídeo e Delay
         const iframe = document.querySelector('#vsl-video');
         const vimeoPlayer = new Vimeo.Player(iframe);
         const progressFill = document.getElementById('progress-bar-fill');
         const mainContent = document.getElementById('main-content');
+        const scrollHint = document.getElementById('scroll-hint');
         
         const TEMPO_BANNER = 30;
         const TEMPO_CONTEUDO = 127; 
@@ -192,35 +199,27 @@
             if (tempo >= TEMPO_CONTEUDO && !conteudoMostrado) {
                 conteudoMostrado = true;
                 mainContent.classList.add('reveal-active');
+                scrollHint.classList.remove('hidden');
                 initScrollObserver();
-                window.scrollBy({ top: 300, behavior: 'smooth' });
             }
             let percent = (tempo / TEMPO_CONTEUDO) * 100;
             progressFill.style.width = (percent > 100 ? 100 : percent) + '%';
         });
 
-        // Lógica de Animação que se Faz e Desfaz
         function initScrollObserver() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: "0px 0px -50px 0px"
-            };
-
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
                     } else {
-                        // Remove a classe para "desfazer" a animação ao sair da tela
                         entry.target.classList.remove('visible');
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.15, rootMargin: "0px 0px -100px 0px" });
 
             document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
         }
 
-        // Visitantes dinâmicos
         setInterval(() => {
             const v = document.getElementById('visitantes');
             let n = parseInt(v.textContent) + (Math.floor(Math.random() * 5) - 2);
