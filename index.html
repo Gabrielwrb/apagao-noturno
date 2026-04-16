@@ -9,15 +9,15 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; }
         
-        /* Barra de carregamento visual (não clicável) */
-        @keyframes progress { from { width: 0%; } to { width: 100%; } }
-        .vsl-progress-fill { height: 100%; background: #dc2626; animation: progress 600s linear forwards; }
+        /* Barra de progresso customizada de 2 minutos */
+        .vsl-progress-container { width: 100%; background: #27272a; height: 10px; border-radius: 999px; overflow: hidden; margin-top: 15px; }
+        #progress-bar-fill { height: 100%; background: #dc2626; width: 0%; transition: width 0.5s linear; }
 
-        /* Botão de Play Central Gigante */
+        /* Botão de Play Central */
         #play-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.7);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -26,14 +26,13 @@
             transition: opacity 0.3s ease;
         }
         .play-btn-circle {
-            width: 90px;
-            height: 90px;
+            width: 85px; height: 85px;
             background: #dc2626;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 0 30px rgba(220, 38, 38, 0.6);
+            box-shadow: 0 0 35px rgba(220, 38, 38, 0.6);
             animation: pulse-play 1.5s infinite;
         }
         @keyframes pulse-play {
@@ -42,92 +41,81 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
         }
 
-        /* Estilo WhatsApp */
-        .wp-container { background: #0b141a; border-radius: 15px; padding: 15px; max-width: 400px; margin: 10px auto; border: 1px solid #202c33; text-align: left; }
-        .wp-msg { background: #202c33; color: #e9edef; padding: 8px 12px; border-radius: 0 10px 10px 10px; margin-bottom: 10px; font-size: 14px; position: relative; width: fit-content; max-width: 90%; }
-        .wp-msg::before { content: ""; position: absolute; left: -8px; top: 0; border: 8px solid transparent; border-top-color: #202c33; border-right-color: #202c33; }
-
-        /* Camada para impedir que o lead pule o vídeo */
+        /* Bloqueador de cliques no vídeo */
         .video-overlay-blocker { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; cursor: default; }
         
         #content-delay { display: none; }
-        #top-banner { transition: background-color 1s ease; }
     </style>
 </head>
 <body class="selection:bg-red-600 selection:text-white">
 
     <div id="top-banner" class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase tracking-widest fixed w-full z-50">
-        <span id="banner-text">⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS COM MAIS DE 70% OFF</span>
+        ⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS COM MAIS DE 70% OFF
     </div>
 
     <section class="px-6 pt-24 pb-8 max-w-4xl mx-auto text-center">
         <div class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
             <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
-            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">134</span> visitando agora</span>
+            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">134</span> assistindo agora</span>
         </div>
 
-        <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase italic tracking-tight">
+        <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase italic">
             Desligue sua mente e durma <span class="text-red-600">sem ficar rolando na cama por horas.</span>
         </h1>
         
-        <p class="text-zinc-400 text-lg md:text-xl max-w-3xl mx-auto mb-10 font-medium leading-relaxed">
+        <p class="text-zinc-400 text-lg md:text-xl mb-10">
             Feito para quem deita cansado e não dorme.
         </p>
 
-        <div class="relative w-full aspect-video bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
+        <div class="relative w-full aspect-video bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl">
             
-            <div id="play-overlay" onclick="startVideoWithSound()">
+            <div id="play-overlay" onclick="startVideo()">
                 <div class="flex flex-col items-center gap-4">
                     <div class="play-btn-circle">
                         <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.333-5.89a1.5 1.5 0 000-2.538L6.3 2.841z"></path></svg>
                     </div>
-                    <span class="text-white font-black text-sm tracking-widest animate-pulse">CLIQUE PARA OUVIR</span>
+                    <span class="text-white font-black text-xs tracking-[0.2em]">CLIQUE PARA OUVIR</span>
                 </div>
             </div>
 
             <div class="video-overlay-blocker"></div>
 
             <div style="padding:56.25% 0 0 0;position:relative;">
-                <iframe id="vsl-video" src="https://player.vimeo.com/video/1183570418?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="PAM"></iframe>
+                <iframe id="vsl-video" src="https://player.vimeo.com/video/1183570418?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
             </div>
-            <script src="https://player.vimeo.com/api/player.js"></script>
         </div>
         
-        <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-12">
-            <div class="vsl-progress-fill"></div>
+        <div class="vsl-progress-container">
+            <div id="progress-bar-fill"></div>
         </div>
+        <p class="text-[10px] text-zinc-600 mt-2 uppercase tracking-widest font-bold">Vídeo aula: Protocolo do Apagão</p>
     </section>
 
-    <div id="content-delay">
-        <section class="px-6 py-8 max-w-4xl mx-auto text-center">
-            <h3 class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-6">Resultados de quem aplicou hoje:</h3>
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="font-bold text-xs block mb-1">Rodrigo (Grupo Alunos)</span>
-                    Mano, testei o gatilho ontem. Acordei novo. 🔥
-                    <span class="text-[10px] text-zinc-500 block text-right mt-1">14:20</span>
-                </div>
-            </div>
-        </section>
-
+    <div id="content-delay" class="animate-fade-in">
         <section class="py-12 px-6 max-w-4xl mx-auto text-center">
             <div class="bg-zinc-900 p-8 rounded-3xl border border-zinc-800 shadow-2xl">
                 <div class="max-w-md mx-auto border-2 border-dashed border-zinc-700 p-8 rounded-2xl bg-black">
-                    <p class="text-gray-500 uppercase font-bold text-xs mb-1">Preço Comum: <span class="line-through">R$ 197</span></p>
-                    <div class="text-5xl font-black text-green-500 mb-6">R$ 27,90</div>
-                    <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl transition-all shadow-lg uppercase"> QUERO MEU ACESSO IMEDIATO </a>
+                    <p class="text-gray-500 uppercase font-bold text-xs mb-1">Oferta Exclusiva: <span class="line-through">R$ 197</span></p>
+                    <div class="text-6xl font-black text-green-500 mb-6 tracking-tighter">R$ 27,90</div>
+                    <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl transition-all shadow-lg uppercase scale-105">
+                        QUERO MEU ACESSO IMEDIATO
+                    </a>
+                    <p class="text-zinc-500 text-[10px] mt-4 uppercase">Acesso vitalício + Garantia de 7 dias</p>
                 </div>
             </div>
         </section>
     </div>
 
+    <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
         const iframe = document.querySelector('#vsl-video');
         const vimeoPlayer = new Vimeo.Player(iframe);
         const overlay = document.getElementById('play-overlay');
+        const progressFill = document.getElementById('progress-bar-fill');
+        
+        const DURACAO_BARRA = 120; // Sincronizado para 2 minutos exatos
 
-        // Função chamada ao clicar no botão grande
-        function startVideoWithSound() {
+        function startVideo() {
             vimeoPlayer.setMuted(false);
             vimeoPlayer.setVolume(1);
             vimeoPlayer.play();
@@ -135,7 +123,21 @@
             setTimeout(() => { overlay.style.display = 'none'; }, 300);
         }
 
-        // Tenta autoplay mudo (necessário para alguns browsers)
+        // Lógica da Barra de Progresso e Delay
+        vimeoPlayer.on('timeupdate', function(data) {
+            let tempoAtual = data.seconds;
+            let percentual = (tempoAtual / DURACAO_BARRA) * 100;
+            
+            if (percentual > 100) percentual = 100;
+            progressFill.style.width = percentual + '%';
+
+            // Mostra o botão após 2 minutos de vídeo assistido
+            if (tempoAtual >= DURACAO_BARRA) {
+                document.getElementById('content-delay').style.display = 'block';
+            }
+        });
+
+        // Autoplay Mudo Inicial
         window.onload = function() {
             vimeoPlayer.ready().then(() => {
                 vimeoPlayer.setMuted(true);
@@ -143,20 +145,16 @@
             });
         };
 
-        // Desbloqueio Geral (15 segundos)
-        setTimeout(() => { document.getElementById('content-delay').style.display = 'block'; }, 15000);
-
-        // Lógica de Escassez
+        // Escassez Realista
         let vagas = 19;
         setInterval(() => {
             if (vagas > 1) {
-                vagas -= Math.floor(Math.random() * 2) + 1;
-                if (vagas < 1) vagas = 1;
+                vagas -= 1;
                 document.getElementById('vagas-count').innerText = vagas;
             }
-        }, 15000);
+        }, 18000);
 
-        // Visitantes Fake
+        // Visitantes
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
