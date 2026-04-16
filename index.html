@@ -12,16 +12,14 @@
         
         #top-banner { display: none; position: fixed; top: 0; width: 100%; z-index: 100; box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4); }
         
-        /* Controle de Revelação */
         #main-content { display: none; opacity: 0; transition: opacity 1s ease-in; }
         .reveal-active { display: block !important; opacity: 1 !important; }
 
         .vsl-progress-container { width: 100%; background: #27272a; height: 10px; border-radius: 999px; overflow: hidden; margin-top: 15px; }
         #progress-bar-fill { height: 100%; background: #dc2626; width: 0%; transition: width 0.5s linear; }
 
-        /* Animação de Junção Profissional */
         .animate-on-scroll {
-            opacity: 0.1; /* Não some totalmente para não parecer vazio */
+            opacity: 0.1;
             transform: translateY(40px) scale(0.95);
             filter: blur(5px);
             transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
@@ -33,10 +31,7 @@
             filter: blur(0px);
         }
 
-        /* Seta Indicadora */
-        .scroll-indicator {
-            animation: bounce 2s infinite;
-        }
+        .scroll-indicator { animation: bounce 2s infinite; }
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
             40% {transform: translateY(-10px);}
@@ -95,7 +90,7 @@
         </div>
 
         <div id="scroll-hint" class="hidden mt-8 flex-col items-center gap-2 text-zinc-500">
-            <span class="text-[10px] uppercase font-bold tracking-widest">Mais informações abaixo</span>
+            <span class="text-[10px] uppercase font-bold tracking-widest">Informações exclusivas abaixo</span>
             <svg class="w-5 h-5 scroll-indicator" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
         </div>
     </section>
@@ -110,7 +105,7 @@
 
         <div class="text-center max-w-3xl mx-auto mb-20 px-4 animate-on-scroll">
             <p class="text-zinc-300 text-base md:text-lg leading-relaxed font-medium">
-                O problema não é falta de cansaço, é a sua <span class="text-white font-bold">biologia</span>. O Protocolo Apagão utiliza a <span class="text-red-500 font-bold">Calibragem do Ciclo Parassimpático</span> para avisar ao seu sistema nervoso que o ambiente é seguro.
+                Entenda por que o seu cérebro ignora o cansaço e como o Protocolo Apagão usa a <span class="text-red-500 font-bold italic">Calibragem do Ciclo Parassimpático</span> para <span class="text-white font-bold underline">'forçar'</span> o desligamento químico em minutos.
             </p>
         </div>
 
@@ -120,7 +115,7 @@
                     <span class="text-red-600 font-black text-4xl opacity-50">01</span>
                     <div>
                         <h3 class="text-white font-black uppercase text-lg leading-tight mb-2">Desligamento Sináptico</h3>
-                        <p class="text-zinc-400 text-sm italic">O passo a passo para o apagão inicial e silêncio mental.</p>
+                        <p class="text-zinc-400 text-sm italic">O passo a passo para o apagão inicial e o silenciamento imediato dos pensamentos.</p>
                     </div>
                 </div>
             </div>
@@ -130,7 +125,7 @@
                     <span class="text-red-600 font-black text-4xl opacity-50">02</span>
                     <div>
                         <h3 class="text-white font-black uppercase text-lg leading-tight mb-2">Blindagem Hormonal</h3>
-                        <p class="text-zinc-400 text-sm italic">Proteja seu sono contra picos de cortisol e estresse.</p>
+                        <p class="text-zinc-400 text-sm italic">Como proteger o sono sob estresse crônico ou oscilações da menopausa.</p>
                     </div>
                 </div>
             </div>
@@ -140,7 +135,7 @@
                     <span class="text-red-600 font-black text-4xl opacity-50">03</span>
                     <div>
                         <h3 class="text-white font-black uppercase text-lg leading-tight mb-2">Ressuscitação às 3h</h3>
-                        <p class="text-zinc-400 text-sm italic">Técnica exata para voltar a dormir se o sono quebrar.</p>
+                        <p class="text-zinc-400 text-sm italic">A técnica fisiológica exata para voltar ao sono profundo se ele "quebrar" no meio da noite.</p>
                     </div>
                 </div>
             </div>
@@ -150,7 +145,7 @@
                     <span class="text-red-500 text-4xl">★</span>
                     <div>
                         <h3 class="text-white font-black uppercase text-lg leading-tight mb-2">BÔNUS: Checklist Zumbi</h3>
-                        <p class="text-zinc-100/60 text-sm italic">O roteiro para limpar a névoa mental pela manhã.</p>
+                        <p class="text-zinc-100/60 text-sm italic">O roteiro matinal para limpar a névoa mental e recuperar o foco total após o despertar.</p>
                     </div>
                 </div>
             </div>
@@ -160,7 +155,7 @@
             <img src="https://img.icons8.com/fluency/96/guarantee.png" class="w-24 h-24 opacity-70" alt="Garantia">
             <div>
                 <h3 class="text-2xl font-black uppercase mb-2 italic tracking-tighter">Garantia Blindada de 7 Dias</h3>
-                <p class="text-zinc-400 text-sm italic">Teste o protocolo. Se não apagar em minutos, eu devolvo 100% do seu dinheiro.</p>
+                <p class="text-zinc-400 text-sm italic">Teste o protocolo hoje à noite. Se você não sentir seu cérebro desligar e acordar renovado, eu devolvo 100% do seu investimento.</p>
             </div>
         </div>
     </div>
@@ -215,7 +210,7 @@
                         entry.target.classList.remove('visible');
                     }
                 });
-            }, { threshold: 0.15, rootMargin: "0px 0px -100px 0px" });
+            }, { threshold: 0.15 });
 
             document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
         }
