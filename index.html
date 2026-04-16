@@ -9,10 +9,6 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; }
         
-        /* Barra de carregamento visual (não clicável) */
-        @keyframes progress { from { width: 0%; } to { width: 100%; } }
-        .vsl-progress-fill { height: 100%; background: #dc2626; animation: progress 600s linear forwards; }
-
         /* Estilo WhatsApp */
         .wp-container { background: #0b141a; border-radius: 15px; padding: 15px; max-width: 400px; margin: 10px auto; border: 1px solid #202c33; text-align: left; }
         .wp-msg { background: #202c33; color: #e9edef; padding: 8px 12px; border-radius: 0 10px 10px 10px; margin-bottom: 10px; font-size: 14px; position: relative; width: fit-content; max-width: 90%; }
@@ -20,135 +16,100 @@
         .wp-name { font-weight: bold; color: #d1d7db; font-size: 12px; margin-bottom: 2px; display: block; }
         .wp-time { font-size: 10px; color: #8696a0; float: right; margin-left: 10px; margin-top: 5px; }
 
-        /* Camada para impedir que o lead pule o vídeo ou pause */
+        /* BLOQUEIO TOTAL DA BARRA DE PROGRESSO E CLIQUES */
+        .video-wrapper { position: relative; width: 100%; border-radius: 1rem; overflow: hidden; background: #000; }
         .video-overlay { 
             position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            z-index: 20; 
-            cursor: default; 
+            top: 0; left: 0; width: 100%; height: 100%; 
+            z-index: 30; 
+            background: rgba(0,0,0,0); /* Invisível */
+            cursor: default;
         }
 
         #content-delay { display: none; }
-        #top-banner { transition: background-color 1s ease; }
     </style>
 </head>
 <body class="selection:bg-red-600 selection:text-white">
 
     <div id="top-banner" class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase tracking-widest fixed w-full z-50">
-        <span id="banner-text">⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS COM MAIS DE 70% OFF</span>
+        ⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS COM MAIS DE 70% OFF
     </div>
 
     <section class="px-6 pt-24 pb-8 max-w-4xl mx-auto text-center">
         <div class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
-            <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
-            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">134</span> visitando a página agora</span>
+            <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">134</span> assistindo agora</span>
         </div>
 
         <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase">
             Desligue sua mente e durma sem ficar rolando na cama por horas
         </h1>
-        <p class="text-gray-400 text-lg mb-8">Feito para quem deita cansado, mas não desliga.</p>
 
-        <div class="relative w-full aspect-video bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
-            <div class="video-overlay"></div>
-            
-            <div style="padding:56.25% 0 0 0;position:relative;">
+        <div class="video-wrapper shadow-2xl mb-12">
+            <div class="video-overlay"></div> <div style="padding:56.25% 0 0 0;position:relative;">
                 <iframe id="vsl-video" 
-                        src="https://player.vimeo.com/video/1183570418?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=0&amp;controls=0" 
+                        src="https://player.vimeo.com/video/1183570418?autoplay=1&muted=1&controls=0&badge=0&autopause=0&player_id=0&app_id=58479" 
                         frameborder="0" 
                         allow="autoplay; fullscreen; picture-in-picture" 
                         style="position:absolute;top:0;left:0;width:100%;height:100%;" 
                         title="PAM">
                 </iframe>
             </div>
-            <script src="https://player.vimeo.com/api/player.js"></script>
-        </div>
-        
-        <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-12">
-            <div class="vsl-progress-fill"></div>
         </div>
     </section>
 
     <div id="content-delay">
-        <section class="px-6 py-8 max-w-4xl mx-auto text-center">
-            <h3 class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-6">Resultados de quem aplicou hoje:</h3>
-            
+        <section class="px-6 py-8 max-w-4xl mx-auto text-center border-t border-zinc-900">
             <div class="wp-container">
                 <div class="wp-msg">
                     <span class="wp-name">Rodrigo (Grupo Alunos)</span>
-                    Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo.
+                    Mano, testei o gatilho de 7 min ontem. Acordei novo. 🔥
                     <span class="wp-time">14:20</span>
                 </div>
             </div>
-
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="wp-name">Dra. Claudia</span>
-                    A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra.
-                    <span class="wp-time">15:45</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-12 px-6 max-w-4xl mx-auto text-center">
-            <div class="bg-zinc-900 p-8 rounded-3xl border border-zinc-800 shadow-2xl">
-                <div class="max-w-md mx-auto border-2 border-dashed border-zinc-700 p-8 rounded-2xl bg-black">
-                    <p class="text-gray-500 uppercase font-bold text-xs mb-1">Preço Comum: <span class="line-through">R$ 197</span></p>
-                    <div class="text-5xl font-black text-green-500 mb-6">R$ 27,90</div>
-                    
-                    <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl transition-all shadow-lg uppercase">
-                        QUERO MEU ACESSO IMEDIATO
-                    </a>
-                </div>
+            
+            <div class="mt-12 bg-zinc-900 p-8 rounded-3xl border border-zinc-800">
+                <div class="text-5xl font-black text-green-500 mb-6 italic">R$ 27,90</div>
+                <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl transition-all uppercase shadow-lg">
+                    QUERO MEU ACESSO IMEDIATO
+                </a>
             </div>
         </section>
     </div>
 
+    <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
         const iframe = document.querySelector('#vsl-video');
-        const vimeoPlayer = new Vimeo.Player(iframe);
-        
-        window.onload = function() {
-            vimeoPlayer.ready().then(() => {
-                vimeoPlayer.setVolume(1);
-                vimeoPlayer.play().catch(() => {
-                    vimeoPlayer.setMuted(true);
-                    vimeoPlayer.play();
-                });
-            });
-        };
+        const player = new Vimeo.Player(iframe);
 
-        // 1. Desbloqueio Geral (15 segundos)
+        // LÓGICA PARA FORÇAR O SOM
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                player.setMuted(false); // Tira do mudo
+                player.setVolume(1);   // Volume no talo
+                player.play();         // Garante o play
+            }, 1500); 
+        });
+
+        // 1. Desbloqueio (15 segundos)
         setTimeout(() => { 
             document.getElementById('content-delay').style.display = 'block'; 
         }, 15000);
 
-        // 2. Lógica de Escassez
+        // 2. Escassez
         let vagas = 19;
-        const vagasElement = document.getElementById('vagas-count');
-        const banner = document.getElementById('top-banner');
-
-        function atualizarVagas() {
-            if (vagas > 1) {
-                let queda = Math.floor(Math.random() * 2) + 1;
-                vagas -= queda;
-                if (vagas < 1) vagas = 1;
-                vagasElement.innerText = vagas;
-                if (vagas <= 12) banner.style.backgroundColor = "#ea580c"; 
-                if (vagas <= 6) banner.style.backgroundColor = "#b91c1c";
-                setTimeout(atualizarVagas, Math.floor(Math.random() * 30000) + 15000);
+        setInterval(() => {
+            if (vagas > 3) {
+                vagas -= Math.floor(Math.random() * 2);
+                document.getElementById('vagas-count').innerText = vagas;
             }
-        }
-        setTimeout(atualizarVagas, 10000);
+        }, 15000);
 
-        // 3. Visitantes Fake
+        // 3. Visitantes
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
-            display.textContent = Math.max(120, current + (Math.floor(Math.random() * 9) - 4));
+            display.textContent = current + (Math.floor(Math.random() * 5) - 2);
         }, 3000);
     </script>
 </body>
