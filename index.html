@@ -68,7 +68,7 @@
         
         <div id="visitantes-badge" class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
             <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
-            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">142</span> assistindo agora</span>
+            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">142</span> pessoas assistindo agora</span>
         </div>
 
         <h1 class="headline-main font-black mb-6 uppercase italic">
@@ -124,11 +124,12 @@
         const cta = document.getElementById('cta-section');
         const notify = document.getElementById('offer-notification');
         const timerNotify = document.getElementById('timer-notify');
+        const vdisplay = document.getElementById('visitantes');
         
         const bannerEscassez = document.getElementById('top-banner');
         const badgeVisitantes = document.getElementById('visitantes-badge');
 
-        const TEMPO_ESCASSEZ = 15; // Gatilho de escassez aos 15s
+        const TEMPO_ESCASSEZ = 15; 
         const TEMPO_CTA = 127; 
         const TEMPO_NOTIFY = 124; 
         let escassezAtivada = false;
@@ -144,18 +145,15 @@
         vimeoPlayer.on('timeupdate', function(data) {
             let tempo = data.seconds;
 
-            // Ativa Escassez (Banner e Visitantes) aos 15 segundos
             if (tempo >= TEMPO_ESCASSEZ && !escassezAtivada) {
                 escassezAtivada = true;
                 bannerEscassez.style.display = 'block';
                 badgeVisitantes.style.display = 'inline-flex';
             }
             
-            // Barra de Progresso
             let percent = (tempo / TEMPO_CTA) * 100;
             progressFill.style.width = (percent > 100 ? 100 : percent) + '%';
 
-            // Notificação
             if (tempo >= TEMPO_NOTIFY && !notifyMostrada) {
                 notifyMostrada = true;
                 notify.classList.add('show');
@@ -170,13 +168,12 @@
                 }, 1000);
             }
 
-            // CTA
             if (tempo >= TEMPO_CTA) {
                 cta.style.display = 'block';
             }
         });
 
-        // Lógica de Vagas (diminui aleatoriamente)
+        // Lógica de Vagas
         let vagas = 19;
         setInterval(() => { 
             if(escassezAtivada && vagas > 1) { 
@@ -185,11 +182,20 @@
             } 
         }, 20000);
 
-        // Lógica de Visitantes (oscilação natural)
+        // Lógica de Visitantes com VARIAÇÃO REALISTA
         setInterval(() => {
-            const display = document.querySelector('#visitantes');
-            let current = parseInt(display.textContent);
-            display.textContent = Math.max(130, current + (Math.floor(Math.random() * 5) - 2));
+            if(escassezAtivada) {
+                let current = parseInt(vdisplay.textContent);
+                // Gera variação entre -3 e +4
+                let variacao = Math.floor(Math.random() * 8) - 3;
+                let novoValor = current + variacao;
+                
+                // Mantém o número sempre entre 130 e 160 para ser crível
+                if(novoValor < 130) novoValor = 132;
+                if(novoValor > 160) novoValor = 158;
+                
+                vdisplay.textContent = novoValor;
+            }
         }, 3000);
     </script>
 </body>
