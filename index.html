@@ -45,7 +45,7 @@
         }
         #offer-notification.show { top: 20px; }
 
-        /* Banner de Vagas - Oculto inicialmente */
+        /* Banner de Vagas - Oculto inicialmente e com texto dinâmico */
         #top-banner { display: none; }
 
         /* Botão CTA */
@@ -60,8 +60,8 @@
 </head>
 <body class="selection:bg-red-600 selection:text-white">
 
-    <div id="top-banner" class="bg-red-600 text-white text-center py-2 font-bold text-[10px] md:text-sm uppercase fixed w-full z-40 tracking-tighter md:tracking-widest">
-        ⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS DISPONÍVEIS COM DESCONTO
+    <div id="top-banner" class="bg-red-600 text-white text-center py-2 px-4 font-bold text-[9px] md:text-xs uppercase fixed w-full z-40 tracking-tight">
+        ⚠️ ATENÇÃO: Devido ao alto volume de acessos hoje, <span id="data-atual"></span>, restam apenas <span id="vagas-count">12</span> vagas com o desconto de R$ 27,90.
     </div>
 
     <section class="px-5 pt-20 pb-12 max-w-4xl mx-auto text-center">
@@ -118,6 +118,19 @@
 
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
+        // Função para atualizar a data automaticamente
+        function atualizarData() {
+            const diasSemana = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
+            const meses = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+            const hoje = new Date();
+            const diaSemana = diasSemana[hoje.getDay()];
+            const diaMes = hoje.getDate();
+            const mes = meses[hoje.getMonth()];
+            
+            document.getElementById('data-atual').innerText = `${diaSemana}, ${diaMes} de ${mes}`;
+        }
+        atualizarData();
+
         const iframe = document.querySelector('#vsl-video');
         const vimeoPlayer = new Vimeo.Player(iframe);
         const progressFill = document.getElementById('progress-bar-fill');
@@ -127,7 +140,7 @@
         const vdisplay = document.getElementById('visitantes');
         const topBanner = document.getElementById('top-banner');
         
-        const TEMPO_VAGAS = 30; // Vagas aparecem aos 30 segundos
+        const TEMPO_VAGAS = 30; 
         const TEMPO_CTA = 127; 
         const TEMPO_NOTIFY = 124; 
         
@@ -144,17 +157,14 @@
         vimeoPlayer.on('timeupdate', function(data) {
             let tempo = data.seconds;
             
-            // Lógica para mostrar as Vagas (Escassez) aos 30s
             if (tempo >= TEMPO_VAGAS && !vagasMostradas) {
                 vagasMostradas = true;
                 topBanner.style.display = 'block';
             }
 
-            // Barra de Progresso
             let percent = (tempo / TEMPO_CTA) * 100;
             progressFill.style.width = (percent > 100 ? 100 : percent) + '%';
 
-            // Notificação de Oferta
             if (tempo >= TEMPO_NOTIFY && !notifyMostrada) {
                 notifyMostrada = true;
                 notify.classList.add('show');
@@ -169,22 +179,21 @@
                 }, 1000);
             }
 
-            // Botão CTA
             if (tempo >= TEMPO_CTA) {
                 cta.style.display = 'block';
             }
         });
 
-        // Lógica de Vagas (diminui após aparecerem)
-        let vagas = 19;
+        // Diminuição de vagas (de 12 para 1 conforme o tempo passa)
+        let vagas = 12;
         setInterval(() => { 
             if(vagasMostradas && vagas > 1) { 
                 vagas--; 
                 document.getElementById('vagas-count').innerText = vagas; 
             } 
-        }, 25000);
+        }, 35000);
 
-        // Lógica de Visitantes (Varía imediatamente ao carregar)
+        // Variação de visitantes
         setInterval(() => {
             let current = parseInt(vdisplay.textContent);
             let variacao = Math.floor(Math.random() * 8) - 3;
