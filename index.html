@@ -9,9 +9,8 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
         
-        /* Otimização da Headline para Celular */
         .headline-main {
-            font-size: clamp(1.75rem, 6vw, 3rem); /* Adapta entre 28px e 48px conforme a tela */
+            font-size: clamp(1.75rem, 6vw, 3rem);
             line-height: 1.15;
             letter-spacing: -0.02em;
         }
@@ -46,6 +45,9 @@
         }
         #offer-notification.show { top: 20px; }
 
+        /* Elementos de Escassez (Ocultos inicialmente) */
+        #top-banner, #visitantes-badge { display: none; }
+
         /* Botão CTA */
         #cta-section { display: none; }
         .cta-btn {
@@ -58,21 +60,17 @@
 </head>
 <body class="selection:bg-red-600 selection:text-white">
 
-    <div id="offer-notification">
-        <div class="bg-green-100 p-2 rounded-full">
-            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        </div>
-        <div>
-            <p class="text-xs font-bold uppercase text-gray-400 tracking-tight">Sistema</p>
-            <p class="text-sm font-black italic">Liberando oferta em <span id="timer-notify" class="text-green-600">3</span>s...</p>
-        </div>
-    </div>
-
-    <div class="bg-red-600 text-white text-center py-2 font-bold text-[10px] md:text-sm uppercase fixed w-full z-40 tracking-tighter md:tracking-widest">
+    <div id="top-banner" class="bg-red-600 text-white text-center py-2 font-bold text-[10px] md:text-sm uppercase fixed w-full z-40 tracking-tighter md:tracking-widest">
         ⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS DISPONÍVEIS COM DESCONTO
     </div>
 
     <section class="px-5 pt-20 pb-12 max-w-4xl mx-auto text-center">
+        
+        <div id="visitantes-badge" class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
+            <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
+            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">142</span> assistindo agora</span>
+        </div>
+
         <h1 class="headline-main font-black mb-6 uppercase italic">
             Finalmente revelado: A técnica de <span class="text-red-600">"Reset Sináptico"</span> que força o seu cérebro a apagar em 7 minutos.
         </h1>
@@ -90,9 +88,7 @@
                     <span class="text-white font-black text-[10px] tracking-widest uppercase">Clique para ouvir</span>
                 </div>
             </div>
-            
             <div class="video-overlay-blocker"></div>
-            
             <div style="padding:75% 0 0 0;position:relative;">
                 <iframe id="vsl-video" src="https://player.vimeo.com/video/1183600782?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
             </div>
@@ -110,6 +106,16 @@
         </div>
     </section>
 
+    <div id="offer-notification">
+        <div class="bg-green-100 p-2 rounded-full">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <div>
+            <p class="text-xs font-bold uppercase text-gray-400 tracking-tight">Sistema</p>
+            <p class="text-sm font-black italic">Liberando oferta em <span id="timer-notify" class="text-green-600">3</span>s...</p>
+        </div>
+    </div>
+
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
         const iframe = document.querySelector('#vsl-video');
@@ -119,8 +125,13 @@
         const notify = document.getElementById('offer-notification');
         const timerNotify = document.getElementById('timer-notify');
         
+        const bannerEscassez = document.getElementById('top-banner');
+        const badgeVisitantes = document.getElementById('visitantes-badge');
+
+        const TEMPO_ESCASSEZ = 15; // Gatilho de escassez aos 15s
         const TEMPO_CTA = 127; 
         const TEMPO_NOTIFY = 124; 
+        let escassezAtivada = false;
         let notifyMostrada = false;
 
         function startVideo() {
@@ -132,9 +143,19 @@
 
         vimeoPlayer.on('timeupdate', function(data) {
             let tempo = data.seconds;
+
+            // Ativa Escassez (Banner e Visitantes) aos 15 segundos
+            if (tempo >= TEMPO_ESCASSEZ && !escassezAtivada) {
+                escassezAtivada = true;
+                bannerEscassez.style.display = 'block';
+                badgeVisitantes.style.display = 'inline-flex';
+            }
+            
+            // Barra de Progresso
             let percent = (tempo / TEMPO_CTA) * 100;
             progressFill.style.width = (percent > 100 ? 100 : percent) + '%';
 
+            // Notificação
             if (tempo >= TEMPO_NOTIFY && !notifyMostrada) {
                 notifyMostrada = true;
                 notify.classList.add('show');
@@ -149,13 +170,27 @@
                 }, 1000);
             }
 
+            // CTA
             if (tempo >= TEMPO_CTA) {
                 cta.style.display = 'block';
             }
         });
 
+        // Lógica de Vagas (diminui aleatoriamente)
         let vagas = 19;
-        setInterval(() => { if(vagas > 1) { vagas--; document.getElementById('vagas-count').innerText = vagas; } }, 25000);
+        setInterval(() => { 
+            if(escassezAtivada && vagas > 1) { 
+                vagas--; 
+                document.getElementById('vagas-count').innerText = vagas; 
+            } 
+        }, 20000);
+
+        // Lógica de Visitantes (oscilação natural)
+        setInterval(() => {
+            const display = document.querySelector('#visitantes');
+            let current = parseInt(display.textContent);
+            display.textContent = Math.max(130, current + (Math.floor(Math.random() * 5) - 2));
+        }, 3000);
     </script>
 </body>
 </html>
