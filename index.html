@@ -41,10 +41,16 @@
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
         }
 
+        /* Bloqueia apenas interação direta com o iframe (impede pular vídeo) */
         .video-overlay-blocker { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; cursor: default; }
         
-        /* Esconde o CTA inicialmente */
+        /* CTA oculto até o tempo de 2:20 */
         #cta-section { display: none; }
+
+        /* Estilo WhatsApp para depoimentos */
+        .wp-container { background: #0b141a; border-radius: 15px; padding: 15px; max-width: 400px; margin: 10px auto; border: 1px solid #202c33; text-align: left; }
+        .wp-msg { background: #202c33; color: #e9edef; padding: 8px 12px; border-radius: 0 10px 10px 10px; margin-bottom: 10px; font-size: 14px; position: relative; width: fit-content; max-width: 90%; }
+        .wp-msg::before { content: ""; position: absolute; left: -8px; top: 0; border: 8px solid transparent; border-top-color: #202c33; border-right-color: #202c33; }
     </style>
 </head>
 <body class="selection:bg-red-600 selection:text-white">
@@ -86,15 +92,31 @@
             <div id="progress-bar-fill"></div>
         </div>
 
-        <div id="cta-section" class="mt-8 animate-bounce">
+        <div id="cta-section" class="mt-8">
             <div class="max-w-md mx-auto">
-                <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl md:text-2xl transition-all shadow-[0_0_20px_rgba(22,163,74,0.5)] uppercase">
+                <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl md:text-2xl transition-all shadow-[0_0_20px_rgba(22,163,74,0.5)] uppercase animate-pulse">
                     QUERO MEU ACESSO IMEDIATO
                 </a>
                 <div class="mt-4 flex items-center justify-center gap-4 text-zinc-500 text-[10px] uppercase font-bold tracking-widest">
                     <span>Acesso Vitalício</span>
                     <span class="w-1 h-1 bg-zinc-700 rounded-full"></span>
                     <span>Garantia de 7 Dias</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-16 border-t border-zinc-900 pt-12">
+            <h3 class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-8 text-center">Resultados Reais:</h3>
+            <div class="wp-container">
+                <div class="wp-msg">
+                    <span class="font-bold text-xs block mb-1">Rodrigo (Grupo Alunos)</span>
+                    Testei o gatilho ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo. 🚀
+                </div>
+            </div>
+            <div class="wp-container">
+                <div class="wp-msg">
+                    <span class="font-bold text-xs block mb-1">Dra. Claudia</span>
+                    A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra.
                 </div>
             </div>
         </div>
@@ -125,7 +147,7 @@
             if (percentual > 100) percentual = 100;
             progressFill.style.width = percentual + '%';
 
-            // Mostra o CTA apenas quando atingir o tempo determinado
+            // Mostra o botão de compra aos 140 segundos
             if (tempoAtual >= DURACAO_BARRA) {
                 cta.style.display = 'block';
             }
@@ -138,7 +160,6 @@
             });
         };
 
-        // Lógica de Vagas
         let vagas = 19;
         setInterval(() => {
             if (vagas > 1) {
@@ -147,7 +168,6 @@
             }
         }, 18000);
 
-        // Lógica de Visitantes
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
