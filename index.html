@@ -15,7 +15,6 @@
             -webkit-font-smoothing: antialiased;
         }
         
-        /* Barra de progresso premium */
         @keyframes progress { from { width: 0%; } to { width: 100%; } }
         .vsl-progress-fill { 
             height: 100%; 
@@ -23,7 +22,6 @@
             animation: progress 120s linear forwards; 
         }
 
-        /* Depoimentos Estilo WhatsApp Moderno */
         .wp-container { 
             background: #121b22; 
             border-radius: 18px; 
@@ -44,7 +42,6 @@
             position: relative;
         }
 
-        /* Botão de Alta Conversão com Efeito de Pulso */
         @keyframes custom-pulse {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
             70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
@@ -54,11 +51,15 @@
 
         #content-delay { display: none; transition: opacity 1s ease-in; }
         
-        /* Camada para impedir pausa no vídeo */
-        .video-cover {
+        /* Overlay transparente para bloquear o botão de pausa do Vimeo */
+        .video-blocker {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 10; cursor: default;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 20;
+            background: transparent;
         }
     </style>
 </head>
@@ -85,10 +86,12 @@
         </p>
 
         <div class="relative w-full aspect-video bg-black rounded-3xl border border-zinc-800/50 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] mb-6">
-            <div class="video-cover"></div>
+            
+            <div class="video-blocker"></div>
             
             <div style="padding:56.25% 0 0 0;position:relative;">
-                <iframe id="vsl-video" src="https://player.vimeo.com/video/1183570418?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;loop=1&amp;autoplay=1&amp;muted=1&amp;background=1" 
+                <iframe id="vsl-video" 
+                        src="https://player.vimeo.com/video/1183570418?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;loop=1&amp;autoplay=1&amp;controls=0&amp;background=0" 
                         frameborder="0" 
                         allow="autoplay; fullscreen" 
                         style="position:absolute;top:0;left:0;width:100%;height:100%;" 
@@ -106,49 +109,47 @@
     </section>
 
     <div id="content-delay">
-        
         <section class="px-6 py-12 max-w-4xl mx-auto text-center border-t border-zinc-900">
             <h3 class="text-zinc-500 text-[11px] font-black uppercase tracking-[0.3em] mb-12 italic">Resultados reais de alunos:</h3>
-            
-            <div class="grid md:grid-cols-1 gap-2 items-center">
-                <div class="wp-container">
-                    <span class="block text-[11px] font-bold text-zinc-500 mb-1 ml-1 uppercase">Rodrigo (Grupo Alunos)</span>
-                    <div class="wp-msg">Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo. 🔥</div>
-                    <span class="text-[10px] text-zinc-500 mt-1 block text-right">14:20</span>
-                </div>
-
-                <div class="wp-container">
-                    <span class="block text-[11px] font-bold text-zinc-500 mb-1 ml-1 uppercase">Dra. Claudia</span>
-                    <div class="wp-msg">A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra. Indico para meus pacientes.</div>
-                    <span class="text-[10px] text-zinc-500 mt-1 block text-right">15:45</span>
-                </div>
+            <div class="wp-container">
+                <span class="block text-[11px] font-bold text-zinc-500 mb-1 ml-1 uppercase">Rodrigo (Grupo Alunos)</span>
+                <div class="wp-msg">Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo. 🔥</div>
+            </div>
+            <div class="wp-container">
+                <span class="block text-[11px] font-bold text-zinc-500 mb-1 ml-1 uppercase">Dra. Claudia</span>
+                <div class="wp-msg">A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra. Indico para meus pacientes.</div>
             </div>
         </section>
 
         <section class="py-16 px-6 max-w-xl mx-auto">
             <div class="bg-gradient-to-b from-zinc-900 to-black p-10 rounded-[40px] border border-zinc-800 text-center shadow-2xl">
-                <p class="text-zinc-500 uppercase font-black text-[10px] tracking-widest mb-2">Oferta Exclusiva por tempo limitado</p>
                 <div class="flex items-center justify-center gap-4 mb-8">
                     <span class="text-zinc-600 line-through text-xl">R$ 197</span>
                     <div class="text-6xl font-black text-white tracking-tighter italic">R$ 27,90</div>
                 </div>
-                
                 <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="cta-button block w-full bg-green-600 hover:bg-green-500 text-white font-black py-6 px-4 rounded-2xl text-xl transition-all uppercase shadow-[0_0_30px_rgba(22,163,74,0.3)]">
                     Quero Meu Acesso Imediato
                 </a>
-
-                <div class="mt-8 flex flex-wrap justify-center gap-6 opacity-30 grayscale">
-                    <img src="https://logodownload.org/wp-content/uploads/2014/07/visa-logo-1.png" class="h-4" alt="Visa">
-                    <img src="https://logodownload.org/wp-content/uploads/2014/07/mastercard-logo-7.png" class="h-6" alt="Mastercard">
-                    <img src="https://logodownload.org/wp-content/uploads/2020/02/pix-bc-logo.png" class="h-4" alt="Pix">
-                </div>
             </div>
         </section>
     </div>
 
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
-        // 1. Desbloqueio Geral (2 minutos)
+        // Tentar play com SOM aos 2 segundos
+        const iframe = document.querySelector('#vsl-video');
+        const player = new Vimeo.Player(iframe);
+
+        window.onload = function() {
+            setTimeout(() => {
+                player.setVolume(1); // Garante volume máximo
+                player.play().catch(function(error) {
+                    console.log("Navegador bloqueou som automático. Usuário precisa clicar.");
+                });
+            }, 2000);
+        };
+
+        // Desbloqueio em 2 min
         setTimeout(() => { 
             const content = document.getElementById('content-delay');
             content.style.display = 'block';
@@ -156,37 +157,23 @@
             setTimeout(() => content.style.opacity = '1', 50);
         }, 120000);
 
-        // 2. Lógica de Escassez Decrescente
+        // Escassez
         let vagas = 19;
-        const banner = document.getElementById('top-banner');
-
         function atualizarVagas() {
             if (vagas > 1) {
                 vagas -= Math.floor(Math.random() * 2) + 1;
-                if (vagas < 1) vagas = 1;
-                document.getElementById('vagas-count').innerText = vagas;
-                
-                if (vagas <= 10) banner.classList.replace('bg-red-700', 'bg-orange-700');
-                if (vagas <= 5) banner.classList.replace('bg-orange-700', 'bg-red-900');
-
+                document.getElementById('vagas-count').innerText = Math.max(1, vagas);
                 setTimeout(atualizarVagas, Math.floor(Math.random() * 20000) + 15000);
             }
         }
         setTimeout(atualizarVagas, 10000);
 
-        // 3. Visitantes Fake Online
+        // Visitantes
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
             display.textContent = Math.max(120, current + (Math.floor(Math.random() * 9) - 4));
         }, 4000);
-
-        // 4. Forçar o play após 2 segundos (caso autoplay mudo falhe)
-        setTimeout(() => {
-            const iframe = document.querySelector('#vsl-video');
-            const player = new Vimeo.Player(iframe);
-            player.play().catch(() => {});
-        }, 2000);
     </script>
 </body>
 </html>
