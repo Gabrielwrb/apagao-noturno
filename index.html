@@ -9,30 +9,55 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; }
         
-        /* Estilo WhatsApp */
-        .wp-container { background: #0b141a; border-radius: 15px; padding: 15px; max-width: 400px; margin: 10px auto; border: 1px solid #202c33; text-align: left; }
-        .wp-msg { background: #202c33; color: #e9edef; padding: 8px 12px; border-radius: 0 10px 10px 10px; margin-bottom: 10px; font-size: 14px; position: relative; width: fit-content; max-width: 90%; }
-        .wp-msg::before { content: ""; position: absolute; left: -8px; top: 0; border: 8px solid transparent; border-top-color: #202c33; border-right-color: #202c33; }
-        .wp-name { font-weight: bold; color: #d1d7db; font-size: 12px; margin-bottom: 2px; display: block; }
-        .wp-time { font-size: 10px; color: #8696a0; float: right; margin-left: 10px; margin-top: 5px; }
-
-        /* BLOQUEIO TOTAL DA BARRA DE PROGRESSO E CLIQUES */
+        /* Container do Vídeo */
         .video-wrapper { position: relative; width: 100%; border-radius: 1rem; overflow: hidden; background: #000; }
+        
+        /* Botão Ativar Som Premium */
+        #unmute-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 40;
+            background: rgba(220, 38, 38, 0.9);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            items-center: center;
+            gap: 10px;
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
+            animation: pulse-red 2s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        /* Camada para impedir que o lead pule o vídeo */
         .video-overlay { 
             position: absolute; 
             top: 0; left: 0; width: 100%; height: 100%; 
             z-index: 30; 
-            background: rgba(0,0,0,0); /* Invisível */
-            cursor: default;
+            background: transparent;
         }
 
+        /* Estilo WhatsApp */
+        .wp-container { background: #0b141a; border-radius: 15px; padding: 15px; max-width: 400px; margin: 10px auto; border: 1px solid #202c33; text-align: left; }
+        .wp-msg { background: #202c33; color: #e9edef; padding: 8px 12px; border-radius: 0 10px 10px 10px; margin-bottom: 10px; font-size: 14px; position: relative; width: fit-content; max-width: 90%; }
+        
         #content-delay { display: none; }
     </style>
 </head>
 <body class="selection:bg-red-600 selection:text-white">
 
     <div id="top-banner" class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase tracking-widest fixed w-full z-50">
-        ⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS COM MAIS DE 70% OFF
+        ⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS COM DESCONTO
     </div>
 
     <section class="px-6 pt-24 pb-8 max-w-4xl mx-auto text-center">
@@ -42,11 +67,20 @@
         </div>
 
         <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase">
-            Desligue sua mente e durma sem ficar rolando na cama por horas
+            Desligue sua mente e durma sem lutar contra a cama
         </h1>
 
         <div class="video-wrapper shadow-2xl mb-12">
-            <div class="video-overlay"></div> <div style="padding:56.25% 0 0 0;position:relative;">
+            <div id="unmute-button" onclick="enableSound()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 010 12.728M16.463 8.288a5.25 5.25 0 010 7.424M6.75 8.25l4.72-4.72a.75.75 0 011.28.53v15.88a.75.75 0 01-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.01 9.01 0 012.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                </svg>
+                CLIQUE PARA ATIVAR O SOM
+            </div>
+
+            <div class="video-overlay"></div>
+            
+            <div style="padding:56.25% 0 0 0;position:relative;">
                 <iframe id="vsl-video" 
                         src="https://player.vimeo.com/video/1183570418?autoplay=1&muted=1&controls=0&badge=0&autopause=0&player_id=0&app_id=58479" 
                         frameborder="0" 
@@ -62,15 +96,15 @@
         <section class="px-6 py-8 max-w-4xl mx-auto text-center border-t border-zinc-900">
             <div class="wp-container">
                 <div class="wp-msg">
-                    <span class="wp-name">Rodrigo (Grupo Alunos)</span>
-                    Mano, testei o gatilho de 7 min ontem. Acordei novo. 🔥
-                    <span class="wp-time">14:20</span>
+                    <span class="font-bold text-xs block mb-1">Rodrigo (Grupo Alunos)</span>
+                    Mano, testei o gatilho ontem. Acordei novo. 🔥
+                    <span class="text-[10px] text-zinc-500 block text-right mt-1">14:20</span>
                 </div>
             </div>
             
             <div class="mt-12 bg-zinc-900 p-8 rounded-3xl border border-zinc-800">
                 <div class="text-5xl font-black text-green-500 mb-6 italic">R$ 27,90</div>
-                <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl transition-all uppercase shadow-lg">
+                <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl transition-all uppercase">
                     QUERO MEU ACESSO IMEDIATO
                 </a>
             </div>
@@ -81,31 +115,31 @@
     <script>
         const iframe = document.querySelector('#vsl-video');
         const player = new Vimeo.Player(iframe);
+        const unmuteBtn = document.getElementById('unmute-button');
 
-        // LÓGICA PARA FORÇAR O SOM
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                player.setMuted(false); // Tira do mudo
-                player.setVolume(1);   // Volume no talo
-                player.play();         // Garante o play
-            }, 1500); 
-        });
+        // Função para ativar som e remover o botão
+        function enableSound() {
+            player.setMuted(false);
+            player.setVolume(1);
+            player.play();
+            unmuteBtn.style.display = 'none';
+        }
 
-        // 1. Desbloqueio (15 segundos)
+        // Desbloqueio de conteúdo (15 segundos para teste, ajuste se necessário)
         setTimeout(() => { 
             document.getElementById('content-delay').style.display = 'block'; 
         }, 15000);
 
-        // 2. Escassez
+        // Escassez
         let vagas = 19;
         setInterval(() => {
             if (vagas > 3) {
-                vagas -= Math.floor(Math.random() * 2);
+                vagas -= 1;
                 document.getElementById('vagas-count').innerText = vagas;
             }
-        }, 15000);
+        }, 12000);
 
-        // 3. Visitantes
+        // Visitantes
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
@@ -113,4 +147,4 @@
         }, 3000);
     </script>
 </body>
-</html>
+</html>```
