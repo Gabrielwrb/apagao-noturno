@@ -5,99 +5,142 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protocolo do Apagão | Oficial</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #0a0a0b; 
+            color: #f4f4f5; 
+            scroll-behavior: smooth; 
+            -webkit-font-smoothing: antialiased;
+        }
         
-        /* Barra de progresso sincronizada com o desbloqueio (120s) */
+        /* Barra de progresso premium */
         @keyframes progress { from { width: 0%; } to { width: 100%; } }
-        .vsl-progress-fill { height: 100%; background: #dc2626; animation: progress 120s linear forwards; }
+        .vsl-progress-fill { 
+            height: 100%; 
+            background: linear-gradient(90deg, #b91c1c, #ef4444); 
+            animation: progress 120s linear forwards; 
+        }
 
-        /* Estilo WhatsApp */
-        .wp-container { background: #0b141a; border-radius: 15px; padding: 15px; max-width: 400px; margin: 10px auto; border: 1px solid #202c33; text-align: left; }
-        .wp-msg { background: #202c33; color: #e9edef; padding: 8px 12px; border-radius: 0 10px 10px 10px; margin-bottom: 10px; font-size: 14px; position: relative; width: fit-content; max-width: 90%; }
-        .wp-msg::before { content: ""; position: absolute; left: -8px; top: 0; border: 8px solid transparent; border-top-color: #202c33; border-right-color: #202c33; }
-        .wp-name { font-weight: bold; color: #d1d7db; font-size: 12px; margin-bottom: 2px; display: block; }
-        .wp-time { font-size: 10px; color: #8696a0; float: right; margin-left: 10px; margin-top: 5px; }
+        /* Depoimentos Estilo WhatsApp Moderno */
+        .wp-container { 
+            background: #121b22; 
+            border-radius: 18px; 
+            padding: 16px; 
+            max-width: 420px; 
+            margin: 12px auto; 
+            border: 1px solid #222d34; 
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .wp-msg { 
+            background: #202c33; 
+            color: #e9edef; 
+            padding: 10px 14px; 
+            border-radius: 0 12px 12px 12px; 
+            font-size: 14px; 
+            line-height: 1.5;
+            position: relative;
+        }
 
-        /* Ocultar conteúdo inicialmente */
-        #content-delay { display: none; }
+        /* Botão de Alta Conversão com Efeito de Pulso */
+        @keyframes custom-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        .cta-button { animation: custom-pulse 2s infinite; }
+
+        #content-delay { display: none; transition: opacity 1s ease-in; }
         
-        #top-banner { transition: background-color 1s ease; }
+        /* Camada para impedir pausa no vídeo */
+        .video-cover {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 10; cursor: default;
+        }
     </style>
 </head>
 <body class="selection:bg-red-600 selection:text-white">
 
-    <div id="top-banner" class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase tracking-widest fixed w-full z-50">
-        <span id="banner-text">⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS COM MAIS DE 70% OFF</span>
+    <div id="top-banner" class="bg-red-700 text-white text-center py-2.5 font-bold text-[10px] md:text-xs uppercase tracking-[0.2em] fixed w-full z-50 shadow-lg border-b border-red-800/50">
+        ⚠️ ÚLTIMAS <span id="vagas-count" class="text-yellow-300">19</span> VAGAS COM 70% DE DESCONTO
     </div>
 
-    <section class="px-6 pt-24 pb-8 max-w-4xl mx-auto text-center">
-        <div class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
-            <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
-            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">134</span> visitando a página agora</span>
+    <section class="px-6 pt-32 pb-8 max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 mb-8 bg-zinc-900/60 backdrop-blur-sm px-4 py-2 rounded-full border border-zinc-800">
+            <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+            <span class="text-[11px] text-zinc-300 font-bold uppercase tracking-wider">
+                <span id="visitantes">134</span> pessoas assistindo agora
+            </span>
         </div>
 
-        <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase">
-            Desligue sua mente e durma sem ficar rolando na cama por horas
+        <h1 class="text-4xl md:text-6xl font-black mb-6 leading-[1.1] tracking-tight text-white uppercase italic">
+            Aperte o <span class="text-red-600">Off</span> e durma <br class="hidden md:block"> sem lutar contra a cama
         </h1>
-        <p class="text-gray-400 text-lg mb-8">Feito para quem deita cansado, mas não desliga.</p>
+        
+        <p class="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-medium leading-relaxed">
+            Feito para mentes aceleradas que deitam cansadas, mas não conseguem "desligar".
+        </p>
 
-        <div class="relative w-full aspect-video bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
+        <div class="relative w-full aspect-video bg-black rounded-3xl border border-zinc-800/50 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] mb-6">
+            <div class="video-cover"></div>
+            
             <div style="padding:56.25% 0 0 0;position:relative;">
-                <iframe src="https://player.vimeo.com/video/1183570418?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;loop=1&amp;autoplay=1" 
+                <iframe id="vsl-video" src="https://player.vimeo.com/video/1183570418?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;loop=1&amp;autoplay=1&amp;muted=1&amp;background=1" 
                         frameborder="0" 
-                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                        allow="autoplay; fullscreen" 
                         style="position:absolute;top:0;left:0;width:100%;height:100%;" 
                         title="PAM">
                 </iframe>
             </div>
         </div>
         
-        <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-12">
-            <div class="vsl-progress-fill"></div>
+        <div class="max-w-md mx-auto">
+            <div class="w-full bg-zinc-900 h-1.5 rounded-full overflow-hidden">
+                <div class="vsl-progress-fill"></div>
+            </div>
+            <p class="text-[10px] text-zinc-600 mt-3 uppercase tracking-widest font-black">Por favor, assista até o fim para liberar seu acesso</p>
         </div>
     </section>
 
     <div id="content-delay">
         
-        <section class="px-6 py-8 max-w-4xl mx-auto text-center">
-            <h3 class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-6">Resultados de quem aplicou hoje:</h3>
+        <section class="px-6 py-12 max-w-4xl mx-auto text-center border-t border-zinc-900">
+            <h3 class="text-zinc-500 text-[11px] font-black uppercase tracking-[0.3em] mb-12 italic">Resultados reais de alunos:</h3>
             
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="wp-name">Rodrigo (Grupo Alunos)</span>
-                    Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo.
-                    <span class="wp-time">14:20</span>
+            <div class="grid md:grid-cols-1 gap-2 items-center">
+                <div class="wp-container">
+                    <span class="block text-[11px] font-bold text-zinc-500 mb-1 ml-1 uppercase">Rodrigo (Grupo Alunos)</span>
+                    <div class="wp-msg">Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo. 🔥</div>
+                    <span class="text-[10px] text-zinc-500 mt-1 block text-right">14:20</span>
                 </div>
-            </div>
 
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="wp-name">Dra. Claudia</span>
-                    A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra.
-                    <span class="wp-time">15:45</span>
-                </div>
-            </div>
-
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="wp-name">Lucas Oliveira</span>
-                    Finalmente silêncio na cabeça kkkk. Aquela ansiedade de ver o relógio passou. Valeu muito.
-                    <span class="wp-time">16:12</span>
+                <div class="wp-container">
+                    <span class="block text-[11px] font-bold text-zinc-500 mb-1 ml-1 uppercase">Dra. Claudia</span>
+                    <div class="wp-msg">A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra. Indico para meus pacientes.</div>
+                    <span class="text-[10px] text-zinc-500 mt-1 block text-right">15:45</span>
                 </div>
             </div>
         </section>
 
-        <section class="py-12 px-6 max-w-4xl mx-auto text-center">
-            <div class="bg-zinc-900 p-8 rounded-3xl border border-zinc-800 shadow-2xl">
-                <div class="max-w-md mx-auto border-2 border-dashed border-zinc-700 p-8 rounded-2xl bg-black">
-                    <p class="text-gray-500 uppercase font-bold text-xs mb-1">Preço Comum: <span class="line-through">R$ 197</span></p>
-                    <div class="text-5xl font-black text-green-500 mb-6">R$ 27,90</div>
-                    
-                    <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl transition-all shadow-lg uppercase">
-                        QUERO MEU ACESSO IMEDIATO
-                    </a>
+        <section class="py-16 px-6 max-w-xl mx-auto">
+            <div class="bg-gradient-to-b from-zinc-900 to-black p-10 rounded-[40px] border border-zinc-800 text-center shadow-2xl">
+                <p class="text-zinc-500 uppercase font-black text-[10px] tracking-widest mb-2">Oferta Exclusiva por tempo limitado</p>
+                <div class="flex items-center justify-center gap-4 mb-8">
+                    <span class="text-zinc-600 line-through text-xl">R$ 197</span>
+                    <div class="text-6xl font-black text-white tracking-tighter italic">R$ 27,90</div>
+                </div>
+                
+                <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="cta-button block w-full bg-green-600 hover:bg-green-500 text-white font-black py-6 px-4 rounded-2xl text-xl transition-all uppercase shadow-[0_0_30px_rgba(22,163,74,0.3)]">
+                    Quero Meu Acesso Imediato
+                </a>
+
+                <div class="mt-8 flex flex-wrap justify-center gap-6 opacity-30 grayscale">
+                    <img src="https://logodownload.org/wp-content/uploads/2014/07/visa-logo-1.png" class="h-4" alt="Visa">
+                    <img src="https://logodownload.org/wp-content/uploads/2014/07/mastercard-logo-7.png" class="h-6" alt="Mastercard">
+                    <img src="https://logodownload.org/wp-content/uploads/2020/02/pix-bc-logo.png" class="h-4" alt="Pix">
                 </div>
             </div>
         </section>
@@ -105,40 +148,45 @@
 
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
-        // 1. Desbloqueio Geral (Alterado para 120.000ms = 2 minutos)
+        // 1. Desbloqueio Geral (2 minutos)
         setTimeout(() => { 
-            document.getElementById('content-delay').style.display = 'block'; 
+            const content = document.getElementById('content-delay');
+            content.style.display = 'block';
+            content.style.opacity = '0';
+            setTimeout(() => content.style.opacity = '1', 50);
         }, 120000);
 
-        // 2. Lógica de Escassez
+        // 2. Lógica de Escassez Decrescente
         let vagas = 19;
-        const vagasElement = document.getElementById('vagas-count');
         const banner = document.getElementById('top-banner');
 
         function atualizarVagas() {
             if (vagas > 1) {
-                let queda = Math.floor(Math.random() * 2) + 1;
-                vagas -= queda;
+                vagas -= Math.floor(Math.random() * 2) + 1;
                 if (vagas < 1) vagas = 1;
+                document.getElementById('vagas-count').innerText = vagas;
+                
+                if (vagas <= 10) banner.classList.replace('bg-red-700', 'bg-orange-700');
+                if (vagas <= 5) banner.classList.replace('bg-orange-700', 'bg-red-900');
 
-                vagasElement.innerText = vagas;
-
-                if (vagas <= 12) banner.style.backgroundColor = "#ea580c"; 
-                if (vagas <= 6) banner.style.backgroundColor = "#b91c1c";
-
-                let proximoTempo = Math.floor(Math.random() * (45000 - 15000 + 1)) + 15000;
-                setTimeout(atualizarVagas, proximoTempo);
+                setTimeout(atualizarVagas, Math.floor(Math.random() * 20000) + 15000);
             }
         }
         setTimeout(atualizarVagas, 10000);
 
-        // 3. Visitantes Online (Fake)
+        // 3. Visitantes Fake Online
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
-            let oscilacao = Math.floor(Math.random() * 9) - 4;
-            display.textContent = Math.max(120, current + oscilacao);
-        }, 3000);
+            display.textContent = Math.max(120, current + (Math.floor(Math.random() * 9) - 4));
+        }, 4000);
+
+        // 4. Forçar o play após 2 segundos (caso autoplay mudo falhe)
+        setTimeout(() => {
+            const iframe = document.querySelector('#vsl-video');
+            const player = new Vimeo.Player(iframe);
+            player.play().catch(() => {});
+        }, 2000);
     </script>
 </body>
 </html>
