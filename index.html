@@ -13,15 +13,42 @@
         @keyframes progress { from { width: 0%; } to { width: 100%; } }
         .vsl-progress-fill { height: 100%; background: #dc2626; animation: progress 600s linear forwards; }
 
+        /* Botão de Play Central Gigante */
+        #play-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 50;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        .play-btn-circle {
+            width: 90px;
+            height: 90px;
+            background: #dc2626;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.6);
+            animation: pulse-play 1.5s infinite;
+        }
+        @keyframes pulse-play {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 20px rgba(220, 38, 38, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+
         /* Estilo WhatsApp */
         .wp-container { background: #0b141a; border-radius: 15px; padding: 15px; max-width: 400px; margin: 10px auto; border: 1px solid #202c33; text-align: left; }
         .wp-msg { background: #202c33; color: #e9edef; padding: 8px 12px; border-radius: 0 10px 10px 10px; margin-bottom: 10px; font-size: 14px; position: relative; width: fit-content; max-width: 90%; }
         .wp-msg::before { content: ""; position: absolute; left: -8px; top: 0; border: 8px solid transparent; border-top-color: #202c33; border-right-color: #202c33; }
-        .wp-name { font-weight: bold; color: #d1d7db; font-size: 12px; margin-bottom: 2px; display: block; }
-        .wp-time { font-size: 10px; color: #8696a0; float: right; margin-left: 10px; margin-top: 5px; }
 
-        /* Camada para impedir que o lead pule o vídeo ou pause */
-        .video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; cursor: default; }
+        /* Camada para impedir que o lead pule o vídeo */
+        .video-overlay-blocker { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; cursor: default; }
         
         #content-delay { display: none; }
         #top-banner { transition: background-color 1s ease; }
@@ -36,7 +63,7 @@
     <section class="px-6 pt-24 pb-8 max-w-4xl mx-auto text-center">
         <div class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
             <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
-            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">134</span> visitando a página agora</span>
+            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">134</span> visitando agora</span>
         </div>
 
         <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase italic tracking-tight">
@@ -48,9 +75,20 @@
         </p>
 
         <div class="relative w-full aspect-video bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
-            <div class="video-overlay"></div>
+            
+            <div id="play-overlay" onclick="startVideoWithSound()">
+                <div class="flex flex-col items-center gap-4">
+                    <div class="play-btn-circle">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.333-5.89a1.5 1.5 0 000-2.538L6.3 2.841z"></path></svg>
+                    </div>
+                    <span class="text-white font-black text-sm tracking-widest animate-pulse">CLIQUE PARA OUVIR</span>
+                </div>
+            </div>
+
+            <div class="video-overlay-blocker"></div>
+
             <div style="padding:56.25% 0 0 0;position:relative;">
-                <iframe id="vsl-video" src="https://player.vimeo.com/video/1183570418?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=0&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="PAM"></iframe>
+                <iframe id="vsl-video" src="https://player.vimeo.com/video/1183570418?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="PAM"></iframe>
             </div>
             <script src="https://player.vimeo.com/api/player.js"></script>
         </div>
@@ -65,16 +103,9 @@
             <h3 class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-6">Resultados de quem aplicou hoje:</h3>
             <div class="wp-container">
                 <div class="wp-msg">
-                    <span class="wp-name">Rodrigo (Grupo Alunos)</span>
-                    Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo.
-                    <span class="wp-time">14:20</span>
-                </div>
-            </div>
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="wp-name">Dra. Claudia</span>
-                    A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra.
-                    <span class="wp-time">15:45</span>
+                    <span class="font-bold text-xs block mb-1">Rodrigo (Grupo Alunos)</span>
+                    Mano, testei o gatilho ontem. Acordei novo. 🔥
+                    <span class="text-[10px] text-zinc-500 block text-right mt-1">14:20</span>
                 </div>
             </div>
         </section>
@@ -93,14 +124,22 @@
     <script>
         const iframe = document.querySelector('#vsl-video');
         const vimeoPlayer = new Vimeo.Player(iframe);
-        
+        const overlay = document.getElementById('play-overlay');
+
+        // Função chamada ao clicar no botão grande
+        function startVideoWithSound() {
+            vimeoPlayer.setMuted(false);
+            vimeoPlayer.setVolume(1);
+            vimeoPlayer.play();
+            overlay.style.opacity = '0';
+            setTimeout(() => { overlay.style.display = 'none'; }, 300);
+        }
+
+        // Tenta autoplay mudo (necessário para alguns browsers)
         window.onload = function() {
             vimeoPlayer.ready().then(() => {
-                vimeoPlayer.setVolume(1);
-                vimeoPlayer.play().catch(() => {
-                    vimeoPlayer.setMuted(true);
-                    vimeoPlayer.play();
-                });
+                vimeoPlayer.setMuted(true);
+                vimeoPlayer.play();
             });
         };
 
@@ -109,27 +148,19 @@
 
         // Lógica de Escassez
         let vagas = 19;
-        const vagasElement = document.getElementById('vagas-count');
-        const banner = document.getElementById('top-banner');
-
-        function atualizarVagas() {
+        setInterval(() => {
             if (vagas > 1) {
-                let queda = Math.floor(Math.random() * 2) + 1;
-                vagas -= queda;
+                vagas -= Math.floor(Math.random() * 2) + 1;
                 if (vagas < 1) vagas = 1;
-                vagasElement.innerText = vagas;
-                if (vagas <= 12) banner.style.backgroundColor = "#ea580c";
-                if (vagas <= 6) banner.style.backgroundColor = "#b91c1c";
-                setTimeout(atualizarVagas, Math.floor(Math.random() * 30000) + 15000);
+                document.getElementById('vagas-count').innerText = vagas;
             }
-        }
-        setTimeout(atualizarVagas, 10000);
+        }, 15000);
 
         // Visitantes Fake
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
-            display.textContent = Math.max(120, current + (Math.floor(Math.random() * 9) - 4));
+            display.textContent = Math.max(120, current + (Math.floor(Math.random() * 5) - 2));
         }, 3000);
     </script>
 </body>
