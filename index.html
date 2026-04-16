@@ -71,7 +71,7 @@
         </h1>
         
         <p class="text-zinc-400 text-lg md:text-xl mb-10 font-medium italic">
-            Feito para quem deita cansado e não dorme.
+            Sem técnicas complicadas e mesmo que você já tenha tentado de tudo.
         </p>
 
         <div class="relative w-full bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl">
@@ -112,8 +112,8 @@
         const notify = document.getElementById('offer-notification');
         const timerNotify = document.getElementById('timer-notify');
         
-        const TEMPO_CTA = 127; // Tempo para o botão aparecer
-        const TEMPO_NOTIFY = 124; // Notificação 3s antes
+        const TEMPO_CTA = 127; 
+        const TEMPO_NOTIFY = 124; 
         let notifyMostrada = false;
 
         function startVideo() {
@@ -126,11 +126,9 @@
         vimeoPlayer.on('timeupdate', function(data) {
             let tempo = data.seconds;
             
-            // Atualiza Barra
             let percent = (tempo / TEMPO_CTA) * 100;
             progressFill.style.width = (percent > 100 ? 100 : percent) + '%';
 
-            // Lógica da Notificação
             if (tempo >= TEMPO_NOTIFY && !notifyMostrada) {
                 notifyMostrada = true;
                 notify.classList.add('show');
@@ -145,13 +143,11 @@
                 }, 1000);
             }
 
-            // Exibição do CTA
             if (tempo >= TEMPO_CTA) {
                 cta.style.display = 'block';
             }
         });
 
-        // Simulação de Vagas
         let vagas = 19;
         setInterval(() => { if(vagas > 1) { vagas--; document.getElementById('vagas-count').innerText = vagas; } }, 25000);
     </script>
