@@ -45,7 +45,8 @@
 
         <div class="relative w-full aspect-video bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
             <div style="padding:56.25% 0 0 0;position:relative;">
-                <iframe id="vsl-video" src="https://player.vimeo.com/video/1183570418?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1" 
+                <iframe id="vsl-video" 
+                        src="https://player.vimeo.com/video/1183570418?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=0" 
                         frameborder="0" 
                         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
                         referrerpolicy="strict-origin-when-cross-origin" 
@@ -54,7 +55,7 @@
                 </iframe>
             </div>
             <script src="https://player.vimeo.com/api/player.js"></script>
-            </div>
+        </div>
         
         <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-12">
             <div class="vsl-progress-fill"></div>
@@ -80,14 +81,6 @@
                     <span class="wp-time">15:45</span>
                 </div>
             </div>
-
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="wp-name">Lucas Oliveira</span>
-                    Finalmente silêncio na cabeça kkkk. Aquela ansiedade de ver o relógio passou. Valeu muito.
-                    <span class="wp-time">16:12</span>
-                </div>
-            </div>
         </section>
 
         <section class="py-12 px-6 max-w-4xl mx-auto text-center">
@@ -105,17 +98,22 @@
     </div>
 
     <script>
-        // Lógica da VSL (Som e Play automático aos 2s)
+        // LÓGICA DE AUTOPLAY COM SOM (FORÇADO)
         const iframe = document.querySelector('#vsl-video');
         const vimeoPlayer = new Vimeo.Player(iframe);
         
+        // Tenta iniciar com som. Se o navegador bloquear, ele inicia mudo e 
+        // mostra o botão de 'Unmute' do próprio Vimeo para o usuário clicar.
         window.onload = function() {
-            setTimeout(() => {
-                vimeoPlayer.setVolume(1);
+            vimeoPlayer.ready().then(() => {
+                vimeoPlayer.setVolume(1); // Volume 100%
                 vimeoPlayer.play().catch(() => {
-                    console.log("Som aguardando interação.");
+                    // Se falhar (bloqueio de autoplay do navegador), tenta dar play mudo e avisa
+                    vimeoPlayer.setMuted(true);
+                    vimeoPlayer.play();
+                    console.log("Autoplay com som bloqueado. Iniciado no mudo.");
                 });
-            }, 2000);
+            });
         };
 
         // 1. Desbloqueio Geral (15 segundos)
