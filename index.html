@@ -88,7 +88,6 @@
         <div class="vsl-progress-container">
             <div id="progress-bar-fill"></div>
         </div>
-        <p class="text-[10px] text-zinc-600 mt-2 uppercase tracking-widest font-bold">Vídeo aula: Protocolo do Apagão</p>
     </section>
 
     <div id="content-delay" class="animate-fade-in">
@@ -113,7 +112,7 @@
         const overlay = document.getElementById('play-overlay');
         const progressFill = document.getElementById('progress-bar-fill');
         
-        const DURACAO_BARRA = 120; // Sincronizado para 2 minutos exatos
+        const DURACAO_BARRA = 120; // 2 minutos exatos
 
         function startVideo() {
             vimeoPlayer.setMuted(false);
@@ -123,7 +122,6 @@
             setTimeout(() => { overlay.style.display = 'none'; }, 300);
         }
 
-        // Lógica da Barra de Progresso e Delay
         vimeoPlayer.on('timeupdate', function(data) {
             let tempoAtual = data.seconds;
             let percentual = (tempoAtual / DURACAO_BARRA) * 100;
@@ -131,13 +129,11 @@
             if (percentual > 100) percentual = 100;
             progressFill.style.width = percentual + '%';
 
-            // Mostra o botão após 2 minutos de vídeo assistido
             if (tempoAtual >= DURACAO_BARRA) {
                 document.getElementById('content-delay').style.display = 'block';
             }
         });
 
-        // Autoplay Mudo Inicial
         window.onload = function() {
             vimeoPlayer.ready().then(() => {
                 vimeoPlayer.setMuted(true);
@@ -145,7 +141,6 @@
             });
         };
 
-        // Escassez Realista
         let vagas = 19;
         setInterval(() => {
             if (vagas > 1) {
@@ -154,7 +149,6 @@
             }
         }, 18000);
 
-        // Visitantes
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
