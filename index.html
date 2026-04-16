@@ -5,134 +5,180 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protocolo do Apagão | Oficial</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #050505; 
+            color: #f4f4f5; 
+            scroll-behavior: smooth; 
+            -webkit-font-smoothing: antialiased;
+        }
         
-        /* Barra VSL de 10 min */
+        /* Animação de progresso refinada */
         @keyframes progress { from { width: 0%; } to { width: 100%; } }
-        .vsl-progress-fill { height: 100%; background: #dc2626; animation: progress 600s linear forwards; }
+        .vsl-progress-fill { 
+            height: 100%; 
+            background: linear-gradient(90deg, #b91c1c, #ef4444); 
+            animation: progress 120s linear forwards; 
+        }
 
-        /* Estilo WhatsApp */
-        .wp-container { background: #0b141a; border-radius: 15px; padding: 15px; max-width: 400px; margin: 10px auto; border: 1px solid #202c33; text-align: left; }
-        .wp-msg { background: #202c33; color: #e9edef; padding: 8px 12px; border-radius: 0 10px 10px 10px; margin-bottom: 10px; font-size: 14px; position: relative; width: fit-content; max-width: 90%; }
-        .wp-msg::before { content: ""; position: absolute; left: -8px; top: 0; border: 8px solid transparent; border-top-color: #202c33; border-right-color: #202c33; }
-        .wp-name { font-weight: bold; color: #d1d7db; font-size: 12px; margin-bottom: 2px; display: block; }
-        .wp-time { font-size: 10px; color: #8696a0; float: right; margin-left: 10px; margin-top: 5px; }
+        /* Efeito de Vidro (Glassmorphism) para os Depoimentos */
+        .wp-container { 
+            background: rgba(22, 22, 26, 0.8); 
+            border-radius: 20px; 
+            padding: 20px; 
+            max-width: 450px; 
+            margin: 16px auto; 
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        .wp-msg { 
+            background: #27272a; 
+            color: #e4e4e7; 
+            padding: 12px 16px; 
+            border-radius: 4px 18px 18px 18px; 
+            font-size: 15px; 
+            line-height: 1.5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
 
-        /* Ocultar conteúdo inicialmente */
-        #content-delay { display: none; }
+        /* Animação Pulse no Botão */
+        @keyframes custom-pulse {
+            0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(22, 163, 74, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
+        }
+        .btn-pulse { animation: custom-pulse 2s infinite; }
+
+        #content-delay { display: none; transition: opacity 1s ease-in; }
         
-        #top-banner { transition: background-color 1s ease; }
+        .premium-border {
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+        }
     </style>
 </head>
 <body class="selection:bg-red-600 selection:text-white">
 
-    <div id="top-banner" class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase tracking-widest fixed w-full z-50">
-        <span id="banner-text">⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS COM MAIS DE 70% OFF</span>
+    <div id="top-banner" class="bg-red-700 text-white text-center py-2.5 font-bold text-[10px] md:text-xs uppercase tracking-[0.2em] fixed w-full z-50 shadow-lg">
+        <span id="banner-text">⚠️ ÚLTIMAS <span id="vagas-count" class="text-yellow-300">19</span> VAGAS COM DESCONTO ATIVO</span>
     </div>
 
-    <section class="px-6 pt-24 pb-8 max-w-4xl mx-auto text-center">
-        <div class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
-            <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
-            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">134</span> visitando a página agora</span>
-        </div>
+    <main class="relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-red-900/10 blur-[120px] rounded-full -z-10"></div>
 
-        <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase">
-            Desligue sua mente e durma sem ficar rolando na cama por horas
-        </h1>
-        <p class="text-gray-400 text-lg mb-8">Feito para quem deita cansado, mas não desliga.</p>
-
-        <div class="relative w-full aspect-video bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
-            <div class="absolute inset-0 flex items-center justify-center">
-                <span class="text-zinc-700 font-bold uppercase tracking-widest text-xs md:text-base">[ VSL - O GATILHO DO APAGÃO ]</span>
+        <section class="px-6 pt-32 pb-12 max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-2.5 mb-8 bg-zinc-900/50 backdrop-blur-md px-5 py-2 rounded-full border border-zinc-800/50">
+                <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span class="text-[11px] text-zinc-400 font-semibold tracking-wider uppercase">
+                    <span id="visitantes" class="text-zinc-100">134</span> pessoas assistindo agora
+                </span>
             </div>
-        </div>
-        
-        <div class="w-full bg-zinc-800 h-2 rounded-full overflow-hidden mb-12">
-            <div class="vsl-progress-fill"></div>
-        </div>
-    </section>
 
-    <div id="content-delay">
-        
-        <section class="px-6 py-8 max-w-4xl mx-auto text-center">
-            <h3 class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-6">Resultados de quem aplicou hoje:</h3>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-[1.1] tracking-tight text-white uppercase italic">
+                Aperte o <span class="text-red-600">Off</span> e apague <br class="hidden md:block"> em poucos minutos
+            </h1>
             
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="wp-name">Rodrigo (Grupo Alunos)</span>
-                    Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo.
-                    <span class="wp-time">14:20</span>
+            <p class="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-medium leading-relaxed">
+                A ciência por trás do sono profundo: uma técnica mecânica para quem não consegue silenciar a mente.
+            </p>
+
+            <div class="relative w-full aspect-video bg-black rounded-3xl premium-border overflow-hidden mb-6 group">
+                <div style="padding:56.25% 0 0 0;position:relative;">
+                    <iframe src="https://player.vimeo.com/video/1183570418?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;loop=1&amp;autoplay=1" 
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture" 
+                            style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+                            title="PAM">
+                    </iframe>
                 </div>
             </div>
-
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="wp-name">Dra. Claudia</span>
-                    A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra.
-                    <span class="wp-time">15:45</span>
+            
+            <div class="max-w-md mx-auto">
+                <div class="w-full bg-zinc-900 h-1.5 rounded-full overflow-hidden shadow-inner">
+                    <div class="vsl-progress-fill"></div>
                 </div>
-            </div>
-
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="wp-name">Lucas Oliveira</span>
-                    Finalmente silêncio na cabeça kkkk. Aquela ansiedade de ver o relógio passou. Valeu muito.
-                    <span class="wp-time">16:12</span>
-                </div>
+                <p class="text-[10px] text-zinc-600 mt-3 uppercase tracking-widest font-bold">Aguarde o carregamento do protocolo...</p>
             </div>
         </section>
 
-        <section class="py-12 px-6 max-w-4xl mx-auto text-center">
-            <div class="bg-zinc-900 p-8 rounded-3xl border border-zinc-800 shadow-2xl">
-                <div class="max-w-md mx-auto border-2 border-dashed border-zinc-700 p-8 rounded-2xl bg-black">
-                    <p class="text-gray-500 uppercase font-bold text-xs mb-1">Preço Comum: <span class="line-through">R$ 197</span></p>
-                    <div class="text-5xl font-black text-green-500 mb-6">R$ 27,90</div>
+        <div id="content-delay" class="pb-24">
+            
+            <section class="px-6 py-12 max-w-4xl mx-auto text-center">
+                <h3 class="text-zinc-500 text-[10px] font-black uppercase tracking-[0.3em] mb-12">Feedback da Comunidade</h3>
+                
+                <div class="grid md:grid-cols-1 gap-4 items-center">
+                    <div class="wp-container">
+                        <span class="block text-[11px] font-bold text-zinc-500 mb-2 ml-1 text-left uppercase tracking-tighter">Rodrigo (Membro)</span>
+                        <div class="wp-msg">
+                            Mano, testei o gatilho de 7 min ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo. 🔥
+                        </div>
+                    </div>
+
+                    <div class="wp-container">
+                        <span class="block text-[11px] font-bold text-zinc-500 mb-2 ml-1 text-left uppercase tracking-tighter">Dra. Claudia</span>
+                        <div class="wp-msg">
+                            A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="px-6 max-w-xl mx-auto">
+                <div class="bg-zinc-900/40 border border-zinc-800 p-10 rounded-[40px] text-center backdrop-blur-sm">
+                    <p class="text-zinc-500 uppercase font-bold text-[10px] tracking-[0.2em] mb-2">Oferta Exclusiva</p>
+                    <div class="flex items-center justify-center gap-3 mb-8">
+                        <span class="text-zinc-600 line-through text-lg">R$ 197</span>
+                        <div class="text-6xl font-black text-white tracking-tighter">R$ 27,90</div>
+                    </div>
                     
-                    <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl transition-all shadow-lg uppercase">
-                        QUERO MEU ACESSO IMEDIATO
+                    <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" 
+                       class="btn-pulse block w-full bg-green-600 hover:bg-green-500 text-white font-black py-6 px-4 rounded-2xl text-xl transition-all uppercase tracking-tight transform hover:scale-[1.02] active:scale-[0.98]">
+                        Sim! Quero Dormir Melhor
                     </a>
+                    
+                    <div class="mt-6 flex items-center justify-center gap-4 opacity-40">
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">🔒 Compra Segura</span>
+                        <span class="text-[10px] font-bold uppercase tracking-widest text-zinc-400">💳 Acesso Imediato</span>
+                    </div>
                 </div>
-            </div>
-        </section>
-    </div>
+            </section>
+        </div>
+    </main>
 
+    <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
-        // 1. Desbloqueio Geral (15 segundos)
+        // Desbloqueio em 2 min (120000ms)
         setTimeout(() => { 
-            document.getElementById('content-delay').style.display = 'block'; 
-        }, 15000);
+            const content = document.getElementById('content-delay');
+            content.style.display = 'block';
+            content.style.opacity = '0';
+            setTimeout(() => content.style.opacity = '1', 10);
+        }, 120000);
 
-        // 2. Lógica de Escassez Decrescente Automática (Sem trava no 3)
+        // Escassez
         let vagas = 19;
         const vagasElement = document.getElementById('vagas-count');
         const banner = document.getElementById('top-banner');
 
         function atualizarVagas() {
-            if (vagas > 1) { // Continua caindo enquanto for maior que 1
-                let queda = Math.floor(Math.random() * 2) + 1;
-                vagas -= queda;
+            if (vagas > 1) {
+                vagas -= Math.floor(Math.random() * 2) + 1;
                 if (vagas < 1) vagas = 1;
-
                 vagasElement.innerText = vagas;
-
-                if (vagas <= 12) banner.style.backgroundColor = "#ea580c"; 
-                if (vagas <= 6) banner.style.backgroundColor = "#b91c1c";
-
-                let proximoTempo = Math.floor(Math.random() * (45000 - 15000 + 1)) + 15000;
-                setTimeout(atualizarVagas, proximoTempo);
+                if (vagas <= 10) banner.classList.replace('bg-red-700', 'bg-orange-700');
+                setTimeout(atualizarVagas, Math.random() * 30000 + 15000);
             }
         }
-        setTimeout(atualizarVagas, 10000);
+        setTimeout(atualizarVagas, 15000);
 
-        // 3. Visitantes Fake
+        // Visitantes
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
-            let oscilacao = Math.floor(Math.random() * 9) - 4;
-            display.textContent = Math.max(120, current + oscilacao);
-        }, 3000);
+            display.textContent = Math.max(120, current + (Math.floor(Math.random() * 5) - 2));
+        }, 4000);
     </script>
 </body>
 </html>
