@@ -45,9 +45,6 @@
         }
         #offer-notification.show { top: 20px; }
 
-        /* Elementos de Escassez (Ocultos inicialmente) */
-        #top-banner, #visitantes-badge { display: none; }
-
         /* Botão CTA */
         #cta-section { display: none; }
         .cta-btn {
@@ -126,13 +123,8 @@
         const timerNotify = document.getElementById('timer-notify');
         const vdisplay = document.getElementById('visitantes');
         
-        const bannerEscassez = document.getElementById('top-banner');
-        const badgeVisitantes = document.getElementById('visitantes-badge');
-
-        const TEMPO_ESCASSEZ = 15; 
         const TEMPO_CTA = 127; 
         const TEMPO_NOTIFY = 124; 
-        let escassezAtivada = false;
         let notifyMostrada = false;
 
         function startVideo() {
@@ -144,12 +136,6 @@
 
         vimeoPlayer.on('timeupdate', function(data) {
             let tempo = data.seconds;
-
-            if (tempo >= TEMPO_ESCASSEZ && !escassezAtivada) {
-                escassezAtivada = true;
-                bannerEscassez.style.display = 'block';
-                badgeVisitantes.style.display = 'inline-flex';
-            }
             
             let percent = (tempo / TEMPO_CTA) * 100;
             progressFill.style.width = (percent > 100 ? 100 : percent) + '%';
@@ -173,29 +159,25 @@
             }
         });
 
-        // Lógica de Vagas
+        // Lógica de Vagas (inicia imediatamente ao carregar a página)
         let vagas = 19;
         setInterval(() => { 
-            if(escassezAtivada && vagas > 1) { 
+            if(vagas > 1) { 
                 vagas--; 
                 document.getElementById('vagas-count').innerText = vagas; 
             } 
         }, 20000);
 
-        // Lógica de Visitantes com VARIAÇÃO REALISTA
+        // Lógica de Visitantes com VARIAÇÃO REALISTA (inicia imediatamente)
         setInterval(() => {
-            if(escassezAtivada) {
-                let current = parseInt(vdisplay.textContent);
-                // Gera variação entre -3 e +4
-                let variacao = Math.floor(Math.random() * 8) - 3;
-                let novoValor = current + variacao;
-                
-                // Mantém o número sempre entre 130 e 160 para ser crível
-                if(novoValor < 130) novoValor = 132;
-                if(novoValor > 160) novoValor = 158;
-                
-                vdisplay.textContent = novoValor;
-            }
+            let current = parseInt(vdisplay.textContent);
+            let variacao = Math.floor(Math.random() * 8) - 3; // Variação entre -3 e +4
+            let novoValor = current + variacao;
+            
+            if(novoValor < 130) novoValor = 132;
+            if(novoValor > 165) novoValor = 158;
+            
+            vdisplay.textContent = novoValor;
         }, 3000);
     </script>
 </body>
