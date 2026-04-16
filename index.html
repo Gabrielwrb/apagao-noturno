@@ -9,7 +9,7 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; }
         
-        /* Barra VSL de 10 min */
+        /* Barra de carregamento visual (não clicável) */
         @keyframes progress { from { width: 0%; } to { width: 100%; } }
         .vsl-progress-fill { height: 100%; background: #dc2626; animation: progress 600s linear forwards; }
 
@@ -20,9 +20,18 @@
         .wp-name { font-weight: bold; color: #d1d7db; font-size: 12px; margin-bottom: 2px; display: block; }
         .wp-time { font-size: 10px; color: #8696a0; float: right; margin-left: 10px; margin-top: 5px; }
 
-        /* Ocultar conteúdo inicialmente */
+        /* Camada para impedir que o lead pule o vídeo ou pause */
+        .video-overlay { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: 20; 
+            cursor: default; 
+        }
+
         #content-delay { display: none; }
-        
         #top-banner { transition: background-color 1s ease; }
     </style>
 </head>
@@ -44,12 +53,13 @@
         <p class="text-gray-400 text-lg mb-8">Feito para quem deita cansado, mas não desliga.</p>
 
         <div class="relative w-full aspect-video bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
+            <div class="video-overlay"></div>
+            
             <div style="padding:56.25% 0 0 0;position:relative;">
                 <iframe id="vsl-video" 
-                        src="https://player.vimeo.com/video/1183570418?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=0" 
+                        src="https://player.vimeo.com/video/1183570418?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=0&amp;controls=0" 
                         frameborder="0" 
-                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                        referrerpolicy="strict-origin-when-cross-origin" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
                         style="position:absolute;top:0;left:0;width:100%;height:100%;" 
                         title="PAM">
                 </iframe>
@@ -98,20 +108,15 @@
     </div>
 
     <script>
-        // LÓGICA DE AUTOPLAY COM SOM (FORÇADO)
         const iframe = document.querySelector('#vsl-video');
         const vimeoPlayer = new Vimeo.Player(iframe);
         
-        // Tenta iniciar com som. Se o navegador bloquear, ele inicia mudo e 
-        // mostra o botão de 'Unmute' do próprio Vimeo para o usuário clicar.
         window.onload = function() {
             vimeoPlayer.ready().then(() => {
-                vimeoPlayer.setVolume(1); // Volume 100%
+                vimeoPlayer.setVolume(1);
                 vimeoPlayer.play().catch(() => {
-                    // Se falhar (bloqueio de autoplay do navegador), tenta dar play mudo e avisa
                     vimeoPlayer.setMuted(true);
                     vimeoPlayer.play();
-                    console.log("Autoplay com som bloqueado. Iniciado no mudo.");
                 });
             });
         };
@@ -121,7 +126,7 @@
             document.getElementById('content-delay').style.display = 'block'; 
         }, 15000);
 
-        // 2. Lógica de Escassez Decrescente Automática
+        // 2. Lógica de Escassez
         let vagas = 19;
         const vagasElement = document.getElementById('vagas-count');
         const banner = document.getElementById('top-banner');
@@ -132,12 +137,9 @@
                 vagas -= queda;
                 if (vagas < 1) vagas = 1;
                 vagasElement.innerText = vagas;
-
                 if (vagas <= 12) banner.style.backgroundColor = "#ea580c"; 
                 if (vagas <= 6) banner.style.backgroundColor = "#b91c1c";
-
-                let proximoTempo = Math.floor(Math.random() * (45000 - 15000 + 1)) + 15000;
-                setTimeout(atualizarVagas, proximoTempo);
+                setTimeout(atualizarVagas, Math.floor(Math.random() * 30000) + 15000);
             }
         }
         setTimeout(atualizarVagas, 10000);
@@ -146,8 +148,7 @@
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
-            let oscilacao = Math.floor(Math.random() * 9) - 4;
-            display.textContent = Math.max(120, current + oscilacao);
+            display.textContent = Math.max(120, current + (Math.floor(Math.random() * 9) - 4));
         }, 3000);
     </script>
 </body>
