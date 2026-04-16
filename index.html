@@ -7,69 +7,70 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
         
-        /* Barra de progresso customizada */
+        /* Barra de progresso sincronizada com 15s */
         .vsl-progress-container { width: 100%; background: #27272a; height: 10px; border-radius: 999px; overflow: hidden; margin-top: 15px; }
         #progress-bar-fill { height: 100%; background: #dc2626; width: 0%; transition: width 0.5s linear; }
 
-        /* Botão de Play Central */
+        /* Botão Play */
         #play-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 50;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center;
+            z-index: 50; cursor: pointer; transition: opacity 0.3s ease;
         }
         .play-btn-circle {
-            width: 85px; height: 85px;
-            background: #dc2626;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 35px rgba(220, 38, 38, 0.6);
-            animation: pulse-play 1.5s infinite;
+            width: 80px; height: 80px; background: #dc2626; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.5); animation: pulse-play 1.5s infinite;
         }
         @keyframes pulse-play {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
-            70% { transform: scale(1.1); box-shadow: 0 0 0 20px rgba(220, 38, 38, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+            0% { transform: scale(1); } 70% { transform: scale(1.1); } 100% { transform: scale(1); }
         }
 
-        /* Bloqueia apenas interação direta com o iframe (impede pular vídeo) */
-        .video-overlay-blocker { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; cursor: default; }
-        
-        /* CTA oculto até o tempo de 2:20 */
-        #cta-section { display: none; }
+        /* Notificação de Oferta Estilo iOS */
+        #offer-notification {
+            position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 400px; background: #fff; color: #000;
+            padding: 15px 20px; border-radius: 20px; z-index: 100;
+            display: flex; align-items: center; gap: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #offer-notification.show { top: 20px; }
 
-        /* Estilo WhatsApp para depoimentos */
-        .wp-container { background: #0b141a; border-radius: 15px; padding: 15px; max-width: 400px; margin: 10px auto; border: 1px solid #202c33; text-align: left; }
-        .wp-msg { background: #202c33; color: #e9edef; padding: 8px 12px; border-radius: 0 10px 10px 10px; margin-bottom: 10px; font-size: 14px; position: relative; width: fit-content; max-width: 90%; }
-        .wp-msg::before { content: ""; position: absolute; left: -8px; top: 0; border: 8px solid transparent; border-top-color: #202c33; border-right-color: #202c33; }
+        /* Estilo do Botão CTA Limpo */
+        #cta-section { display: none; }
+        .cta-btn {
+            background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+            box-shadow: 0 4px 20px rgba(22, 163, 74, 0.4);
+        }
+
+        .video-overlay-blocker { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; }
     </style>
 </head>
 <body class="selection:bg-red-600 selection:text-white">
 
-    <div id="top-banner" class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase tracking-widest fixed w-full z-50">
-        ⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS COM MAIS DE 70% OFF
+    <div id="offer-notification">
+        <div class="bg-green-100 p-2 rounded-full">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        </div>
+        <div>
+            <p class="text-xs font-bold uppercase text-gray-400 tracking-tight">Sistema</p>
+            <p class="text-sm font-black italic">Oferta especial em <span id="timer-notify" class="text-green-600">3</span>s...</p>
+        </div>
+    </div>
+
+    <div class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase fixed w-full z-40">
+        ⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS DISPONÍVEIS
     </div>
 
     <section class="px-6 pt-24 pb-12 max-w-4xl mx-auto text-center">
-        <div class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
-            <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
-            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">134</span> assistindo agora</span>
-        </div>
-
         <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase italic">
             Desligue sua mente e durma <span class="text-red-600">sem ficar rolando na cama por horas.</span>
         </h1>
         
-        <p class="text-zinc-400 text-lg md:text-xl mb-10 font-medium">
+        <p class="text-zinc-400 text-lg md:text-xl mb-10 font-medium italic">
             Feito para quem deita cansado e não dorme.
         </p>
 
@@ -79,12 +80,12 @@
                     <div class="play-btn-circle">
                         <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.333-5.89a1.5 1.5 0 000-2.538L6.3 2.841z"></path></svg>
                     </div>
-                    <span class="text-white font-black text-xs tracking-[0.2em]">CLIQUE PARA OUVIR</span>
+                    <span class="text-white font-black text-xs tracking-widest">CLIQUE PARA OUVIR</span>
                 </div>
             </div>
             <div class="video-overlay-blocker"></div>
             <div style="padding:75% 0 0 0;position:relative;">
-                <iframe id="vsl-video" src="https://player.vimeo.com/video/1183600782?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="VSL"></iframe>
+                <iframe id="vsl-video" src="https://player.vimeo.com/video/1183600782?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
             </div>
         </div>
         
@@ -92,33 +93,11 @@
             <div id="progress-bar-fill"></div>
         </div>
 
-        <div id="cta-section" class="mt-8">
-            <div class="max-w-md mx-auto">
-                <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 px-4 rounded-xl text-xl md:text-2xl transition-all shadow-[0_0_20px_rgba(22,163,74,0.5)] uppercase animate-pulse">
-                    QUERO MEU ACESSO IMEDIATO
-                </a>
-                <div class="mt-4 flex items-center justify-center gap-4 text-zinc-500 text-[10px] uppercase font-bold tracking-widest">
-                    <span>Acesso Vitalício</span>
-                    <span class="w-1 h-1 bg-zinc-700 rounded-full"></span>
-                    <span>Garantia de 7 Dias</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-16 border-t border-zinc-900 pt-12">
-            <h3 class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-8 text-center">Resultados Reais:</h3>
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="font-bold text-xs block mb-1">Rodrigo (Grupo Alunos)</span>
-                    Testei o gatilho ontem. Geralmente demoro 2h pra apagar. Ontem nem vi o que aconteceu, acordei novo. 🚀
-                </div>
-            </div>
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="font-bold text-xs block mb-1">Dra. Claudia</span>
-                    A técnica de respiração mecânica é excelente. O cérebro entende que precisa desligar na marra.
-                </div>
-            </div>
+        <div id="cta-section" class="mt-10">
+            <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="cta-btn block w-full max-w-md mx-auto text-white font-black py-5 px-4 rounded-2xl text-2xl transition-all uppercase italic tracking-tighter hover:scale-105 active:scale-95 animate-pulse">
+                Quero meu acesso imediato
+            </a>
+            <p class="text-zinc-600 text-[10px] mt-4 font-bold uppercase tracking-widest italic">Acesso liberado imediatamente após o pagamento</p>
         </div>
     </section>
 
@@ -126,53 +105,53 @@
     <script>
         const iframe = document.querySelector('#vsl-video');
         const vimeoPlayer = new Vimeo.Player(iframe);
-        const overlay = document.getElementById('play-overlay');
         const progressFill = document.getElementById('progress-bar-fill');
         const cta = document.getElementById('cta-section');
+        const notify = document.getElementById('offer-notification');
+        const timerNotify = document.getElementById('timer-notify');
         
-        const DURACAO_BARRA = 140; // 2 minutos e 20 segundos
+        const TEMPO_CTA = 15; // CTA aos 15 segundos
+        const TEMPO_NOTIFY = 12; // Notificação aos 12 segundos (3s antes)
+        let notifyMostrada = false;
 
         function startVideo() {
             vimeoPlayer.setMuted(false);
             vimeoPlayer.setVolume(1);
             vimeoPlayer.play();
-            overlay.style.opacity = '0';
-            setTimeout(() => { overlay.style.display = 'none'; }, 300);
+            document.getElementById('play-overlay').style.display = 'none';
         }
 
         vimeoPlayer.on('timeupdate', function(data) {
-            let tempoAtual = data.seconds;
-            let percentual = (tempoAtual / DURACAO_BARRA) * 100;
+            let tempo = data.seconds;
             
-            if (percentual > 100) percentual = 100;
-            progressFill.style.width = percentual + '%';
+            // Atualiza Barra
+            let percent = (tempo / TEMPO_CTA) * 100;
+            progressFill.style.width = (percent > 100 ? 100 : percent) + '%';
 
-            // Mostra o botão de compra aos 140 segundos
-            if (tempoAtual >= DURACAO_BARRA) {
+            // Gatilho da Notificação
+            if (tempo >= TEMPO_NOTIFY && !notifyMostrada) {
+                notifyMostrada = true;
+                notify.classList.add('show');
+                let count = 3;
+                let interval = setInterval(() => {
+                    count--;
+                    if(count >= 0) timerNotify.innerText = count;
+                    if (count <= 0) {
+                        clearInterval(interval);
+                        notify.classList.remove('show');
+                    }
+                }, 1000);
+            }
+
+            // Gatilho do CTA
+            if (tempo >= TEMPO_CTA) {
                 cta.style.display = 'block';
             }
         });
 
-        window.onload = function() {
-            vimeoPlayer.ready().then(() => {
-                vimeoPlayer.setMuted(true);
-                vimeoPlayer.play();
-            });
-        };
-
+        // Escassez
         let vagas = 19;
-        setInterval(() => {
-            if (vagas > 1) {
-                vagas -= 1;
-                document.getElementById('vagas-count').innerText = vagas;
-            }
-        }, 18000);
-
-        setInterval(() => {
-            const display = document.querySelector('#visitantes');
-            let current = parseInt(display.textContent);
-            display.textContent = Math.max(120, current + (Math.floor(Math.random() * 5) - 2));
-        }, 3000);
+        setInterval(() => { if(vagas > 1) { vagas--; document.getElementById('vagas-count').innerText = vagas; } }, 25000);
     </script>
 </body>
 </html>
