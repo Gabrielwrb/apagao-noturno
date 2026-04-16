@@ -45,6 +45,9 @@
         }
         #offer-notification.show { top: 20px; }
 
+        /* Banner de Vagas - Oculto inicialmente */
+        #top-banner { display: none; }
+
         /* Botão CTA */
         #cta-section { display: none; }
         .cta-btn {
@@ -122,10 +125,14 @@
         const notify = document.getElementById('offer-notification');
         const timerNotify = document.getElementById('timer-notify');
         const vdisplay = document.getElementById('visitantes');
+        const topBanner = document.getElementById('top-banner');
         
+        const TEMPO_VAGAS = 30; // Vagas aparecem aos 30 segundos
         const TEMPO_CTA = 127; 
         const TEMPO_NOTIFY = 124; 
+        
         let notifyMostrada = false;
+        let vagasMostradas = false;
 
         function startVideo() {
             vimeoPlayer.setMuted(false);
@@ -137,9 +144,17 @@
         vimeoPlayer.on('timeupdate', function(data) {
             let tempo = data.seconds;
             
+            // Lógica para mostrar as Vagas (Escassez) aos 30s
+            if (tempo >= TEMPO_VAGAS && !vagasMostradas) {
+                vagasMostradas = true;
+                topBanner.style.display = 'block';
+            }
+
+            // Barra de Progresso
             let percent = (tempo / TEMPO_CTA) * 100;
             progressFill.style.width = (percent > 100 ? 100 : percent) + '%';
 
+            // Notificação de Oferta
             if (tempo >= TEMPO_NOTIFY && !notifyMostrada) {
                 notifyMostrada = true;
                 notify.classList.add('show');
@@ -154,29 +169,28 @@
                 }, 1000);
             }
 
+            // Botão CTA
             if (tempo >= TEMPO_CTA) {
                 cta.style.display = 'block';
             }
         });
 
-        // Lógica de Vagas (inicia imediatamente ao carregar a página)
+        // Lógica de Vagas (diminui após aparecerem)
         let vagas = 19;
         setInterval(() => { 
-            if(vagas > 1) { 
+            if(vagasMostradas && vagas > 1) { 
                 vagas--; 
                 document.getElementById('vagas-count').innerText = vagas; 
             } 
-        }, 20000);
+        }, 25000);
 
-        // Lógica de Visitantes com VARIAÇÃO REALISTA (inicia imediatamente)
+        // Lógica de Visitantes (Varía imediatamente ao carregar)
         setInterval(() => {
             let current = parseInt(vdisplay.textContent);
-            let variacao = Math.floor(Math.random() * 8) - 3; // Variação entre -3 e +4
+            let variacao = Math.floor(Math.random() * 8) - 3;
             let novoValor = current + variacao;
-            
             if(novoValor < 130) novoValor = 132;
             if(novoValor > 165) novoValor = 158;
-            
             vdisplay.textContent = novoValor;
         }, 3000);
     </script>
