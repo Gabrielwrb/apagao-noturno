@@ -2,90 +2,92 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Protocolo do Apagão | Oficial</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; margin: 0; padding: 0; }
         
+        /* Ajuste do Banner para Celular */
+        #top-banner { 
+            display: none; 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            z-index: 9999; /* Garantia de ficar no topo */
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.5);
+        }
+
         .headline-main {
-            font-size: clamp(1.75rem, 6vw, 3rem);
-            line-height: 1.15;
+            font-size: clamp(1.5rem, 6vw, 3rem);
+            line-height: 1.2;
             letter-spacing: -0.02em;
         }
 
-        .vsl-progress-container { width: 100%; background: #27272a; height: 10px; border-radius: 999px; overflow: hidden; margin-top: 15px; }
+        .vsl-progress-container { width: 100%; background: #27272a; height: 8px; border-radius: 999px; overflow: hidden; margin-top: 15px; }
         #progress-bar-fill { height: 100%; background: #dc2626; width: 0%; transition: width 0.5s linear; }
 
         #play-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center;
-            z-index: 50; cursor: pointer; transition: opacity 0.3s ease;
+            background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center;
+            z-index: 50; cursor: pointer;
         }
         .play-btn-circle {
-            width: 70px; height: 70px; background: #dc2626; border-radius: 50%;
+            width: 60px; height: 60px; background: #dc2626; border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 0 30px rgba(220, 38, 38, 0.5); animation: pulse-play 1.5s infinite;
+            animation: pulse-play 1.5s infinite;
         }
         @keyframes pulse-play {
-            0% { transform: scale(1); } 70% { transform: scale(1.1); } 100% { transform: scale(1); }
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(220, 38, 38, 0); }
+            100% { transform: scale(1); }
         }
 
+        #cta-section { display: none; padding-bottom: 40px; }
+        
+        /* Notificação iOS */
         #offer-notification {
-            position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 400px; background: #fff; color: #000;
-            padding: 15px 20px; border-radius: 20px; z-index: 100;
-            display: flex; align-items: center; gap: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: fixed; top: -120px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 380px; background: #fff; color: #000;
+            padding: 12px; border-radius: 18px; z-index: 10000;
+            display: flex; align-items: center; gap: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
-        #offer-notification.show { top: 20px; }
+        #offer-notification.show { top: 60px; } /* Ajustado para não bater no banner */
 
-        /* Banner de Escassez Oculto inicialmente */
-        #top-banner { display: none; }
-
-        #cta-section { display: none; }
-        .cta-btn {
-            background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
-            box-shadow: 0 4px 20px rgba(22, 163, 74, 0.4);
-        }
-
-        .video-overlay-blocker { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; }
+        .video-container { position: relative; width: 100%; background: #111; border-radius: 12px; overflow: hidden; }
     </style>
 </head>
-<body class="selection:bg-red-600 selection:text-white">
+<body>
 
-    <div id="top-banner" class="bg-red-600 text-white text-center py-2 px-6 font-bold text-[10px] md:text-xs uppercase fixed w-full z-40 leading-tight">
+    <div id="top-banner" class="bg-red-600 text-white text-center py-2.5 px-4 font-bold text-[10px] md:text-xs uppercase leading-tight">
         ⚠️ ATENÇÃO: Devido ao alto volume de acessos vindo do anúncio hoje, <span id="data-dinamica"></span>, restam apenas <span id="vagas-count">12</span> vagas com o desconto promocional de R$ 27,90. Após o preenchimento, o valor retornará para R$ 97,00 automaticamente.
     </div>
 
-    <section class="px-5 pt-24 pb-12 max-w-4xl mx-auto text-center">
+    <main class="px-4 pt-12 pb-10 max-w-3xl mx-auto text-center">
         
-        <div id="visitantes-badge" class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
+        <div id="visitantes-badge" class="inline-flex items-center gap-2 mb-6 bg-zinc-900 px-4 py-2 rounded-full border border-zinc-800">
             <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
-            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">142</span> pessoas assistindo agora</span>
+            <span class="text-[11px] text-gray-300 font-bold uppercase tracking-wider"><span id="visitantes">142</span> pessoas assistindo agora</span>
         </div>
 
         <h1 class="headline-main font-black mb-6 uppercase italic">
-            Finalmente revelado: A técnica de <span class="text-red-600">"Reset Sináptico"</span> que força o seu cérebro a apagar em 7 minutos.
+            A técnica de <span class="text-red-600">"Reset Sináptico"</span> que força o seu cérebro a apagar em 7 minutos.
         </h1>
-        
-        <p class="text-zinc-400 text-sm md:text-lg mb-8 font-medium italic leading-relaxed px-2">
-            Pare de se preocupar com a hora de ir para a cama. Descubra como destravar o seu <span class="text-zinc-200">Interruptor Biológico</span> e silenciar o <span class="text-zinc-200">Cortisol Residual</span> para garantir um sono profundo todas as noites.
-        </p>
 
-        <div class="relative w-full bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl">
+        <div class="video-container shadow-2xl mb-4">
             <div id="play-overlay" onclick="startVideo()">
                 <div class="flex flex-col items-center gap-3">
                     <div class="play-btn-circle">
                         <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.333-5.89a1.5 1.5 0 000-2.538L6.3 2.841z"></path></svg>
                     </div>
-                    <span class="text-white font-black text-[10px] tracking-widest uppercase">Clique para ouvir</span>
+                    <span class="text-white font-bold text-[10px] uppercase tracking-widest">Clique para ouvir</span>
                 </div>
             </div>
-            <div class="video-overlay-blocker"></div>
-            <div style="padding:75% 0 0 0;position:relative;">
+            <div style="padding:56.25% 0 0 0;position:relative;">
                 <iframe id="vsl-video" src="https://player.vimeo.com/video/1183600782?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
             </div>
         </div>
@@ -95,32 +97,31 @@
         </div>
 
         <div id="cta-section" class="mt-8">
-            <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="cta-btn block w-full max-w-sm mx-auto text-white font-black py-4 md:py-5 px-4 rounded-xl text-lg md:text-2xl transition-all uppercase italic tracking-tighter animate-pulse">
+            <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="block w-full bg-green-600 text-white font-black py-4 rounded-xl text-xl uppercase italic animate-bounce">
                 Quero meu acesso imediato
             </a>
-            <p class="text-zinc-600 text-[9px] mt-4 font-bold uppercase tracking-widest italic text-center">Acesso liberado imediatamente após o pagamento</p>
+            <p class="text-zinc-500 text-[10px] mt-4 font-bold uppercase">Acesso liberado imediatamente após o pagamento</p>
         </div>
-    </section>
+    </main>
 
     <div id="offer-notification">
         <div class="bg-green-100 p-2 rounded-full">
-            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         </div>
-        <div>
-            <p class="text-xs font-bold uppercase text-gray-400 tracking-tight">Sistema</p>
-            <p class="text-sm font-black italic">Liberando oferta em <span id="timer-notify" class="text-green-600">3</span>s...</p>
+        <div class="flex-1">
+            <p class="text-[10px] font-bold text-gray-400">SISTEMA</p>
+            <p class="text-xs font-black">Oferta liberada em <span id="timer-notify" class="text-green-600">3</span>s...</p>
         </div>
     </div>
 
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
-        // Função de Data Automática
+        // Data Automática
         function gerarData() {
             const dias = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
             const meses = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
             const agora = new Date();
-            const textoData = `${dias[agora.getDay()]}, ${agora.getDate()} de ${meses[agora.getMonth()]}`;
-            document.getElementById('data-dinamica').innerText = textoData;
+            document.getElementById('data-dinamica').innerText = `${dias[agora.getDay()]}, ${agora.getDate()} de ${meses[agora.getMonth()]}`;
         }
         gerarData();
 
@@ -142,7 +143,6 @@
 
         function startVideo() {
             vimeoPlayer.setMuted(false);
-            vimeoPlayer.setVolume(1);
             vimeoPlayer.play();
             document.getElementById('play-overlay').style.display = 'none';
         }
@@ -150,14 +150,18 @@
         vimeoPlayer.on('timeupdate', function(data) {
             let tempo = data.seconds;
             
+            // Ativar Banner de Vagas aos 30s
             if (tempo >= TEMPO_VAGAS && !vagasMostradas) {
                 vagasMostradas = true;
                 topBanner.style.display = 'block';
+                document.body.style.paddingTop = topBanner.offsetHeight + 'px'; // Ajusta o corpo para o banner não cobrir a headline
             }
 
+            // Barra Progresso
             let percent = (tempo / TEMPO_CTA) * 100;
             progressFill.style.width = (percent > 100 ? 100 : percent) + '%';
 
+            // Notificação
             if (tempo >= TEMPO_NOTIFY && !notifyMostrada) {
                 notifyMostrada = true;
                 notify.classList.add('show');
@@ -165,35 +169,21 @@
                 let interval = setInterval(() => {
                     count--;
                     if(count >= 0) timerNotify.innerText = count;
-                    if (count <= 0) {
-                        clearInterval(interval);
-                        notify.classList.remove('show');
-                    }
+                    if (count <= 0) { clearInterval(interval); notify.classList.remove('show'); }
                 }, 1000);
             }
 
-            if (tempo >= TEMPO_CTA) {
-                cta.style.display = 'block';
-            }
+            // Mostrar CTA
+            if (tempo >= TEMPO_CTA) { cta.style.display = 'block'; }
         });
 
-        // Lógica de Vagas (inicia em 12 e desce lentamente)
+        // Vagas e Visitantes
         let vagas = 12;
-        setInterval(() => { 
-            if(vagasMostradas && vagas > 1) { 
-                vagas--; 
-                document.getElementById('vagas-count').innerText = vagas; 
-            } 
-        }, 30000);
-
-        // Variação de Visitantes (imediato)
+        setInterval(() => { if(vagasMostradas && vagas > 1) { vagas--; document.getElementById('vagas-count').innerText = vagas; } }, 30000);
         setInterval(() => {
-            let current = parseInt(vdisplay.textContent);
-            let vario = Math.floor(Math.random() * 8) - 3;
-            let final = current + vario;
-            if(final < 130) final = 131;
-            if(final > 165) final = 159;
-            vdisplay.textContent = final;
+            let cur = parseInt(vdisplay.textContent);
+            let val = cur + (Math.floor(Math.random() * 7) - 3);
+            vdisplay.textContent = (val < 130) ? 135 : (val > 170) ? 155 : val;
         }, 3000);
     </script>
 </body>
