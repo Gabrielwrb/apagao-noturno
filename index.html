@@ -40,7 +40,7 @@
         </div>
 
         <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase italic tracking-tight">
-            Desligue sua mente e durma sem ficar rolando na cama por <span class="text-red-600">horas</span>, mesmo que você já tenha tentado de tudo
+            Desligue sua mente e durma sem ficar rolando na cama por <span class="text-red-600">horas.</span>
         </h1>
         
         <p class="text-zinc-400 text-lg md:text-xl max-w-3xl mx-auto mb-10 font-medium leading-relaxed">
@@ -93,18 +93,23 @@
     <script>
         const iframe = document.querySelector('#vsl-video');
         const vimeoPlayer = new Vimeo.Player(iframe);
+        
+        // Tenta dar play com volume alto assim que possível
         window.onload = function() {
             vimeoPlayer.ready().then(() => {
                 vimeoPlayer.setVolume(1);
                 vimeoPlayer.play().catch(() => {
+                    // Fallback se o navegador bloquear autoplay com som
                     vimeoPlayer.setMuted(true);
                     vimeoPlayer.play();
                 });
             });
         };
 
+        // Desbloqueio Geral (15 segundos)
         setTimeout(() => { document.getElementById('content-delay').style.display = 'block'; }, 15000);
 
+        // Lógica de Escassez
         let vagas = 19;
         const vagasElement = document.getElementById('vagas-count');
         const banner = document.getElementById('top-banner');
@@ -122,6 +127,7 @@
         }
         setTimeout(atualizarVagas, 10000);
 
+        // Visitantes Fake
         setInterval(() => {
             const display = document.querySelector('#visitantes');
             let current = parseInt(display.textContent);
