@@ -9,6 +9,13 @@
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
         
+        /* Otimização da Headline para Celular */
+        .headline-main {
+            font-size: clamp(1.75rem, 6vw, 3rem); /* Adapta entre 28px e 48px conforme a tela */
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
+
         /* Barra de progresso sincronizada com 127s */
         .vsl-progress-container { width: 100%; background: #27272a; height: 10px; border-radius: 999px; overflow: hidden; margin-top: 15px; }
         #progress-bar-fill { height: 100%; background: #dc2626; width: 0%; transition: width 0.5s linear; }
@@ -20,7 +27,7 @@
             z-index: 50; cursor: pointer; transition: opacity 0.3s ease;
         }
         .play-btn-circle {
-            width: 80px; height: 80px; background: #dc2626; border-radius: 50%;
+            width: 70px; height: 70px; background: #dc2626; border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
             box-shadow: 0 0 30px rgba(220, 38, 38, 0.5); animation: pulse-play 1.5s infinite;
         }
@@ -39,7 +46,7 @@
         }
         #offer-notification.show { top: 20px; }
 
-        /* Estilo do Botão CTA */
+        /* Botão CTA */
         #cta-section { display: none; }
         .cta-btn {
             background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
@@ -61,26 +68,26 @@
         </div>
     </div>
 
-    <div class="bg-red-600 text-white text-center py-2 font-bold text-sm uppercase fixed w-full z-40">
-        ⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS DISPONÍVEIS
+    <div class="bg-red-600 text-white text-center py-2 font-bold text-[10px] md:text-sm uppercase fixed w-full z-40 tracking-tighter md:tracking-widest">
+        ⚠️ ÚLTIMAS <span id="vagas-count">19</span> VAGAS DISPONÍVEIS COM DESCONTO
     </div>
 
-    <section class="px-6 pt-24 pb-12 max-w-4xl mx-auto text-center">
-        <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase italic">
+    <section class="px-5 pt-20 pb-12 max-w-4xl mx-auto text-center">
+        <h1 class="headline-main font-black mb-6 uppercase italic">
             Finalmente revelado: A técnica de <span class="text-red-600">"Reset Sináptico"</span> que força o seu cérebro a apagar em 7 minutos.
         </h1>
         
-        <p class="text-zinc-400 text-base md:text-lg mb-10 font-medium italic leading-relaxed">
-            Pare de se preocupar com a hora de ir para a cama. Descubra como destravar o seu <span class="text-zinc-200">Interruptor Biológico</span> e silenciar o <span class="text-zinc-200">Cortisol Residual</span> para garantir um sono profundo e restaurador todas as noites, sem depender de remédios ou acordar dopado.
+        <p class="text-zinc-400 text-sm md:text-lg mb-8 font-medium italic leading-relaxed px-2">
+            Pare de se preocupar com a hora de ir para a cama. Descubra como destravar o seu <span class="text-zinc-200">Interruptor Biológico</span> e silenciar o <span class="text-zinc-200">Cortisol Residual</span> para garantir um sono profundo todas as noites.
         </p>
 
         <div class="relative w-full bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl">
             <div id="play-overlay" onclick="startVideo()">
-                <div class="flex flex-col items-center gap-4">
+                <div class="flex flex-col items-center gap-3">
                     <div class="play-btn-circle">
-                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.333-5.89a1.5 1.5 0 000-2.538L6.3 2.841z"></path></svg>
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.333-5.89a1.5 1.5 0 000-2.538L6.3 2.841z"></path></svg>
                     </div>
-                    <span class="text-white font-black text-xs tracking-widest">CLIQUE PARA OUVIR</span>
+                    <span class="text-white font-black text-[10px] tracking-widest uppercase">Clique para ouvir</span>
                 </div>
             </div>
             
@@ -95,11 +102,11 @@
             <div id="progress-bar-fill"></div>
         </div>
 
-        <div id="cta-section" class="mt-10">
-            <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="cta-btn block w-full max-w-md mx-auto text-white font-black py-5 px-4 rounded-2xl text-2xl transition-all uppercase italic tracking-tighter hover:scale-105 active:scale-95 animate-pulse">
+        <div id="cta-section" class="mt-8">
+            <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="cta-btn block w-full max-w-sm mx-auto text-white font-black py-4 md:py-5 px-4 rounded-xl text-lg md:text-2xl transition-all uppercase italic tracking-tighter animate-pulse">
                 Quero meu acesso imediato
             </a>
-            <p class="text-zinc-600 text-[10px] mt-4 font-bold uppercase tracking-widest italic text-center">Acesso liberado imediatamente após o pagamento</p>
+            <p class="text-zinc-600 text-[9px] mt-4 font-bold uppercase tracking-widest italic">Acesso liberado imediatamente após o pagamento</p>
         </div>
     </section>
 
@@ -125,7 +132,6 @@
 
         vimeoPlayer.on('timeupdate', function(data) {
             let tempo = data.seconds;
-            
             let percent = (tempo / TEMPO_CTA) * 100;
             progressFill.style.width = (percent > 100 ? 100 : percent) + '%';
 
