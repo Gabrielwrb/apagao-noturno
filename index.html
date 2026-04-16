@@ -8,152 +8,139 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
-        .headline-main { font-size: clamp(1.8rem, 6vw, 3.2rem); line-height: 1.1; letter-spacing: -0.03em; }
-        .gradient-text { background: linear-gradient(180deg, #fff 30%, #999 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* Banner Escassez */
-        #top-banner { display: none; position: fixed; top: 0; width: 100%; z-index: 100; }
-        
-        /* Delays */
-        #main-content, #cta-final, #faq-section { display: none; }
+        .headline-main {
+            font-size: clamp(1.75rem, 6vw, 3rem);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+        }
 
-        .vsl-progress-container { width: 100%; background: #27272a; height: 8px; border-radius: 999px; overflow: hidden; margin-top: 15px; }
+        .vsl-progress-container { width: 100%; background: #27272a; height: 10px; border-radius: 999px; overflow: hidden; margin-top: 15px; }
         #progress-bar-fill { height: 100%; background: #dc2626; width: 0%; transition: width 0.5s linear; }
 
         #play-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center;
-            z-index: 50; cursor: pointer;
+            background: rgba(0,0,0,0.7); display: flex; justify-content: center; align-items: center;
+            z-index: 50; cursor: pointer; transition: opacity 0.3s ease;
         }
         .play-btn-circle {
             width: 70px; height: 70px; background: #dc2626; border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 0 30px rgba(220, 38, 38, 0.5); animation: pulse 1.5s infinite;
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.5); animation: pulse-play 1.5s infinite;
         }
-        @keyframes pulse { 0% { transform: scale(1); } 70% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        @keyframes pulse-play {
+            0% { transform: scale(1); } 70% { transform: scale(1.1); } 100% { transform: scale(1); }
+        }
+
+        #offer-notification {
+            position: fixed; top: -100px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 400px; background: #fff; color: #000;
+            padding: 15px 20px; border-radius: 20px; z-index: 100;
+            display: flex; align-items: center; gap: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #offer-notification.show { top: 20px; }
+
+        /* Banner de Escassez Oculto inicialmente */
+        #top-banner { display: none; }
+
+        #cta-section { display: none; }
+        .cta-btn {
+            background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
+            box-shadow: 0 4px 20px rgba(22, 163, 74, 0.4);
+        }
+
+        .video-overlay-blocker { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; }
     </style>
 </head>
-<body>
+<body class="selection:bg-red-600 selection:text-white">
 
-    <div id="top-banner" class="bg-red-600 text-white text-center py-2 px-4 font-bold text-[10px] md:text-xs uppercase leading-tight">
+    <div id="top-banner" class="bg-red-600 text-white text-center py-2 px-6 font-bold text-[10px] md:text-xs uppercase fixed w-full z-40 leading-tight">
         ⚠️ ÚLTIMA CHANCE: O valor de R$ 27,90 expira ao final desta <span id="dia-semana"></span>. Garanta seu desconto antes que o sistema atualize.
     </div>
 
-    <section class="px-5 pt-16 pb-10 max-w-4xl mx-auto text-center">
+    <section class="px-5 pt-24 pb-12 max-w-4xl mx-auto text-center">
+        
         <div id="visitantes-badge" class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
             <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
             <span class="text-xs text-gray-300 font-medium"><span id="visitantes">142</span> pessoas assistindo agora</span>
         </div>
 
         <h1 class="headline-main font-black mb-6 uppercase italic">
-            A técnica de <span class="text-red-600 italic">"Reset Sináptico"</span> de 7 minutos que sinaliza o desligamento imediato da mente.
+            Finalmente revelado: A técnica de <span class="text-red-600">"Reset Sináptico"</span> que força o seu cérebro a apagar em 7 minutos.
         </h1>
+        
+        <p class="text-zinc-400 text-sm md:text-lg mb-8 font-medium italic leading-relaxed px-2">
+            Pare de se preocupar com a hora de ir para a cama. Descubra como destravar o seu <span class="text-zinc-200">Interruptor Biológico</span> e silenciar o <span class="text-zinc-200">Cortisol Residual</span> para garantir um sono profundo todas as noites.
+        </p>
 
-        <div class="relative w-full bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
+        <div class="relative w-full bg-zinc-900 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl">
             <div id="play-overlay" onclick="startVideo()">
                 <div class="flex flex-col items-center gap-3">
-                    <div class="play-btn-circle"><svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.333-5.89a1.5 1.5 0 000-2.538L6.3 2.841z"></path></svg></div>
+                    <div class="play-btn-circle">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.333-5.89a1.5 1.5 0 000-2.538L6.3 2.841z"></path></svg>
+                    </div>
                     <span class="text-white font-black text-[10px] tracking-widest uppercase">Clique para ouvir</span>
                 </div>
             </div>
+            <div class="video-overlay-blocker"></div>
             <div style="padding:56.25% 0 0 0;position:relative;">
-                <iframe id="vsl-video" src="https://player.vimeo.com/video/1183570418?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                <iframe id="vsl-video" src="https://player.vimeo.com/video/1183570418?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" referrerpolicy="strict-origin-when-cross-origin" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="PAM"></iframe>
             </div>
         </div>
+        
         <div class="vsl-progress-container">
             <div id="progress-bar-fill"></div>
         </div>
+
+        <div id="cta-section" class="mt-8">
+            <a href="https://pay.kiwify.com.br/6stdDAC" target="_blank" class="cta-btn block w-full max-w-sm mx-auto text-white font-black py-4 md:py-5 px-4 rounded-xl text-lg md:text-2xl transition-all uppercase italic tracking-tighter animate-pulse">
+                Quero meu acesso imediato
+            </a>
+            <p class="text-zinc-600 text-[9px] mt-4 font-bold uppercase tracking-widest italic text-center">Acesso liberado imediatamente após o pagamento</p>
+        </div>
     </section>
 
-    <div id="main-content" class="max-w-4xl mx-auto px-5 pb-20">
-        
-        <div class="text-center mb-12">
-            <p class="text-zinc-400 text-lg md:text-xl font-medium leading-relaxed italic">
-                Descubra como calibrar sua <span class="text-white">Janela de Transição</span> e silenciar a <span class="text-white">Hipervigilância Cognitiva</span>.
-            </p>
+    <div id="offer-notification">
+        <div class="bg-green-100 p-2 rounded-full">
+            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         </div>
-
-        <div class="grid md:grid-cols-2 gap-4 mb-12">
-            <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
-                <h3 class="text-red-500 font-black mb-2 uppercase">Módulo 1</h3>
-                <p class="text-sm">O Ritual do Desligamento Sináptico.</p>
-            </div>
-            <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
-                <h3 class="text-red-500 font-black mb-2 uppercase">Módulo 2</h3>
-                <p class="text-sm">Blindagem Hormonal (Menopausa & Estresse).</p>
-            </div>
-            <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
-                <h3 class="text-red-500 font-black mb-2 uppercase">Módulo 3</h3>
-                <p class="text-sm">O Protocolo de Ressuscitação das 3h da Manhã.</p>
-            </div>
-            <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-700 bg-gradient-to-br from-zinc-900 to-red-950">
-                <h3 class="text-white font-black mb-2 uppercase">🎁 BÔNUS EXCLUSIVO</h3>
-                <p class="text-sm">Checklist do Zumbi Nunca Mais.</p>
-            </div>
-        </div>
-
-        <div class="bg-zinc-900 border-2 border-red-600 rounded-3xl p-8 text-center shadow-[0_0_50px_rgba(220,38,38,0.2)]">
-            <p class="uppercase font-bold text-zinc-500 text-sm mb-2">Acesso Vitalício + Bônus</p>
-            <p class="text-2xl line-through text-zinc-600 font-bold mb-1">R$ 97,00</p>
-            <p class="text-5xl font-black text-white mb-6">R$ 27,90</p>
-            
-            <a href="https://pay.kiwify.com.br/6stdDAC" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 rounded-2xl text-xl uppercase italic transition-all animate-pulse">
-                Quero meu acesso ao protocolo agora
-            </a>
-            
-            <p class="mt-6 text-zinc-400 text-xs italic">
-                "Estou liberando por este valor simbólico para alcançar o maior número de pessoas, mas o desconto é válido apenas para o lote de hoje."
-            </p>
-        </div>
-
-        <div class="mt-16 flex flex-col md:flex-row items-center gap-8 bg-zinc-900/50 p-8 rounded-2xl border border-zinc-800">
-            <img src="https://img.icons8.com/fluency/96/guarantee.png" class="w-24 h-24" alt="Garantia">
-            <div>
-                <h3 class="text-2xl font-black uppercase mb-2 italic">Garantia Blindada de 7 Dias</h3>
-                <p class="text-zinc-400 text-sm leading-relaxed">
-                    Teste o protocolo hoje à noite. Se você não sentir seu cérebro "desligar" em minutos, eu te devolvo cada centavo. Sem burocracia. O risco é meu.
-                </p>
-            </div>
-        </div>
-
-        <div class="mt-20">
-            <h3 class="text-3xl font-black text-center mb-10 uppercase italic">Perguntas Frequentes</h3>
-            <div class="space-y-4">
-                <details class="bg-zinc-900 p-4 rounded-xl border border-zinc-800 group">
-                    <summary class="font-bold cursor-pointer list-none flex justify-between">Como recebo o acesso? <span class="group-open:rotate-180 transition-transform">▼</span></summary>
-                    <p class="text-zinc-400 text-sm mt-3">Imediatamente no seu e-mail após a confirmação do pagamento.</p>
-                </details>
-                <details class="bg-zinc-900 p-4 rounded-xl border border-zinc-800 group">
-                    <summary class="font-bold cursor-pointer list-none flex justify-between">O pagamento é único? <span class="group-open:rotate-180 transition-transform">▼</span></summary>
-                    <p class="text-zinc-400 text-sm mt-3">Sim, você paga uma única vez e o acesso é vitalício.</p>
-                </details>
-                <details class="bg-zinc-900 p-4 rounded-xl border border-zinc-800 group">
-                    <summary class="font-bold cursor-pointer list-none flex justify-between">Preciso de remédios? <span class="group-open:rotate-180 transition-transform">▼</span></summary>
-                    <p class="text-zinc-400 text-sm mt-3">Absolutamente não. O método é 100% fisiológico e natural.</p>
-                </details>
-            </div>
+        <div>
+            <p class="text-xs font-bold uppercase text-gray-400 tracking-tight">Sistema</p>
+            <p class="text-sm font-black italic">Liberando oferta em <span id="timer-notify" class="text-green-600">3</span>s...</p>
         </div>
     </div>
 
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
+        // Função para atualizar o dia da semana automaticamente
         function atualizarDia() {
             const dias = ["domingo", "segunda-feira", "terça-feira", "quarta-feira", "quinta-feira", "sexta-feira", "sábado"];
-            document.getElementById('dia-semana').innerText = dias[new Date().getDay()];
+            const hoje = new Date();
+            document.getElementById('dia-semana').innerText = dias[hoje.getDay()];
         }
         atualizarDia();
 
         const iframe = document.querySelector('#vsl-video');
         const vimeoPlayer = new Vimeo.Player(iframe);
         const progressFill = document.getElementById('progress-bar-fill');
+        const cta = document.getElementById('cta-section');
+        const notify = document.getElementById('offer-notification');
+        const timerNotify = document.getElementById('timer-notify');
+        const vdisplay = document.getElementById('visitantes');
+        const topBanner = document.getElementById('top-banner');
         
-        const TEMPO_BANNER = 30;
-        const TEMPO_CONTEUDO = 127;
-        let bannerMostrado = false;
-        let conteudoMostrado = false;
+        const TEMPO_VAGAS = 30; 
+        const TEMPO_CTA = 127; 
+        const TEMPO_NOTIFY = 124; 
+        
+        let notifyMostrada = false;
+        let vagasMostradas = false;
 
         function startVideo() {
             vimeoPlayer.setMuted(false);
+            vimeoPlayer.setVolume(1);
             vimeoPlayer.play();
             document.getElementById('play-overlay').style.display = 'none';
         }
@@ -161,28 +148,42 @@
         vimeoPlayer.on('timeupdate', function(data) {
             let tempo = data.seconds;
             
-            // Trigger Banner 30s
-            if (tempo >= TEMPO_BANNER && !bannerMostrado) {
-                bannerMostrado = true;
-                document.getElementById('top-banner').style.display = 'block';
+            // Mostrar Banner aos 30 segundos
+            if (tempo >= TEMPO_VAGAS && !vagasMostradas) {
+                vagasMostradas = true;
+                topBanner.style.display = 'block';
             }
 
-            // Trigger Conteúdo 127s
-            if (tempo >= TEMPO_CONTEUDO && !conteudoMostrado) {
-                conteudoMostrado = true;
-                document.getElementById('main-content').style.display = 'block';
-            }
-
-            // Barra Progresso
-            let percent = (tempo / TEMPO_CONTEUDO) * 100;
+            let percent = (tempo / TEMPO_CTA) * 100;
             progressFill.style.width = (percent > 100 ? 100 : percent) + '%';
+
+            if (tempo >= TEMPO_NOTIFY && !notifyMostrada) {
+                notifyMostrada = true;
+                notify.classList.add('show');
+                let count = 3;
+                let interval = setInterval(() => {
+                    count--;
+                    if(count >= 0) timerNotify.innerText = count;
+                    if (count <= 0) {
+                        clearInterval(interval);
+                        notify.classList.remove('show');
+                    }
+                }, 1000);
+            }
+
+            if (tempo >= TEMPO_CTA) {
+                cta.style.display = 'block';
+            }
         });
 
-        // Visitantes
+        // Oscilação de Visitantes
         setInterval(() => {
-            const v = document.getElementById('visitantes');
-            let n = parseInt(v.textContent) + (Math.floor(Math.random() * 5) - 2);
-            v.textContent = n < 120 ? 135 : n;
+            let current = parseInt(vdisplay.textContent);
+            let vario = Math.floor(Math.random() * 8) - 3;
+            let final = current + vario;
+            if(final < 130) final = 131;
+            if(final > 165) final = 159;
+            vdisplay.textContent = final;
         }, 3000);
     </script>
 </body>
