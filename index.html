@@ -10,10 +10,7 @@
         body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; overflow-x: hidden; }
         .headline-main { font-size: clamp(1.8rem, 6vw, 3.2rem); line-height: 1.1; letter-spacing: -0.03em; }
         
-        /* Banner Escassez */
         #top-banner { display: none; position: fixed; top: 0; width: 100%; z-index: 100; box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4); }
-        
-        /* Delays */
         #main-content { display: none; }
 
         .vsl-progress-container { width: 100%; background: #27272a; height: 10px; border-radius: 999px; overflow: hidden; margin-top: 15px; }
@@ -34,22 +31,22 @@
 </head>
 <body class="selection:bg-red-600 selection:text-white">
 
-    <div id="top-banner" class="bg-red-600 text-white text-center py-2 px-6 font-bold text-[10px] md:text-xs uppercase fixed w-full z-40 leading-tight">
+    <div id="top-banner" class="bg-red-600 text-white text-center py-2.5 px-6 font-bold text-[10px] md:text-xs uppercase fixed w-full z-40 leading-tight">
         ⚠️ ÚLTIMA CHANCE: O valor de R$ 27,90 expira ao final desta <span id="dia-semana"></span>. Garanta seu desconto antes que o sistema atualize.
     </div>
 
     <section class="px-5 pt-16 pb-10 max-w-4xl mx-auto text-center">
         <div id="visitantes-badge" class="inline-flex items-center gap-2 mb-6 bg-zinc-900/80 px-4 py-1.5 rounded-full border border-zinc-800">
             <span class="flex h-2 w-2 rounded-full bg-green-500 animate-ping"></span>
-            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">142</span> pessoas assistindo agora</span>
+            <span class="text-xs text-gray-300 font-medium"><span id="visitantes">145</span> pessoas assistindo agora</span>
         </div>
 
         <h1 class="headline-main font-black mb-6 uppercase italic">
-            O <span class="text-red-600 italic">'Hack' Fisiológico</span> de 7 Minutos Usado para Desligar o Cérebro de Profissionais de Elite Sob Pressão Extrema.
+            Ajuste sua <span class="text-red-600">Janela Sináptica</span> para sinalizar o desligamento mental em apenas 7 minutos.
         </h1>
 
         <p class="text-zinc-400 text-sm md:text-lg mb-8 font-medium italic leading-relaxed px-2 max-w-3xl mx-auto">
-            Esqueça chás ou remédios tarja preta. Se você deita e sua mente parece uma <span class="text-zinc-100">turbina ligada</span>, seu problema é a Hipervigilância Residual. Veja como sinalizar o <span class="text-zinc-100">"Modo de Segurança"</span> para o seu sistema nervoso e apagar em minutos.
+            Descubra como silenciar a <span class="text-zinc-100">Hipervigilância Cognitiva Residual</span> — o estado de alerta ancestral que trava o seu cérebro e impede o descanso, mesmo que você esteja exausto.
         </p>
 
         <div class="relative w-full bg-zinc-900 rounded-3xl border border-zinc-800 overflow-hidden shadow-2xl mb-4">
@@ -73,17 +70,36 @@
 
     <div id="main-content" class="max-w-4xl mx-auto px-5 pb-20">
         
-        <div class="grid md:grid-cols-2 gap-4 mb-12">
-            <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800 hover:border-red-900 transition-all">
-                <h3 class="text-red-500 font-black mb-2 uppercase italic tracking-tighter">Módulo 1</h3>
+        <div class="bg-zinc-900 border-2 border-red-600 rounded-3xl p-8 text-center shadow-[0_0_60px_rgba(220,38,38,0.25)] mb-12">
+            <p class="text-2xl line-through text-zinc-600 font-bold mb-1">R$ 97,00</p>
+            <p class="text-5xl md:text-6xl font-black text-white mb-6 tracking-tighter">R$ 27,90</p>
+            
+            <a href="https://pay.kiwify.com.br/6stdDAC" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 rounded-2xl text-lg md:text-xl uppercase italic transition-all animate-pulse">
+                QUERO ACESSO AO PROTOCOLO E DESLIGAR MINHA MENTE AGORA
+            </a>
+            
+            <p class="mt-4 text-zinc-400 text-xs italic">
+                Oferta disponível para as últimas 11 vagas desta <span class="day-text">quinta-feira</span>.
+            </p>
+        </div>
+
+        <div class="text-center max-w-3xl mx-auto mb-16 px-4">
+            <p class="text-zinc-300 text-base md:text-lg leading-relaxed font-medium">
+                O problema não é falta de cansaço, é a sua <span class="text-white font-bold">biologia</span>. O estresse moderno mantém você em um estado de "vigilância". O Protocolo Apagão utiliza a <span class="text-red-500 font-bold">Calibragem do Ciclo Parassimpático</span> — uma técnica fisiológica simples para avisar ao seu sistema nervoso que o ambiente é seguro, induzindo o sono profundo de forma mecânica e natural.
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4 mb-16">
+            <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+                <h3 class="text-red-500 font-black mb-1 uppercase italic tracking-tighter">Módulo 1</h3>
                 <p class="text-sm font-bold">O Ritual do Desligamento Sináptico.</p>
             </div>
-            <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800 hover:border-red-900 transition-all">
-                <h3 class="text-red-500 font-black mb-2 uppercase italic tracking-tighter">Módulo 2</h3>
+            <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+                <h3 class="text-red-500 font-black mb-1 uppercase italic tracking-tighter">Módulo 2</h3>
                 <p class="text-sm font-bold">Blindagem Hormonal (Menopausa & Estresse).</p>
             </div>
-            <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800 hover:border-red-900 transition-all">
-                <h3 class="text-red-500 font-black mb-2 uppercase italic tracking-tighter">Módulo 3</h3>
+            <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-800">
+                <h3 class="text-red-500 font-black mb-1 uppercase italic tracking-tighter">Módulo 3</h3>
                 <p class="text-sm font-bold">O Protocolo de Ressuscitação das 3h da Manhã.</p>
             </div>
             <div class="bg-zinc-900 p-6 rounded-xl border border-zinc-700 bg-gradient-to-br from-zinc-900 to-red-950">
@@ -92,45 +108,13 @@
             </div>
         </div>
 
-        <div class="bg-zinc-900 border-2 border-red-600 rounded-3xl p-8 text-center shadow-[0_0_50px_rgba(220,38,38,0.2)]">
-            <p class="uppercase font-bold text-zinc-500 text-xs mb-2 tracking-widest">Acesso Vitalício + Bônus</p>
-            <p class="text-2xl line-through text-zinc-600 font-bold mb-1">R$ 97,00</p>
-            <p class="text-5xl font-black text-white mb-6 tracking-tighter">R$ 27,90</p>
-            
-            <a href="https://pay.kiwify.com.br/6stdDAC" class="block w-full bg-green-600 hover:bg-green-500 text-white font-black py-5 rounded-2xl text-xl uppercase italic transition-all animate-pulse shadow-lg">
-                QUERO ACESSO AO PROTOCOLO E DESLIGAR MINHA MENTE AGORA
-            </a>
-            
-            <p class="mt-6 text-zinc-400 text-xs italic">
-                Oferta disponível para as últimas 11 vagas desta <span class="day-text">quinta-feira</span>.
-            </p>
-        </div>
-
-        <div class="mt-16 flex flex-col md:flex-row items-center gap-8 bg-zinc-900/50 p-8 rounded-2xl border border-zinc-800">
-            <img src="https://img.icons8.com/fluency/96/guarantee.png" class="w-20 h-20 opacity-80" alt="Garantia">
+        <div class="flex flex-col md:flex-row items-center gap-8 bg-zinc-900/50 p-8 rounded-2xl border border-zinc-800">
+            <img src="https://img.icons8.com/fluency/96/guarantee.png" class="w-20 h-20 grayscale opacity-50" alt="Garantia">
             <div>
                 <h3 class="text-2xl font-black uppercase mb-2 italic tracking-tighter">Garantia Blindada de 7 Dias</h3>
                 <p class="text-zinc-400 text-sm leading-relaxed">
-                    Teste o protocolo hoje à noite. Se você não sentir seu cérebro <span class="text-white">"desligar"</span> em minutos e acordar com muito mais energia, eu te devolvo cada centavo. O risco é meu.
+                    Teste o protocolo hoje à noite. Se você não sentir seu cérebro <span class="text-white">"desligar"</span> em minutos e acordar renovado, eu te devolvo cada centavo. O risco é meu.
                 </p>
-            </div>
-        </div>
-
-        <div class="mt-20">
-            <h3 class="text-3xl font-black text-center mb-10 uppercase italic tracking-tighter">Perguntas Frequentes</h3>
-            <div class="space-y-4">
-                <details class="bg-zinc-900 p-5 rounded-xl border border-zinc-800 group cursor-pointer transition-all">
-                    <summary class="font-bold list-none flex justify-between">Como recebo o acesso? <span class="group-open:rotate-180 transition-transform">▼</span></summary>
-                    <p class="text-zinc-400 text-sm mt-3 leading-relaxed">Imediatamente no seu e-mail cadastrado logo após a confirmação da compra.</p>
-                </details>
-                <details class="bg-zinc-900 p-5 rounded-xl border border-zinc-800 group cursor-pointer transition-all">
-                    <summary class="font-bold list-none flex justify-between">O pagamento é único? <span class="group-open:rotate-180 transition-transform">▼</span></summary>
-                    <p class="text-zinc-400 text-sm mt-3 leading-relaxed">Sim. Você paga uma única vez e o acesso ao Protocolo do Apagão é vitalício.</p>
-                </details>
-                <details class="bg-zinc-900 p-5 rounded-xl border border-zinc-800 group cursor-pointer transition-all">
-                    <summary class="font-bold list-none flex justify-between">Funciona se eu tomo café? <span class="group-open:rotate-180 transition-transform">▼</span></summary>
-                    <p class="text-zinc-400 text-sm mt-3 leading-relaxed">Sim. O objetivo é recalibrar sua janela de sono biologicamente, independente do seu consumo de cafeína ou rotina agitada.</p>
-                </details>
             </div>
         </div>
     </div>
@@ -162,29 +146,22 @@
 
         vimeoPlayer.on('timeupdate', function(data) {
             let tempo = data.seconds;
-            
-            // Trigger Banner 30s
             if (tempo >= TEMPO_BANNER && !bannerMostrado) {
                 bannerMostrado = true;
                 document.getElementById('top-banner').style.display = 'block';
             }
-
-            // Trigger Conteúdo 127s
             if (tempo >= TEMPO_CONTEUDO && !conteudoMostrado) {
                 conteudoMostrado = true;
                 document.getElementById('main-content').style.display = 'block';
             }
-
-            // Barra Progresso (até os 127s)
             let percent = (tempo / TEMPO_CONTEUDO) * 100;
             progressFill.style.width = (percent > 100 ? 100 : percent) + '%';
         });
 
-        // Visitantes dinâmicos
         setInterval(() => {
             const v = document.getElementById('visitantes');
             let n = parseInt(v.textContent) + (Math.floor(Math.random() * 5) - 2);
-            v.textContent = n < 125 ? 138 : (n > 165 ? 155 : n);
+            v.textContent = n < 120 ? 141 : (n > 175 ? 162 : n);
         }, 3000);
     </script>
 </body>
