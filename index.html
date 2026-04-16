@@ -47,11 +47,6 @@
         }
 
         .video-overlay-blocker { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 20; }
-        
-        /* Estilo Depoimentos WhatsApp */
-        .wp-container { background: #0b141a; border-radius: 15px; padding: 15px; max-width: 400px; margin: 10px auto; border: 1px solid #202c33; text-align: left; }
-        .wp-msg { background: #202c33; color: #e9edef; padding: 8px 12px; border-radius: 0 10px 10px 10px; margin-bottom: 10px; font-size: 14px; position: relative; width: fit-content; max-width: 90%; }
-        .wp-msg::before { content: ""; position: absolute; left: -8px; top: 0; border: 8px solid transparent; border-top-color: #202c33; border-right-color: #202c33; }
     </style>
 </head>
 <body class="selection:bg-red-600 selection:text-white">
@@ -88,7 +83,9 @@
                     <span class="text-white font-black text-xs tracking-widest">CLIQUE PARA OUVIR</span>
                 </div>
             </div>
+            
             <div class="video-overlay-blocker"></div>
+            
             <div style="padding:75% 0 0 0;position:relative;">
                 <iframe id="vsl-video" src="https://player.vimeo.com/video/1183600782?badge=0&autopause=0&player_id=0&app_id=58479&autoplay=1&muted=1&controls=0" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
             </div>
@@ -104,22 +101,6 @@
             </a>
             <p class="text-zinc-600 text-[10px] mt-4 font-bold uppercase tracking-widest italic">Acesso liberado imediatamente após o pagamento</p>
         </div>
-
-        <div class="mt-16 border-t border-zinc-900 pt-12">
-            <h3 class="text-zinc-500 text-xs font-bold uppercase tracking-widest mb-8 text-center">Resultados de Alunos:</h3>
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="font-bold text-xs block mb-1">Rodrigo (Grupo Alunos)</span>
-                    Mano, apaguei em 10 minutos. Fazia anos que não dormia assim. Valeu demais!
-                </div>
-            </div>
-            <div class="wp-container">
-                <div class="wp-msg">
-                    <span class="font-bold text-xs block mb-1">Dra. Claudia</span>
-                    A técnica de respiração é cientificamente perfeita. Realmente "força" o desligamento do sistema nervoso.
-                </div>
-            </div>
-        </div>
     </section>
 
     <script src="https://player.vimeo.com/api/player.js"></script>
@@ -131,8 +112,8 @@
         const notify = document.getElementById('offer-notification');
         const timerNotify = document.getElementById('timer-notify');
         
-        const TEMPO_CTA = 127; // CTA aos 127 segundos
-        const TEMPO_NOTIFY = 124; // Notificação aos 124 segundos (3s antes)
+        const TEMPO_CTA = 127; // Tempo para o botão aparecer
+        const TEMPO_NOTIFY = 124; // Notificação 3s antes
         let notifyMostrada = false;
 
         function startVideo() {
@@ -149,7 +130,7 @@
             let percent = (tempo / TEMPO_CTA) * 100;
             progressFill.style.width = (percent > 100 ? 100 : percent) + '%';
 
-            // Gatilho da Notificação
+            // Lógica da Notificação
             if (tempo >= TEMPO_NOTIFY && !notifyMostrada) {
                 notifyMostrada = true;
                 notify.classList.add('show');
@@ -164,13 +145,13 @@
                 }, 1000);
             }
 
-            // Gatilho do CTA
+            // Exibição do CTA
             if (tempo >= TEMPO_CTA) {
                 cta.style.display = 'block';
             }
         });
 
-        // Escassez
+        // Simulação de Vagas
         let vagas = 19;
         setInterval(() => { if(vagas > 1) { vagas--; document.getElementById('vagas-count').innerText = vagas; } }, 25000);
     </script>
