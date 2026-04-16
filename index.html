@@ -40,7 +40,7 @@
         </div>
 
         <h1 class="text-3xl md:text-5xl font-black mb-6 leading-tight uppercase italic tracking-tight">
-            Desligue sua mente e durma sem ficar rolando na cama por <span class="text-red-600">horas.</span>
+            Desligue sua mente e durma <span class="text-red-600">sem ficar rolando na cama por horas.</span>
         </h1>
         
         <p class="text-zinc-400 text-lg md:text-xl max-w-3xl mx-auto mb-10 font-medium leading-relaxed">
@@ -94,12 +94,10 @@
         const iframe = document.querySelector('#vsl-video');
         const vimeoPlayer = new Vimeo.Player(iframe);
         
-        // Tenta dar play com volume alto assim que possível
         window.onload = function() {
             vimeoPlayer.ready().then(() => {
                 vimeoPlayer.setVolume(1);
                 vimeoPlayer.play().catch(() => {
-                    // Fallback se o navegador bloquear autoplay com som
                     vimeoPlayer.setMuted(true);
                     vimeoPlayer.play();
                 });
